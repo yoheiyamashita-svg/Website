@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* 全体・共通 */
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.wrapper {
+    width: 1080px;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.container {
+    width: 760px;
+    margin: 0 auto;
+    padding: 64px 0;
+}
+
+.section-wrap {
+    margin-top: 40px;
+}
+
+.section-wrap p {
+    margin-top: 24px;
+}
+
+.section-ttl {
+    background-color: #B5D569;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 8px 0 8px 8px;
+}
+
+.name {
+    font-size: 32px;
+    border-bottom: 2px solid #000;
+}
+
+/* work */
+.work-img {
+    margin-top: 8px;
+}
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 16px 0;
+}
+
+.footer-cr {
+    font-size: 12px;
+}

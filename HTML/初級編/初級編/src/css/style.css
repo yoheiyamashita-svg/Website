@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+/* 全体・共通 */
+body{
+    font-family: 'Noto Serif JP', serif;
+}
+
+.section-wrap {
+    padding: 80px 0;
+}
+
+.section-inner {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.section-ttl {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-item + .nav-item {
+    margin-left: 40px;
+}
+
+/* header */
+.header {
+    padding-top: 40px;
+    background-color: #E7D7D4;
+}
+
+.header-logo {
+    width: 180px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-nav {
+    margin-top: 40px;
+}
+
+
+/* kv */
+.kv {
+    background-color: #E7D7D4;
+    padding: 60px 0;
+}
+
+.kv-img {
+    height: 480px;
+}
+
+.kv-img img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/* concept */
+.concept-copy {
+    font-size: 32px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.concept-txt {
+    text-align: center;
+    width: 500px;
+    margin: 40px auto 0;
+}
+
+/* items */
+.items-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.items-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.items-img {
+    width: 48%;
+}
+
+.items-content {
+    width: 48%;
+}
+
+.items-ttl {
+    font-size: 20px;
+}
+
+.items-price {
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.items-text {
+    margin-top: 32px;
+}
+
+.items-btn {
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    width: 160px;
+    margin-top: 40px;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.items-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* shop */
+.shop {
+    background-color: #E7D7D4;
+    color: #000;
+}
+
+.shop-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.shop-img {
+    width: 48%;
+}
+
+.shop-content {
+    width: 48%;
+}
+
+.shop-table {
+    width: 100%;
+}
+
+.shop-row {
+    border-bottom: 1px solid #000;
+}
+
+.shop-head, .shop-data {
+    padding: 16px 0;
+}
+
+/* footer */
+.footer {
+    padding-top: 60px;
+}
+
+.footer-logo {
+    width: 180px;
+    margin: 0 auto;
+}
+
+.footer-list {
+    margin-top: 40px;
+}
+
+.footer-cr {
+    display: block;
+    text-align: center;
+    padding: 16px 0;
+    margin-top: 60px;
+}

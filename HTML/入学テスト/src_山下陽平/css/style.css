@@ -1,0 +1,466 @@
+@charset "UTF-8";
+
+/* =====================================
+   全体に適用させるスタイル
+===================================== */
+
+/* body全体の文字色を#111111にし、
+フォントは『Noto Sans JP』を使用
+文字サイズは14px、行間は2倍 */
+body {
+  color: #111111;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* リンクの文字色を親要素に合わせる */
+a {
+  color: inherit;
+}
+
+
+/* =====================================
+   共通レイアウト
+===================================== */
+
+/* コンテンツを中央に配置する箱 */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+
+/* =====================================
+   ヘッダー
+===================================== */
+
+/* ヘッダー全体 */
+.header {
+  padding: 32px 0 16px;
+  text-align: center;
+  background: #ffffff;
+}
+
+/* サイトロゴ */
+.header-logo {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 2;
+  letter-spacing: 0.1em;
+}
+
+/* ロゴリンク */
+.header-logo-link {
+  text-decoration: none;
+}
+
+/* 「Ad」の文字色 */
+.header-logo-primary {
+  color: #1FB3EA;
+}
+
+
+/* =====================================
+   ナビゲーション
+===================================== */
+
+/* ナビゲーション全体 */
+.header-nav {
+  margin-top: 16px;
+}
+
+/* ナビゲーション一覧 */
+.header-nav-list {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* ナビゲーションリンク */
+.header-nav-link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+/* マウスを乗せた時 */
+.header-nav-link:hover {
+  opacity: .7;
+}
+
+
+/* =====================================
+   キービジュアル
+===================================== */
+
+/* キービジュアル全体 */
+.kv {
+  margin-top: 16px;
+}
+
+/* キービジュアル画像 */
+.kv-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* =====================================
+   お知らせ
+===================================== */
+
+/* お知らせセクション全体 */
+.top-news {
+  padding: 80px 0;
+}
+
+/* セクションタイトル */
+.top-news-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* お知らせ一覧 */
+.top-news-list {
+  margin-top: 40px;
+}
+
+/* お知らせ1件 */
+.top-news-item {
+  display: flex;
+  gap: 16px;
+}
+
+/* 2件目以降の余白 */
+.top-news-item:not(:first-child) {
+  margin-top: 24px;
+}
+
+/* 日付 */
+.top-news-date {
+  flex-shrink: 0;
+}
+
+/* お知らせリンク */
+.top-news-link {
+  text-decoration: underline;
+}
+
+/* ボタン配置 */
+.top-news-btn-wrapper {
+  margin-top: 48px;
+  text-align: center;
+}
+
+/* 「お知らせ一覧を見る」ボタン */
+.top-news-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #1FB3EA;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ボタンにマウスを乗せた時 */
+.top-news-btn:hover {
+  opacity: .7;
+}
+
+/* ==========================
+   サービスセクション
+========================== */
+
+/* サービスセクション全体 */
+.top-service {
+  /* 上下80px、の余白 */
+  /* 左右はコンテナに任せる */
+  padding: 80px 0;
+
+  /* 背景色 */
+  background: #fafafa;
+}
+
+/* コンテンツを中央寄せ */
+.top-service .container {
+  margin: 0 auto;
+}
+
+/* セクションタイトル */
+.top-service-title {
+  /* 文字サイズ */
+  font-size: 24px;
+
+  /* 太字 */
+  font-weight: 700;
+
+  /* 行間（24px × 2） */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+
+  /* 中央揃え */
+  text-align: center;
+}
+
+/* リード文（理念の文章が入ります。） */
+.top-service-heading {
+  /* タイトルとの余白 */
+  margin-top: 48px;
+
+  /* 文字サイズ */
+  font-size: 18px;
+
+  /* 太字 */
+  font-weight: 700;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+
+  /* 中央揃え */
+  text-align: center;
+}
+
+/* 説明文 */
+.top-service-text {
+  /* 見出しとの余白 */
+  margin-top: 32px;
+
+  /* 文字サイズ */
+  font-size: 14px;
+
+  /* 通常 */
+  font-weight: 400;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+}
+
+/* サービス一覧 */
+.service-list {
+  /* 説明文との余白 */
+  margin-top: 48px;
+}
+
+/* サービスカード */
+.service-item {
+  /* 背景画像を表示するための準備 */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  /* カード内の余白 */
+  padding: 48px 16px;
+
+  /* テキストを中央揃え */
+  text-align: center;
+}
+
+/* 2枚目以降のカード */
+.service-item:not(:first-child) {
+  /* カード同士の余白 */
+  margin-top: 16px;
+}
+
+/* 1枚目（広告運用） */
+.service-item-ad {
+  background-image: url("../img/img-service-bg01.png");
+}
+
+/* 2枚目（Webサイト制作） */
+.service-item-web {
+  background-image: url("../img/img-service-bg02.png");
+}
+
+/* 3枚目（Webサイト運用） */
+.service-item-operation {
+  background-image: url("../img/img-service-bg03.png");
+}
+
+/* カードタイトル */
+.service-item-title {
+  /* 白文字 */
+  color: #ffffff;
+
+  /* 文字サイズ */
+  font-size: 20px;
+
+  /* 太字 */
+  font-weight: 700;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+}
+
+/* カード説明文 */
+.service-item-text {
+  /* タイトルとの余白 */
+  margin-top: 8px;
+
+  /* 白文字 */
+  color: #ffffff;
+
+  /* 文字サイズ */
+  font-size: 14px;
+
+  /* 通常 */
+  font-weight: 400;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+}
+
+/* ==========================
+   お問い合わせ
+========================== */
+
+/* お問い合わせセクション全体 */
+.top-contact {
+  /* 上下80pxの余白 */
+  /* 左右はコンテナに任せる */
+  padding: 80px 0;
+
+  /* 背景画像 */
+  background: url("../img/bg_contact_sm.jpg") no-repeat center / cover;
+}
+
+/* セクションタイトル */
+.top-contact-title {
+  /* 文字サイズ */
+  font-size: 24px;
+
+  /* 太字 */
+  font-weight: 700;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+
+  /* 中央揃え */
+  text-align: center;
+
+  /* 白文字 */
+  color: #ffffff;
+}
+
+/* 説明文 */
+.top-contact-text {
+  /* タイトルとの余白 */
+  margin-top: 48px;
+
+  /* 文字サイズ */
+  font-size: 14px;
+
+  /* 通常 */
+  font-weight: 400;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+
+  /* 白文字 */
+  color: #ffffff;
+
+}
+
+/* ボタンを中央配置 */
+.top-contact-btn-wrapper {
+  /* 説明文との余白 */
+  margin-top: 48px;
+
+  text-align: center;
+}
+
+/* お問い合わせボタン */
+.top-contact-btn {
+  /* リンクをボタン化 */
+  display: inline-block;
+
+  /* 内側の余白 */
+  padding: 16px 32px;
+
+  /* ボタン色 */
+  background: #1fb3ea;
+
+  /* 白文字 */
+  color: #ffffff;
+
+  /* 太字 */
+  font-weight: 700;
+
+  /* 文字サイズ */
+  font-size: 14px;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+
+  /* 下線を消す */
+  text-decoration: none;
+
+  /* マウスカーソル */
+  cursor: pointer;
+}
+
+/* ホバー時 */
+.top-contact-btn:hover {
+  opacity: 0.7;
+}
+
+
+/* ==========================
+   フッター
+========================== */
+
+/* フッター全体 */
+.footer {
+  /* 上下16px */
+  padding: 16px 0;
+
+  /* 中央揃え */
+  text-align: center;
+
+  /* 背景色 */
+  background: #111111;
+}
+
+/* コピーライト */
+.footer-copyright {
+  /* 白文字 */
+  color: #ffffff;
+
+  /* 文字サイズ */
+  font-size: 12px;
+
+  /* 行間 */
+  line-height: 2;
+
+  /* 文字間隔 */
+  letter-spacing: 0.1em;
+}

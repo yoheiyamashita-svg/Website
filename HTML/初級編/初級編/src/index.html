@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ZeroPlus Gate | Luxury</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!--
+      【新出HTMLタグ】
+
+      header: ヘッダー
+      ページの上部
+
+      nav: ナビゲーション
+      
+      ul: 順不同リスト
+
+      li: リストアイテム
+
+      a: リンク
+
+      table: テーブル（表）
+
+      tr: テーブルの行
+
+      th: テーブルの見出し
+
+      td: テーブルのデータ
+
+
+      【新出CSSプロパティ】
+      display: 要素の表示形式
+
+      line-height: 行間
+
+      height: 高さ
+
+      object-fit: 画像のトリミング
+
+      border-radius: 角丸め
+
+      flexbox: flexible box layout module（レイアウトプロパティ）
+        justify-content: 余白の空け方
+        align-items: 垂直方向の揃え方
+        flex-direction: 並び方向
+
+    -->
+    <header class="header">
+      <h1 class="header-logo"><img src="img/logo.png" alt="ロゴ" /></h1>
+
+      <nav class="header-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="">CONCEPT</a></li>
+          <li class="nav-item"><a href="">ITEM</a></li>
+          <li class="nav-item"><a href="">SHOP</a></li>
+          <li class="nav-item"><a href="">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="kv">
+      <div class="kv-img section-inner"><img src="img/kv.jpg" alt="" /></div>
+    </div>
+
+    <main class="main">
+      <section class="concept section-wrap">
+        <div class="section-inner">
+          <h2 class="section-ttl">CONCEPT</h2>
+  
+          <p class="concept-copy">
+            ここにしか無い上品なおしゃれを
+          </p>
+          <p class="concept-txt">
+            歳を重ねてもおしゃれで居たい。いつでも自分らしくいるために、
+            ハンドメイドでこだわり尽くした上品なアイテムをお届けします。
+          </p>
+        </div>
+      </section>
+  
+      <section class="items section-wrap">
+        <div class="section-inner">
+          <h2 class="section-ttl">ITEM</h2>
+  
+          <div class="items-wrap">
+            <div class="items-item">
+              <div class="items-img"><img src="img/item01.jpg" alt="" /></div>
+              <div class="items-content">
+                <h3 class="items-ttl">アイウェア</h3>
+                <p class="items-price">¥16,800(税込)</p>
+                <p class="items-text">
+                  薄型軽量金属フレームが特徴。<br />
+                  ミラーレンズを採用した、UVカット99%
+                </p>
+                <a href="" class="items-btn">購入する</a>
+              </div>
+            </div>
+            <div class="items-item">
+              <div class="items-img"><img src="img/item02.jpg" alt="" /></div>
+              <div class="items-content">
+                <h3 class="items-ttl">エンゲージリング</h3>
+                <p class="items-price">¥67,200(税込)</p>
+                <p class="items-text">
+                  一途な愛の象徴として一粒のダイヤモンドで仕上げたリング。
+                </p>
+                <a href="" class="items-btn">購入する</a>
+              </div>
+            </div>
+            <div class="items-item">
+              <div class="items-img"><img src="img/item03.jpg" alt="" /></div>
+              <div class="items-content">
+                <h3 class="items-ttl">イエローゴールドリング</h3>
+                <p class="items-price">¥21,200(税込)</p>
+                <p class="items-text">
+                  アラぺスク風の凝ったエングレーピングを施したリング。
+                </p>
+                <a href="" class="items-btn">購入する</a>
+              </div>
+            </div>
+            <div class="items-item">
+              <div class="items-img"><img src="img/item04.jpg" alt="" /></div>
+              <div class="items-content">
+                <h3 class="items-ttl">ストーンブレスレット</h3>
+                <p class="items-price">¥14,200(税込)</p>
+                <p class="items-text">
+                  様々なサンストーンで創り上げた明るい色彩がとても美しいストーンブレスレット。
+                </p>
+                <a href="" class="items-btn">購入する</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section class="shop section-wrap">
+        <div class="section-inner">
+          <h2 class="section-ttl">SHOP</h2>
+  
+          <div class="shop-wrap">
+            <div class="shop-img">
+              <img src="img/shop.jpg" alt="" />
+            </div>
+            <div class="shop-content">
+              <table class="shop-table">
+                <tr class="shop-row">
+                  <th class="shop-head">住所</th>
+                  <td class="shop-data">東京都豊島区池袋3-13-5</td>
+                </tr>
+                <tr class="shop-row">
+                  <th class="shop-head">電話番号</th>
+                  <td class="shop-data">03-6912-5250</td>
+                </tr>
+                <tr class="shop-row">
+                  <th class="shop-head">営業時間</th>
+                  <td class="shop-data">10:00~18:00（火曜日を除く）</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="img/logo.png" alt="ロゴ" />
+      </div>
+      <ul class="footer-list nav-list">
+        <li class="nav-item"><a href="">CONCEPT</a></li>
+        <li class="nav-item"><a href="">ITEM</a></li>
+        <li class="nav-item"><a href="">SHOP</a></li>
+        <li class="nav-item"><a href="">CONTACT</a></li>
+      </ul>
+      <small class="footer-cr"> &copy;2021 ZeroPlus Gate. </small>
+    </footer>
+  </body>
+</html>

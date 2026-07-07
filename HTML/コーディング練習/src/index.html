@@ -1,0 +1,322 @@
+<!-- 「この文書はHTML5で書かれています」とブラウザに伝える -->
+<!DOCTYPE html>
+<!-- html 文書開始 lang="ja":このページは日本語 -->
+<html lang="ja">
+<!-- 
+headには
+
+タイトル
+CSS
+文字コード
+検索エンジン向け情報
+
+などを書きます。
+画面には表示されません。 -->
+
+  <head>
+    <!-- 
+    文字コードを指定しています。
+
+      UTF-8は
+
+      日本語
+      英語
+      中国語
+      絵文字
+
+      など多くの文字を扱えます。
+
+      現在はほぼUTF-8を使います。
+     -->
+    <meta charset="utf-8" />
+
+    <!-- width=device-width：画面の横幅を端末に合わせる -->
+     <!-- initial-scale=1：最初の拡大率を100%にするという意味 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- ブラウザのタブに表示されるタイトル -->
+    <title>ZeroPlus_Pre-Exam-Practice</title>
+
+    <!-- google fonts -->
+    <!-- linkタグ：外部ファイルを読み込み（今回はGoogle Fontsへ接続）-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ヘッダー -->
+    <header class="header">
+      <!-- h1：一番大きい見出し -->
+      <h1 class="header-logo">
+        <!-- a : リンクを作るタグ -->
+        <!-- 今回はロゴをクリックするとトップページへ戻る -->
+        <a href="index.html" class="header-logo-link"
+          >ZeroPlus <span class="header-logo-primary">B</span>log</a
+        >
+      </h1>
+      <!-- p：段落 -->
+      <p class="header-heading">日々の学習を記録するブログ</p>
+    </header>
+    <main class="main">
+      <div class="container">
+        <div class="posts">
+          <!-- 記事のまとまり -->
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article01.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">初心者のやりがちなミス</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article02.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">SEO対策できてる？HTMLの正しい書き方</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article03.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">フリーランスにおすすめの資金運用の話</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article04.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">タスク管理ツールのおすすめツール5戦！</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article05.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">フリーランス必見！経費申請のやり方</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+          <article class="post">
+            <!-- この投稿全体がリンク -->
+            <a href="#" class="post-link">
+              <!-- wrapper：画像の装飾や配置のための入れ物 -->
+              <div class="post-thumb-wrapper">
+                <img
+                  src="img/thumb_article06.png"
+                  alt="初心者マークとBeginnerの黒板"
+                  width="686"
+                  height="384"
+                  class="post-thumb"
+                />
+              </div>
+              <!-- 画像以外の部分情報 -->
+              <div class="post-content">
+                <!-- 記事のタイトル -->
+                <h2 class="post-title">穴場のコワーキングスペース！</h2>
+                <!-- 記事のリード文、概要 -->
+                <p class="post-text">
+                  親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。な…
+                </p>
+                <!-- 「続きを読む」 -->
+                <div class="post-read-more-wrapper">
+                  <span class="post-read-more">続きを読む</span>
+                </div>
+              </div>
+              <!-- /post-content -->
+            </a>
+          </article>
+        </div>
+        <!-- /posts -->
+      </div>
+      <!-- /container -->
+    </main>
+    <section class="contact">
+      <div class="container">
+        <!-- セクションタイトル -->
+        <h2 class="contact-title">お問い合わせ</h2>
+          <!-- 説明文を囲むブロック -->
+          <div class="contact-text-wrapper">
+            <p class="contact-text">
+              いつもご覧いただきありがとうございます。
+              ブログの感想や「ここが気になった！」というご質問、あるいはちょっとした雑談でも大歓迎です。
+              <!-- 強制改行 -->
+              <br
+              class="text-break"
+              />
+              お気軽に下のボタンからご連絡ください。
+            </p>
+          </div>
+          <!-- ボタンを囲むためのブロック -->
+          <div class="contact-btn-wrapper">
+            <a href="#" class="contact-btn">お問い合わせはこちら</a>
+          </div>
+          <!-- /contact-btn-wrapper -->
+      </div>
+    <!-- /container -->
+    <!-- /contents -->
+    </section>
+    <footer class="footer">
+      <!-- smallタグで小さく -->
+       <!-- &copy; コピーライトマーク -->
+      <small class="footer-copyright">&copy; 2018 sample inc.</small>
+    </footer>
+  </body>
+</html>
+
+    <!--
+      【新出HTMLタグ】
+
+      header: ヘッダー
+      ページの上部
+
+      nav: ナビゲーション
+      
+      ul: 順不同リスト
+
+      li: リストアイテム
+
+      a: リンク
+
+      table: テーブル（表）
+
+      tr: テーブルの行
+
+      th: テーブルの見出し
+
+      td: テーブルのデータ
+
+
+      【新出CSSプロパティ】
+      display: 要素の表示形式
+
+      line-height: 行間
+
+      height: 高さ
+
+      object-fit: 画像のトリミング
+
+      border-radius: 角丸め
+
+      flexbox: flexible box layout module（レイアウトプロパティ）
+        justify-content: 余白の空け方
+        align-items: 垂直方向の揃え方
+        flex-direction: 並び方向
+
+    -->

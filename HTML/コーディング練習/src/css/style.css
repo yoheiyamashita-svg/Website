@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/* body全体の文字色を濃いグレーにし、フォントは『Noto Sans JP』を使用
+もし利用できなければゴシック体を使用
+文字サイズは14px、行間は文字サイズの1.75倍 */
+/* 全体に統一感を持たせるための「ベーススタイル」 */
+body {
+  color: #333;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.header {
+   /* paddingは内側の余白 */
+   /* 上下16px　左右0px */
+  padding: 16px 0;
+  text-align: center;
+}
+
+.header-logo {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  /* 文字と文字の間隔 ここでは1em=24px */
+  letter-spacing: 0.1em;
+}
+
+.header-logo-primary {
+  color: #ff7f00;
+}
+
+.header-heading {
+  font-size: 14px;
+  /* marginは外側の余白 */
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+}
+
+/* 中のコンテンツを整った位置に表示するための箱 */
+.container {
+  padding: 0 16px;
+}
+
+/* カードの外枠 */
+.post {
+  padding-bottom: 32px;
+  /* 下線を引く */
+  border-bottom: 1px solid #ccc;
+}
+
+/* 最初以外の投稿に上の余白を追加 */
+.post:not(:first-child) {
+  margin-top: 32px;
+}
+
+/* 記事タイトルや本文が並ぶ部分に */
+/* 画像との間に余白を設け、詰まりすぎを防ぐ */
+.post-content {
+  margin-top: 8px;
+}
+
+/* 記事のタイトル表示 */
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  /* 文字間を広めに */
+  letter-spacing: 0.1em;
+}
+
+/* 記事のリード文・説明文 */
+.post-text {
+  color: #999;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+}
+
+/* 「続きを読む」のレイアウト */
+.post-read-more-wrapper {
+  /* 上のテキストからしっかり離す */
+  margin-top: 40px;
+  /* 右下にボタン配置 */
+  text-align: right;
+}
+
+/* 「続きを読む」のテキストデザイン */
+.post-read-more {
+  color: #ff7f00;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* 問い合わせセクション全体をまとめる要素 */
+.contact {
+  margin-top: 40px;
+  padding: 80px 0;
+  /* 背景に画像を入れることでデザイン性を高めている */
+  background: url(../img/bg_contact01.png) no-repeat center / cover;
+  /* 
+    background-image: url(../img/bg_contact01.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  */
+}
+
+/* お問い合わせの見出し */
+.contact-title {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* 説明文をまとめるテキストボックス */
+.contact-text-wrapper {
+  /* タイトルとの間隔 */
+  margin-top: 32px;
+  padding: 24px 16px;
+  /* 背景は白 */
+  background: #fff;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+/* 問い合わせボタンのレイアウト */
+.contact-btn-wrapper {
+  margin-top: 64px;
+  text-align: center;
+}
+
+/* リンク型ボタン */
+.contact-btn {
+  /* ブロックのようにサイズを持たせる */
+  display: inline-block;
+  /* 大きめサイズ */
+  padding: 16px 24px;
+  /* 白 */
+  color: #fff;
+  /* オレンジ */
+  background: #ff7f00;
+  /*  */
+  font-size: 14px;
+  /*  */
+  line-height: 2;
+  /*  */
+  font-weight: bold;
+  /*  */
+  letter-spacing: 0.1em;
+}
+
+.footer {
+  text-align: center;
+  padding: 16px 0;
+  background: #ff7f00;
+}
+
+.footer-copyright {
+  /* 要素をflexboxにして、内部のレイアウトを調整しやすく */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}

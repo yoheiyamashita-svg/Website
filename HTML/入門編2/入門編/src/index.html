@@ -1,0 +1,149 @@
+<!-- 
+  【<!DOCTYPE html>】
+  Doctype（ドクタイプ）宣言と言って、必ず記述する必要があります。
+  このHTMLファイルがどのバージョンのHTMLで作られているのかを表します。
+  HTML5が現行のバージョンなので、今回のような書き方をして宣言をします。
+-->
+<!DOCTYPE html>
+<!-- 
+  【<html lang="ja">】
+  HTMLの文書であるということを表していて、必ず記述する必要があります。
+  langというのは属性で、Webページの言語設定ができるもので、値として「ja」とすることで日本語を示すことができます。
+  Doctype（ドクタイプ）宣言のすぐ後に記述し、閉じタグはそれ以下のコードを全て囲います。
+-->
+<html lang="ja">
+<!-- 
+  【<head>】
+  このタグの中にページのタイトルや説明文やその他読み込みたい外部ファイルのリンクなどの情報を記述することができます。
+-->
+<head>
+<!--
+  【<meta charset="UTF-8">】
+  文字コードをUTF-8に指定しています。
+  これがないと文字化けしてしまう場合があるので、必ず記述します。
+-->
+  <meta charset="UTF-8">
+<!--
+  【<title>】
+  ページのタイトルを記述します。
+  ここに書かれたものが、ブラウザのタブやGoogle検索した時のページタイトルとして表示されます。
+-->
+  <title>ZeroPlus Gate | Profile</title>
+<!-- 
+  【<meta name="description" content="">】
+  Webページの説明文を記述することができます。
+  タイトルタグと同じようにGoogle検索した時のタイトル下の説明文として表示されます。
+  content属性に表示させたい説明文を記述します。
+-->
+  <meta name="description" content="プロフィールサイトを通してHTMLとCSSの基本を身につけましょう">
+  <!-- 
+    【リセットCSS】
+    ブラウザ毎に最低限の見た目を担保するデフォルトのCSSがあり、ブラウザ毎に異なります。
+    これを統一しないまま制作を進めてしまうと、最終的なデザインもブラウザ毎に異なってしまいます。
+    この問題を解消するためにリセットCSSを当ててどのブラウザでも同じ見た目にすることができる
+
+
+    【リセットCSSには2種類ある】
+
+    ■ハードリセット系CSS
+    デフォルトの余白やフォントサイズなどを取り去り、すべての要素を統一するリセットCSS
+
+    ■ノーマライズ系CSS
+    有用なデフォルトのスタイルを活かしつつブラウザ間の差異をなくすリセットCSS
+  -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <!-- オリジナルスタイル -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 
+    【登場するHTMLタグ】
+    h: 見出し
+    見出しなどの重要なテキストをマークアップする際
+    
+    p: 段落
+    段落を意味する
+
+    div: グループ化
+    意味としては持たないが、要素をグルーピングする際
+
+    img: 画像
+    画像を表示する際
+
+    section: 章
+    節や章を意味する。
+
+    footer: フッター
+    ページの下部の領域をマークアップする際
+
+    small: テキストを小さく
+    警告や著作権などの注釈をマークアップする際
+
+
+    【登場するCSSプロパティ】
+    background-color: 背景色
+
+    font-family: 書体
+
+    font-size: フォントの大きさ
+
+    font-weight: フォントの太さ
+
+    margin: 要素の外側の余白
+
+    padding: 要素の内側の余白
+
+    text-align: ブロック要素の水平方向の配置
+
+    width: 要素の横幅
+  -->
+
+  <div class="wrapper">
+    <h1 class="name">山田 花子</h1>
+
+    <div class="container">
+      <div class="profile-img">
+        <img src="img/profile.jpg" alt="">
+      </div>
+      <section class="section-wrap">
+        <h2 class="section-ttl">プロフィール</h2>
+        <p>生年月日: 2021.07.18</p>
+        <p>出身: アメリカ in ニューヨーク</p>
+        <p>趣味: カメラ撮影 / 絵を描くこと</p>
+        <p>好きな言葉: Freedom of choice for everyone.</p>
+      </section>
+
+      <section class="section-wrap">
+        <h2 class="section-ttl">経歴</h2>
+        <p>2021年07月: アメリカ in ニューヨークに産まれる</p>
+        <p>2024年10月: ニューヨークの小学校に入学</p>
+        <p>2027年12月: 両親の仕事の関係で日本に移住</p>
+      </section>
+
+      <section class="section-wrap">
+        <h2 class="section-ttl">私の作品</h2>
+        <p>東京のラーメン屋さん</p>
+        <div class="work-img">
+          <img src="img/work01.jpg" alt="東京のラーメン屋さん">
+        </div>
+        <p>埼玉の桜並木</p>
+        <div class="work-img">
+          <img src="img/work02.jpg" alt="埼玉の桜並木">
+        </div>
+        <p>富士山</p>
+        <div class="work-img">
+          <img src="img/work03.jpg" alt="富士山">
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <small class="footer-cr">&copy;2021 ZeroPlus Gate.</small>
+    </footer>
+  </div>
+</body>
+</html>
