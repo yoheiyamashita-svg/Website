@@ -1,3 +1,14 @@
+<!-- 
+1. `header`の基本的なHTML構造
+2. `display:flex`は横並びの他に、テキストの上下左右中央寄せもできる
+3. `display`プロパティのさまざまな値がある(`block` / `inline` / `inline-block`)
+4. `not(:first-child)`は最初の要素以外に、スタイルを当てる時に使う
+5. `overflow`プロパティははみ出した要素に影響を与えられる
+6. `white-space:nowrap`はテキストの改行を防ぐ
+7. レイアウトシフト防止のために、`imgタグ`には`width`,`height`属性をつける 
+-->
+
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -22,5 +33,85 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body></body>
+  <body>
+      <header class="header">
+      <!-- 1番大事なワードを表すh1タグも可 -->
+      <p class="header-logo">
+        <a href="index.html" class="header-logo_link">ZeroPlus</a>
+      </p>
+
+      <nav class="header-nav">
+        <ul class="header-nav_list">
+          <li class="header-nav_item">
+            <a href="category.html" class="header-nav_link">
+              マーケティング
+            </a>
+          </li>
+          <li class="header-nav_item">
+            <a href="" class="header-nav_link">
+              グロースハック
+            </a>
+          </li>
+          <li class="header-nav_item">
+            <a href="" class="header-nav_link">SEO</a>
+          </li>
+          <li class="header-nav_item">
+            <a href="" class="header-nav_link">運用型広告</a>
+          </li>
+          <li class="header-nav_item">
+            <a href="" class="header-nav_link">SNSマーケ</a>
+          </li>
+          <li class="header-nav_item">
+            <a href="" class="header-nav_link">運営会社</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="posts">
+      <article class="post">
+        <a href="single.html" class="post_link">
+          <!--  -->
+          <div class="post_thumb-wrapper">
+            <!-- HTMLにかく 
+             https://parashuto.com/rriver/development/img-size-attributes-are-back
+             - imgタグにwidth属性とheight属性を指定する
+              →読み込んだ時にキレイに表示されるため
+              - 書き方
+              →画像の大きさの数字をそのまま入れる
+              - timeタグの使い方
+              時間を表す数字や単語に使う。
+              これを書くと、文字列に書いてある時間の意味を機械が理解できるようになる。
+              - spanタグの使い方
+              divのような使い方をする。divとの違いは、文字単位の装飾・小物を作る時に使う。
+            -->
+            <img
+              width="670"
+              height="418"
+              src="img/thumb.jpg"
+              alt="運用型広告"
+              class="post_thumb"
+            />
+          </div>
+           <!-- /.post_thumb-wrapper -->
+          <div class="post_content">
+            <div class="post_meta">
+              <time class="post_meta-date">2021.06.05</time>
+              <span class="post_meta-cat">運用型広告</span>
+            </div>
+            <!-- ./post_meta -->
+              <h2 class="post_title">
+                運用型広告とは？種類による特徴や導入のメリット・デメリットをわかりやすく解説！
+              </h2>
+           </div>
+      <!-- /.post_content -->
+        </a>
+      </article>
+    </div>
+<!-- /.posts -->
+
+    <footer class="footer">
+      <small class="footer-copyright">&copy; 2018 sample inc.</small>
+    </footer>
+  </body>
 </html>
