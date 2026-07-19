@@ -1,0 +1,171 @@
+@charset "UTF-8";
+body {
+  color: #111;
+  font-size: 14px;
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 2;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container-sm {
+  padding: 0 16px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn {
+  color: #fff;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  display: inline-block;
+  padding: 16px 24px;
+  background: #1fb3ea;
+}
+
+.header {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-logo {
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.header-logo-primary {
+  color: #1fb3ea;
+}
+
+.header-nav {
+  margin-top: 16px;
+}
+
+.header-nav-list {
+  display: flex;
+  gap: 24px;
+}
+
+.header-nav-link {
+  letter-spacing: 0.1em;
+}
+
+.news-list {
+  margin-top: 40px;
+}
+
+.news-item {
+  display: flex;
+}
+
+.news-item:not(:first-child) {
+  margin-top: 16px;
+}
+
+.news-link {
+  text-decoration: underline;
+  margin-left: 16px;
+}
+
+.news-btn-wrapper {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.service {
+  background: #fafafa;
+}
+
+.service-copy {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.service-desc {
+  margin-top: 40px;
+  letter-spacing: 0.1em;
+}
+
+.service-contents {
+  margin-top: 40px;
+}
+
+.service-item {
+  padding: 40px 0;
+}
+
+.service-item:nth-child(1) {
+  background: url("../img/bg_service.jpg") center/cover;
+}
+
+.service-item:nth-child(2) {
+  background: url("../img/bg_service02.jpg") center/cover;
+}
+
+.service-item:nth-child(3) {
+  background: url("../img/bg_service03.jpg") center/cover;
+}
+
+.service-item:not(:first-child) {
+  margin-top: 24px;
+}
+
+.service-item-title {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.service-item-desc {
+  color: #fff;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.contact {
+  background: url("../img/bg_contact_sm.jpg") center/cover;
+}
+
+.contact .section-title {
+  color: #fff;
+}
+.contact-desc {
+  color: #fff;
+  letter-spacing: 0.1em;
+  margin-top: 40px;
+}
+.contact-btn-wrapper {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  padding: 16px 0;
+  background: #111;
+}
+
+.footer-copyright {
+  color: #fff;
+  font-size: 12px;
+}

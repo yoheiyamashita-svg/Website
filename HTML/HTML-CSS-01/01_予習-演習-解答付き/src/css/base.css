@@ -1,0 +1,332 @@
+@charset "UTF-8";
+
+/* ------------------------------ */
+/*                                */
+/*                                */
+/*                                */
+/*                                */
+/* このファイルは編集しないでください。 */
+/*                                */
+/*                                */
+/*                                */
+/*                                */
+/* ------------------------------ */
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+.u_link {
+  color: #1a0dab;
+  text-decoration: underline;
+}
+
+/* homework section */
+.homework_section {
+  padding-bottom: 120px;
+}
+
+.homework_title-wrapper {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 32px 80px;
+}
+
+.homework_title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.homework_practice {
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.homework_practice_title-wrapper {
+  max-width: 1200px;
+  background: #efefef;
+  width: 96%;
+  margin: 80px auto 0;
+  border-radius: 5px;
+  border-left: solid #f19664 16px;
+  padding: 16px;
+}
+.homework_practice_title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.homework_practice_item {
+  font-size: 14px;
+}
+
+.homework_practice_contents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 80px;
+  padding: 0 16px;
+  margin-top: 80px;
+}
+
+.homework_practice_contents > div {
+  width: 400px;
+}
+
+.homework_practice_rendering > p,
+.homework_practice_challenge > p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.homework_practice_rendering > img {
+  margin-top: 20px;
+  height: 155px;
+  object-fit: contain;
+}
+
+.homework_practice_challenge > div {
+  border: 1px solid #b3b3b3;
+  height: 150px;
+  margin-top: 20px;
+}
+
+.homework_practice_code {
+  max-width: 900px;
+  margin: 40px auto 0;
+  position: relative;
+}
+
+.homework_practice_code::before {
+  position: absolute;
+  content: "index.html";
+  font-size: 12px;
+  color: #878787;
+  right: 10px;
+  top: 5px;
+  z-index: 1;
+}
+
+.homework_point {
+  margin-top: 80px;
+}
+
+.homework_point_head-wrapper {
+  width: 100%;
+  text-align: left;
+}
+
+.homework_point_head {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 16px;
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  position: relative;
+}
+
+.homework_point__hint .homework_point_head {
+  background: linear-gradient(45deg, #4CAAC0 0, #6ACAE2 100%);
+}
+
+.homework_point_head::before,
+.homework_point_head::after {
+  position: absolute;
+  content: "";
+  background: #fff;
+  height: 4px;
+  width: 24px;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+}
+
+.homework_point_head::before {
+  transform: translateY(-50%) rotate(90deg);
+  transition: all 0.3s;
+}
+
+.homework_point_head-wrapper.is_open .homework_point_head::before {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.homework_point_contents {
+  border: 1px solid #ffb924;
+  padding: 40px 20px 60px;
+}
+
+.homework_point__hint .homework_point_contents {
+  border-color: #6ACAE2;
+}
+
+.homework_point_title {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.homework_point_title:not(:first-child) {
+  margin-top: 40px;
+}
+
+.homework_point_title::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 4px;
+  border-radius: 100vh;
+  background: #f19664;
+  left: 0;
+  bottom: 0;
+}
+
+.homework_point_txt {
+  font-size: 14px;
+}
+
+.homework_point_txt:not(:first-child) {
+  margin-top: 32px;
+}
+
+.homework_point_code {
+  margin-top: 40px;
+}
+
+
+
+/* ----- Step1-1 block ----- */
+
+.inline-to-block {
+  border: 1px solid #333;
+}
+
+/* ----- Step1-2 inline ----- */
+.block-to-inline {
+  border: 1px solid #333;
+}
+
+/* ----- Step1-3 inlineblock ----- */
+.block-to-inline-block {
+  border: 1px solid #333;
+}
+
+/* ----- Step2-1 ----- */
+.wh-practice_wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  margin-top: 80px;
+}
+
+.wh-practice_wrapper > div {
+  width: 400px;
+}
+
+.wh-practice_rendering > p,
+.wh-practice_challenge > p {
+  text-align: center;
+}
+
+.wh-practice_rendering > img {
+  margin-top: 20px;
+  height: 155px;
+  object-fit: contain;
+}
+
+.homework_point_contents .wh-practice_rendering {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.homework_point_contents .wh-practice_rendering > img {
+  height: auto;
+  width: 400px;
+}
+
+.wh-practice_challenge-inner {
+  border: 1px solid #b3b3b3;
+  margin-top: 20px;
+  padding: 16px 0;
+}
+
+.wh-practice_challenge-inner > div:not(:first-child) {
+  margin-top: 24px;
+}
+
+.wh {
+  border: 1px solid #333;
+}
+
+.wh-practice_challenge-inner > div:nth-child(3) .wh {
+  display: inline-block;
+}
+
+/* ----- Step2-2 ----- */
+
+.homework_practice_challenge__wh-100 > div {
+  background: #B6FFDC;
+}
+
+.wh-100 {
+  display: inline-block;
+  border: 1px solid #333;
+  background: #3F8CFF;
+  color: #fff;
+}
+
+/* ----- Step3-1 ----- */
+
+.homework_practice_challenge__flex > div {
+  background: #B6FFDC;
+}
+
+.flex-children {
+  border: 1px solid #333;
+  background: #3F8CFF;
+  color: #fff;
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----- Step3-2 ----- */
+
+.button {
+  border: 1px solid #333;
+}
+
+
+/* ----- Step3-1 ----- */
+
+.homework_practice_challenge__header > div {
+  border: none;
+  margin-top: 30px;
+  color: #333;
+}
+
+
+/* ----- js ----- */
+
+.js_accordion_contents {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.js_accordion_contents.is_open {
+  grid-template-rows: 1fr;
+}
+
+.js_accordion_contents-inner {
+  overflow: hidden;
+}

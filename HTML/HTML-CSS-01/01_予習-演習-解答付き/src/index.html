@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HTML-CSS-01-予習-演習-解答付き</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/line-numbers/prism-line-numbers.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/line-highlight/prism-line-highlight.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/unescaped-markup/prism-unescaped-markup.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- ----- Step1 ----- -->
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">
+          Step1 | 表示形式（displayプロパティ）の理解を深めよう！
+        </h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・<a
+              class="u_link"
+              href="https://zero-plus.io/media/css-display-format-difference/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >こちら</a
+            >の記事を参考にしながら以下の設問に挑戦し、表示形式「block、inline、inline-block」の特徴を掴みましょう。
+          </li>
+          <li class="homework_item">
+            ・各項目の模範回答や解説はトグルの中にありますので、適宜確認してください。
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step1-1 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            1. 表示形式をblockに変えてみよう！
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・表示形式がインラインであるaタグ（.inline-to-block）に対して、表示形式をブロックする記述を書いてみよう
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/block_rendering-img.png" alt="" />
+            </div>
+
+            <div class="homework_practice_challenge">
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step1-1        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div>
+                <a class="inline-to-block">インラインをブロックに変更</a>
+                <a class="inline-to-block">インラインをブロックに変更</a>
+                <a class="inline-to-block">インラインをブロックに変更</a>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;a class=&quot;inline-to-block&quot;&gt;インラインをブロックに変更&lt;/a&gt;
+  &lt;a class=&quot;inline-to-block&quot;&gt;インラインをブロックに変更&lt;/a&gt;
+  &lt;a class=&quot;inline-to-block&quot;&gt;インラインをブロックに変更&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    要素の表示形式を変更したい場合は、CSSのdisplayプロパティを使用します。<br />
+                    今回はaタグ（.inline-to-block）の表示形式をブロックにしたいので、aタグ（.inline-to-block）に以下のようなCSSを適用します。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.inline-to-block {
+  display: block;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    <a
+                      class="u_link"
+                      href="https://zero-plus.io/media/css-display-format-difference/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >参考記事</a
+                    >にて「blockの特徴」を確認しましょう。<br />
+                    blockの特徴の一つとして「縦に要素が並ぶ」というものがありますが、これは<b>blockの要素の横幅は親要素いっぱいに広がる</b>という仕様であるためです。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step1-2 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            2. 表示形式をinlineに変えてみよう！
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・表示形式がブロックであるdivタグ（.block-to-inline）に対して、表示形式をインラインにする記述を書いてみよう
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/inline_rendering-img.png" alt="" />
+            </div>
+
+            <div class="homework_practice_challenge">
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step1-2        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div>
+                <div class="block-to-inline">ブロックをインラインに変更</div>
+                <div class="block-to-inline">ブロックをインラインに変更</div>
+                <div class="block-to-inline">ブロックをインラインに変更</div>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;div class=&quot;block-to-inline&quot;&gt;ブロックをインラインに変更&lt;/div&gt;
+  &lt;div class=&quot;block-to-inline&quot;&gt;ブロックをインラインに変更&lt;/div&gt;
+  &lt;div class=&quot;block-to-inline&quot;&gt;ブロックをインラインに変更&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    今回はdivタグ（.block-to-inline）の表示形式をインラインにしたいので、divタグ（.block-to-inline）に以下のようなCSSを適用します。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.block-to-inline {
+  display: inline;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    <a
+                      class="u_link"
+                      href="https://zero-plus.io/media/css-display-format-difference/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >参考記事</a
+                    >にて「inlineの特徴」を確認しましょう。<br />
+                    inlineの特徴の一つとして「横に要素が並ぶ」というものがありますが、これは<b>inlineの要素の横幅は子要素の幅分だけになる</b>という仕様であるためです。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step1-3 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            3. 表示形式をinline-blockに変えてみよう！
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・表示形式がブロックであるdivタグ（.block-to-inline-block）に対して、表示形式をインラインブロックにする記述を書いてみよう
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/inlineblock_rendering-img.png" alt="" />
+            </div>
+
+            <div class="homework_practice_challenge">
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step1-3        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div>
+                <div class="block-to-inline-block">
+                  インラインブロックに変更
+                </div>
+                <div class="block-to-inline-block">
+                  インラインブロックに変更
+                </div>
+                <div class="block-to-inline-block">
+                  インラインブロックに変更
+                </div>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;div class=&quot;block-to-inline-block&quot;&gt;インラインブロックに変更&lt;/div&gt;
+  &lt;div class=&quot;block-to-inline-block&quot;&gt;インラインブロックに変更&lt;/div&gt;
+  &lt;div class=&quot;block-to-inline-block&quot;&gt;インラインブロックに変更&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    今回はdivタグ（.block-to-inline-block）の表示形式をインラインブロックにしたいので、divタグ（.block-to-inline-block）に以下のようなCSSを適用します。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.block-to-inline-block {
+  display: inline-block;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    <a
+                      class="u_link"
+                      href="https://zero-plus.io/media/css-display-format-difference/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >参考記事</a
+                    >にて「inline-blockの特徴」を確認しましょう。<br />
+                    inline-blockの特徴の一つとして「横に要素が並ぶ」というものがあります。<br />
+                    これはinlineと同じく、<b>inline-blockの要素の横幅は子要素の幅分だけになる</b>という仕様であるためです。<br />
+                    <br />
+                    inlineとinline-blockの違いについては次のStepでも取り扱いますが、一旦この段階でも参考記事を確認して把握しておきましょう。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ----- Step2 ----- -->
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">
+          Step2 | height・widthについて理解を深めよう！
+        </h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・以下の設問に挑戦し、heighとwidthについて理解を深めましょう。
+          </li>
+          <li class="homework_item">
+            ・各項目の模範回答や解説はトグルの中にありますので、適宜確認してください。
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step2-1 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            1. 表示形式ごとに「幅・高さの指定」ができるか確かめてみよう！
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・表示形式がブロック(divタグ)・インライン(aタグ)・インラインブロック(divタグにdisplay:inline-blockを付与)の要素（クラス名は全て.wh）があります。
+            </li>
+            <li class="homework_practice_item">
+              ・.whにwidthとheightを100pxずつ設定して表示を確かめてみましょう。
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="wh-practice_challenge">
+              <p>やってみよう！</p>
+              <div class="wh-practice_challenge-inner">
+                <!-- --------------------- -->
+                <!--        Step2-1        -->
+                <!-- やってみよう！ (ここから) -->
+                <!-- --------------------- -->
+                <div>
+                  <div class="wh">ブロック</div>
+                  <div class="wh">ブロック</div>
+                  <div class="wh">ブロック</div>
+                </div>
+
+                <div>
+                  <a class="wh">インライン</a>
+                  <a class="wh">インライン</a>
+                  <a class="wh">インライン</a>
+                </div>
+
+                <div>
+                  <div class="wh">インラインブロック</div>
+                  <div class="wh">インラインブロック</div>
+                  <div class="wh">インラインブロック</div>
+                </div>
+                <!-- --------------------- -->
+                <!-- やってみよう！ (ここまで) -->
+                <!-- --------------------- -->
+              </div>
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;div class=&quot;wh&quot;&gt;ブロック&lt;/div&gt;
+  &lt;div class=&quot;wh&quot;&gt;ブロック&lt;/div&gt;
+  &lt;div class=&quot;wh&quot;&gt;ブロック&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;a class=&quot;wh&quot;&gt;インライン&lt;/a&gt;
+  &lt;a class=&quot;wh&quot;&gt;インライン&lt;/a&gt;
+  &lt;a class=&quot;wh&quot;&gt;インライン&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;div class=&quot;wh&quot;&gt;インラインブロック&lt;/div&gt;
+  &lt;div class=&quot;wh&quot;&gt;インラインブロック&lt;/div&gt;
+  &lt;div class=&quot;wh&quot;&gt;インラインブロック&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    指示通り.whにwidthとheightを100pxずつ設定しましょう。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.wh {
+  width: 100px;
+  height: 100px;
+}</code></pre>
+                  </div>
+                  <p class="homework_point_txt">
+                    下記の完成イメージの通りになっていたら正常です。
+                  </p>
+                  <div class="wh-practice_rendering">
+                    <p>完成イメージ</p>
+                    <img src="img/wh_rendering-img.png" alt="" />
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    表示形式ごとに「幅・高さの指定」ができるもの・できないものがあります。<br />
+                    ・ブロック → 幅と高さが指定できる<br />
+                    ・インライン → 幅と高さが<b>指定できない</b>
+                    <br />
+                    ・インラインブロック → 幅と高さが指定できる<br /><br />
+                    インラインには幅と高さが指定できない仕様となっています。<br />
+                    そのため、デフォルトで表示形式がインラインであるaタグなどに幅・高さの指定をしたい場合は、表示形式をインライン以外にする必要がありますので注意しましょう。<br />
+                    また、インラインは「上下の余白が調整できない」という特徴もありますので、その場合も同じく表示形式の変更が必要になります。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step2-2 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            2. 幅・高さの「100％」の意味を知ろう！
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・height150px・width400pxで設定してある緑色の親要素があります。
+            </li>
+            <li class="homework_practice_item">
+              ・表示形式がインラインブロックの子要素(青色、.wh-100)を、親要素いっぱいの大きさに広げるCSSを書いてください。
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/wh-100_rendering-img.png" alt="" />
+            </div>
+
+            <div
+              class="homework_practice_challenge homework_practice_challenge__wh-100"
+            >
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step2-2        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div>
+                <div class="wh-100">インラインブロック</div>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;div class=&quot;wh-100&quot;&gt;インラインブロック&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    .wh-100に以下のようなCSSを適用します。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.wh-100 {
+  width: 100%;
+  height: 100%;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    height・widthの値が100%の場合、「親要素いっぱいに広がる」という意味になります。<br />
+                    <br />
+                    今回の設問の場合、青色の要素である.wh-100にheight150px・width400pxをつければ完成イメージ通りの見た目にはなりますが、そのような記述にしてしまうと親要素の大きさに修正があった場合に子要素の値も修正する必要が出てきます。<br />
+                    Web制作では後の修正も考慮してコーディングすることが望ましいためため、「親要素いっぱいに広げる」という場合には100%という値が使用される場合が多いです。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ----- Step3 ----- -->
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step3 | flexについて理解を深めよう！</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・<a
+              class="u_link"
+              href="https://zero-plus.io/media/css-flexbox-commentary/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >こちら</a
+            >の記事を参考にしながら以下の設問に挑戦し、flexの特徴を掴みましょう。
+          </li>
+          <li class="homework_item">
+            ・各項目のヒント、模範回答や解説はトグルの中にありますので、適宜確認してください。
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step3-1 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">1. flexのおさらいをしよう</h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・完成イメージの通りの形になるようにCSSを当ててみましょう
+            </li>
+            <li class="homework_practice_item">
+              ・完成イメージは画像ですので、数値は目視で適当に設定してください。
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/flex_rendering-img.png" alt="" />
+            </div>
+
+            <div
+              class="homework_practice_challenge homework_practice_challenge__flex"
+            >
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step3-1        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div class="flex-parent">
+                <div class="flex-children">アイテム1</div>
+                <div class="flex-children">アイテム2</div>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div class=&quot;flex-parent&quot;&gt;
+  &lt;div class=&quot;flex-children&quot;&gt;アイテム1&lt;/div&gt;
+  &lt;div class=&quot;flex-children&quot;&gt;アイテム2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    今回は、アイテム1とアイテム2を横並びにしたうえで、親要素に対して左右端に寄せるという完成イメージです。<br />
+                    .flex-parentに以下のようなCSSを適用することで実現が可能です。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.flex-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    <a
+                      class="u_link"
+                      href="https://zero-plus.io/media/css-flexbox-commentary/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >参考記事</a
+                    >にてflex系プロパティを確認しましょう。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 1<br />アイテム1とアイテム2が横並びになっているので、.flex-parentにdisplay:
+                    flex;をつけて横並びにします。<br />
+                    横並びにしたい要素の親にflexをつけるという点を押さえておきましょう。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 2<br />アイテムを上下中央揃えをするために、.flex-parentにalign-items:center;をつけます。<br />
+                    align-itemsはflex系のプロパティであり、display: flex;
+                    と併用する必要があります。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 3<br />アイテムを親要素に対して左右端に配置するために、.flex-parentにjustify-content:
+                    space-between;をつけます。<br />
+                    justify-contentもflex系のプロパティであり、display: flex;
+                    と併用する必要があります。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step3-2 -->
+      <section class="homework_contents">
+        <div class="homework_practice_title-wrapper">
+          <h3 class="homework_practice_title">
+            2. flexを使用したテキスト中央寄せの使い方を知ろう
+          </h3>
+          <ul class="homework_practice_list">
+            <li class="homework_practice_item">
+              ・完成イメージの通りの形になるように、.buttonへCSSを当ててみましょう。
+            </li>
+            <li class="homework_practice_item">
+              ・完成イメージは画像ですので、数値は目視で適当に設定してください。
+            </li>
+            <li class="homework_practice_item">
+              ・「flex テキスト 中央」などと検索してみましょう。
+            </li>
+          </ul>
+        </div>
+
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/button_rendering-img.png" alt="" />
+            </div>
+
+            <div class="homework_practice_challenge">
+              <p>やってみよう！</p>
+              <!-- --------------------- -->
+              <!--        Step3-2        -->
+              <!-- やってみよう！ (ここから) -->
+              <!-- --------------------- -->
+              <div>
+                <a class="button">ボタン</a>
+                <a class="button">ボタン</a>
+              </div>
+              <!-- --------------------- -->
+              <!-- やってみよう！ (ここまで) -->
+              <!-- --------------------- -->
+            </div>
+          </div>
+
+          <div class="homework_practice_code">
+            <pre><code type="text/plain" class="language-markup line-numbers">&lt;div&gt;
+  &lt;a class=&quot;button&quot;&gt;ボタン&lt;/a&gt;
+  &lt;a class=&quot;button&quot;&gt;ボタン&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    .buttonに以下のようなCSSを適用することで実現が可能です。<br />
+                    模範解答以外のCSSでも完成イメージ通りの形を作ることが可能ですが、flexの特徴を掴むための一例として参考にしてください。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.button {
+  width: 200px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    以下の手順は一例です。CSSの記述順に決まりはありませんので、結果的にデザイン通りになればOKです。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 1<br />まずは要素の大きさを整えるために.buttonにwidth
+                    200px,
+                    height:100pxをつけてみます。（数値は目視で適当に設定してOKです）<br /><br />
+                    これだけでは大きさが変わりませんね。理由はaタグは表示形式がインラインなのでwidth,heightが効かない仕様だからです。aタグにwidth,heightを適用させたい場合は表示形式をインライン以外にする必要があります。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 2<br />.buttonにdisplay: flex;をつけてみます。<br /><br />
+                    width, heightが効きましたね！<br />
+                    「aタグにwidth,heightを適用させたい場合は表示形式をインライン以外にする必要がある」について、これはblockやinline-blockだけでなくflexでもOKです。
+                    <br /><br />
+                    なぜblockやinline-blockではなくflexを選択したのかは次の手順に関わってきます。
+                  </p>
+                  <p class="homework_point_txt">
+                    ■ 手順 3<br />前の手順までで四角枠の大きさは整いましたが、テキストが左上に寄っているので上下左右中央揃えにしてみましょう。<br /><br />
+                    .buttonにjustify-content:
+                    center;とjustify-content:center;をつけます。<br />
+                    テキストが上下左右中央揃えになりましたね！
+                    <br /><br />
+                    実はflexにはタグ内のテキストの上下左右中央揃えができるという特徴もあります。<br />ボタンの中のテキストを上下左右中央揃えにする際に使用されることが多いので、このやり方も知っておきましょう。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <!-- ----- チャレンジ問題 ----- -->
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">
+          チャレンジ問題 | ヘッダーを作ってみよう！
+        </h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            入学テストと、この予習課題Step1からStep3までの知識を活用して完成イメージのヘッダーを作ってみましょう（HTML,CSSを記述）。
+          </li>
+          <li class="homework_item">
+            ※ 完成イメージが画像のため数値は適当で大丈夫です。
+          </li>
+          <li class="homework_item">
+            <u>
+              ※ヘッダーのHTMLを書く場所はindex.htmlです。index.htmlにて「ここにヘッダーのHTMLを書く」とファイル内検索をしてみてください。<br />
+              （vscodeでindex.htmlを開いた上で、control + F（macは ⌘ +
+              F）で検索窓を開くことができます）。</u
+            >
+          </li>
+          <li class="homework_item">
+            ※自力で挑戦した後に模範解答を確認して、Step1からStep3までの知識がどこで使われているか確認しましょう。
+          </li>
+        </ul>
+      </div>
+
+      <section class="homework_contents">
+        <div class="homework_practice">
+          <div class="homework_practice_contents">
+            <div class="homework_practice_rendering">
+              <p>完成イメージ</p>
+              <img src="img/header_rendering-img.png" alt="" />
+            </div>
+
+            <div
+              class="homework_practice_challenge homework_practice_challenge__header"
+            >
+              <p>やってみよう！</p>
+              <div>
+                <!-- --------------------- -->
+                <!--      チャレンジ問題      -->
+                <!-- やってみよう！ (ここから) -->
+                <!-- --------------------- -->
+
+                <!-- TODO：ここにヘッダーのHTMLを書く -->
+
+                <!-- --------------------- -->
+                <!-- やってみよう！ (ここまで) -->
+                <!-- --------------------- -->
+              </div>
+            </div>
+          </div>
+
+          <div class="homework_point homework_point__hint">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">ヒント</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <p class="homework_point_txt">
+                    こちらはヘッダーのHTML構造を図にしたものです。参考にしてHTMLを書いてみましょう。
+                  </p>
+                  <img
+                    src="img/header-hint.png"
+                    alt=""
+                    class="homework_point_img"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="homework_point">
+            <button class="homework_point_head-wrapper js_accordion">
+              <h4 class="homework_point_head">模範解答・ポイント解説</h4>
+            </button>
+            <div class="js_accordion_contents">
+              <div class="js_accordion_contents-inner">
+                <div class="homework_point_contents">
+                  <h5 class="homework_point_title">模範解答</h5>
+                  <p class="homework_point_txt">
+                    HTML,CSSの模範解答は以下の通りです。<br />
+                    模範解答以外のCSSでも完成イメージ通りの形を作ることが可能ですが、Step1~3で扱った内容の特性を掴むための一例として参考にしてください。
+                  </p>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-markup line-numbers">&lt;header class=&quot;header&quot;&gt;
+  &lt;p class=&quot;header-logo&quot;&gt;
+    &lt;a href=&quot;index.html&quot; class=&quot;header-logo_link&quot;&gt;ZeroPlus&lt;/a&gt;
+  &lt;/p&gt;
+  &lt;nav class=&quot;header-nav&quot;&gt;
+    &lt;ul class=&quot;header-nav_list&quot;&gt;
+      &lt;li class=&quot;header-nav_item&quot;&gt;
+        &lt;a href=&quot;&quot; class=&quot;header-nav_link&quot;&gt;トップ&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;header-nav_item&quot;&gt;
+        &lt;a href=&quot;&quot; class=&quot;header-nav_link&quot;&gt;会社概要&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;header-nav_item&quot;&gt;
+        &lt;a href=&quot;&quot; class=&quot;header-nav_link&quot;&gt;サービス&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;header-nav_item&quot;&gt;
+        &lt;a href=&quot;&quot; class=&quot;header-nav_link&quot;&gt;お問い合わせ&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+                  </div>
+                  <div class="homework_point_code">
+                    <pre><code type="text/plain" class="language-css line-numbers">.header {
+  text-align: center;
+  background: #F28A2B;
+}
+
+.header-logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  height: 64px;
+  display: inline-block;
+}
+
+.header-logo_link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-nav {
+  background: #F7E6CC;
+}
+
+.header-nav_list {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.header-nav_link {
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}</code></pre>
+                  </div>
+                  <h5 class="homework_point_title">ポイント解説</h5>
+                  <p class="homework_point_txt">
+                    HTML-CSS-01授業内での演習でヘッダーの作成を行います。<br />
+                    授業内でコードの解説がありますので、予習の段階では模範解答を確認してStep1からStep3までの知識がどこで使われているか確認しておきましょう。
+                  </p>
+                  <p class="homework_point_txt">
+                    入学テストやこの予習の内容を振り返り、事前準備をしておくと授業内での理解がより深まりますので、何度か入学テストやこのチャレンジ問題に挑戦しておくと良いでしょう。
+                  </p>
+                  <p class="homework_point_txt">
+                    また、ZeroPlusでは模写練習用の追加課題を複数用意しております。<br />
+                    授業開始後や卒業後でもご活用いただけるものですが、余裕があり取り組みたい方は質問フォームにて「1つ目の追加課題ください！」とご連絡ください。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>
