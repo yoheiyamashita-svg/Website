@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/* ---------- base ---------- */
+body {
+  color: #001c2b;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  background: #fafafa;
+}
+
+/* ---------- layout ---------- */
+.container {
+  padding: 0 16px;
+}
+
+.contents:not(:first-child) {
+  margin-top: 80px;
+}
+
+.contents-body {
+  margin-top: 64px;
+}
+
+/* ---------- header ---------- */
+
+.header {
+  background: #fcf2e4;
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  height: 72px;
+  /* 下記のflexはクリックされる箇所を限定的にするために記述している */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #ffffff;
+}
+
+.header-logo_link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo_link__accent-color {
+  color: #cb7aa6;
+}
+
+.header-nav {
+  padding: 0 16px;
+}
+
+.header-nav_list {
+  height: 72px;
+  display: flex;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.header-nav_list::-webkit-scrollbar {
+  display: none;
+}
+
+.header-nav_item {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.header-nav_item:not(:first-child) {
+  margin-left: 40px;
+}
+
+.header-nav_link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- top ---------- */
+
+.top_kv {
+  /* 下記のkvのheightは、calc関数を使ってヘッダー自体の高さを引いて計算している。
+  こうすることで、どのデバイス(デバイス毎に一画面の高さが違う)で閲覧しても同じレイアウトが再現できる */
+  height: calc(100vh - 144px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../img/img_kv_sm.jpg') center/cover;
+  padding: 0 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .top_kv {
+    background-image: url('../img/img_kv_lg.jpg');
+  }
+}
+
+.top_kv_copy-wrapper {
+  width: 100%;
+  max-width: 672px;
+  padding: 32px 8px;
+  text-align: center;
+  background: #cb7aa6;
+}
+
+.top_kv_copy {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.top_kv_copy-jp {
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+}
+
+.top_main {
+  padding: 80px 0;
+}
+
+.contents-title {
+  color: #001c2b;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.contents-title::after {
+  content: 'RECOMMEND';
+  display: block;
+  /* 上記のdisplay: block;は要素の高さを保持し、装飾要素をposition配置ではなくブロックで表示しています。 */
+  /* positionは高さがなくなるので配置が複雑になります。これについてはL6-L7で詳しく解説します。 */
+  color: #cb7aa6;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+}
+
+.contents-title.popular::after {
+  content: 'POPULAR';
+}
+
+.contents-title.articles::after {
+  content: 'ARTICLES';
+}
+
+.post {
+  background: #ffffff;
+  box-shadow: 2px 2px 4px rgba(170, 170, 170, 0.16);
+}
+
+.post_txt {
+  padding: 24px;
+}
+
+.post_meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_meta-date {
+  color: #707070;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.post_meta-cat {
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 4px 16px;
+  background: #cb7aa6;
+  border-radius: 4px;
+}
+
+.post_title {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-top: 16px;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.posts__col-4 {
+  gap: 24px;
+}
+
+.posts__col-3 {
+  gap: 24px;
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  padding: 40px 0 16px;
+  background: #fcf2e4;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.footer-logo_link__accent-color {
+  color: #cb7aa6;
+}
+
+.footer-sns {
+  margin: 40px auto 0;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.footer-sns_item {
+  width: 40px;
+  height: 40px;
+}
+
+.footer-copyright {
+  color: #707070;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-copyright_txt {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}

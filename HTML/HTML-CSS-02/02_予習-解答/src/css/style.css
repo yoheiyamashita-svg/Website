@@ -1,0 +1,83 @@
+/* position */
+.kv {
+  position: relative;
+}
+
+.kv_contents {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+}
+
+/* sticky */
+.sticky_aside {
+  position: sticky;
+  top: 48px;
+}
+
+/* transform & transition */
+.transform_item {
+  transition: transform ease-out 1s;
+}
+
+.transform_item__1:hover {
+  transform: translate(30px, 50px);
+}
+
+.transform_item__2:hover {
+  transform: rotate(45deg);
+}
+
+.transform_item__3:hover {
+  transform: scale(1.2);
+}
+
+.transform_item__4:hover {
+  transform: skewX(15deg);
+}
+
+/* pseudo */
+.pseudo_btn {
+  position: relative;
+}
+
+.pseudo_btn::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #ff9158;
+  border-right: 1px solid #ff9158;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: rotate(45deg) translateY(-50%);
+}
+
+.pseudo_txt-feature {
+  position: relative;
+}
+
+.pseudo_txt-feature::after {
+  content: "Feature";
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(255, 145, 88, 0.2);
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.pseudo_txt-zero-plus::before,
+.pseudo_txt-zero-plus::after {
+  color: #ff9158;
+}
+
+.pseudo_txt-zero-plus::before {
+  content: "Zero";
+}
+
+.pseudo_txt-zero-plus::after {
+  content: "Plus";
+}
