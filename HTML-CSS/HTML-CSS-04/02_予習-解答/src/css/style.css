@@ -1,0 +1,95 @@
+/* Step1 */
+.calc_wrapper {
+  max-width: 1080px;
+}
+
+.calc_main {
+  width: calc(100% - 260px);
+}
+
+.calc_aside {
+  width: 260px;
+}
+
+/* Step2 */
+:root {
+  --main-color: #43cfe8;
+}
+
+.variable_item {
+  background-color: var(--main-color);
+}
+
+/* Step3 */
+.m_post {
+  box-shadow: 2px 2px 4px rgb(159 159 159 / 16%);
+}
+
+.m_post:not(:first-child) {
+  margin-top: 24px;
+}
+
+.m_post_thumb-wrapper {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.m_post_link {
+  display: flex;
+}
+
+.m_post_content {
+  width: 100%;
+  padding: 24px 16px;
+}
+
+.m_post_meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m_post_time {
+  font-size: 12px;
+}
+
+.m_post_cat {
+  color: #ffbb1e;
+  font-size: 12px;
+  font-weight: bold;
+  width: 116px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffbb1e;
+  border-radius: 5px;
+}
+
+.m_post_title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* Step4 */
+.l_header {
+  background-color: #41b035;
+  height: 70px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.l_header-logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.l_header-nav_list {
+  display: flex;
+  gap: 24px;
+  color: #fff;
+}

@@ -1,0 +1,75 @@
+/* Step1 */
+.calc_wrapper {
+  max-width: 1080px;
+}
+
+.calc_main {
+  width: calc(100% - 260px);
+}
+
+.calc_aside {
+  width: 260px;
+}
+
+/* Step2 */
+:root {
+    --main-color: #43cfe8;
+}
+
+.variable_item {
+    background-color: var(--main-color);
+}
+
+/* Step3 */
+.post {
+  box-shadow: 2px 2px 4px rgb(159 159 159 / 16%);
+}
+
+.post:not(:first-child) {
+  margin-top: 24px;
+}
+
+.post-thumb-wrapper {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.post-link {
+  display: flex;
+}
+
+.post-content {
+  width: 100%;
+  padding: 24px 16px;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-time {
+  font-size: 12px;
+}
+
+.post-meta-cat {
+  color: #ffbb1e;
+  font-size: 12px;
+  font-weight: bold;
+  width: 116px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffbb1e;
+  border-radius: 5px;
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* Step4 */

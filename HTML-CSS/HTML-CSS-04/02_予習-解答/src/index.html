@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HTML-CSS-04-予習-解答</title>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step1 | calc()</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・「.calc_container」の最大幅を1080px、「サイドコンテンツ」の幅を260pxと指定しています。ブラウザの画面幅が変わったときに、「サイドコンテンツ」の横幅は固定（260pxのまま）で、「メインコンテンツ」の横幅が残りのスペースに合わせて変動するようにしてください。「メインコンテンツ」のwidthに、calcを使った計算式を指定することで実装してください。
+          </li>
+        </ul>
+      </div>
+
+      <div class="calc_wrapper">
+        <div class="calc_image">
+          <p>完成イメージ</p>
+          <img src="img/calc-image.png" alt="" />
+        </div>
+
+        <div class="calc_container">
+          <main class="calc_main">メインコンテンツ</main>
+          <aside class="calc_aside">サイドコンテンツ</aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step2 | カスタムプロパティ</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・カスタムプロパティ「--main-color」に対して「#43cfe8」を定義し、「.variable_item」の背景色に適用させてください
+          </li>
+        </ul>
+      </div>
+
+      <div class="variable_container">
+        <div class="variable_item">CSS変数</div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step3 | CSS設計 part1</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・「div.css-design_container」内のクラス名を「<a
+              class="homework_item-link"
+              href="https://zero-plus.io/media/html-css/css-design/#ZeroPlus%E3%81%A7%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87"
+              >ZeroPlusの命名規則</a
+            >」に則ったクラス名に変更してください <br />
+          </li>
+          <li class="homework_item homework_item__black">
+            ※index.html内にコメントで「ここのコードから」~「ここまで」と書いてあります
+          </li>
+          <li class="homework_item homework_item__black">
+            ※変更したクラス名はstyle.cssにも適用させてください
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント1: 基本的な命名規則はBEMに従う（ .block_element__modifier
+              ）</b
+            >
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント2: 2単語以上をつなげる場合にのみハイフンを使用する（
+              .class-name ）</b
+            >
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント3: 必要に応じて、接頭辞をつける（ l_: レイアウト, m_:
+              モジュール など ）</b
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="css-design_container">
+        <!-- ここのコードから -->
+        <div class="m_posts">
+          <article class="m_post">
+            <a href="#" class="m_post_link">
+              <div class="m_post_thumb-wrapper">
+                <img
+                  width="1200"
+                  height="630"
+                  src="https://zero-plus.io/media/wp-content/uploads/2020/08/HTMLCSS-%E2%80%93-30.png"
+                  alt="HTML"
+                />
+              </div>
+              <div class="m_post_content">
+                <div class="m_post_meta">
+                  <time class="m_post_time">2022.01.01</time>
+                  <span class="m_post_cat">HTML</span>
+                </div>
+                <h2 class="m_post_title">
+                  【初学者必見】HTMLの基礎と書き方を丁寧に解説
+                </h2>
+              </div>
+            </a>
+          </article>
+          <article class="m_post">
+            <a href="#" class="m_post_link">
+              <div class="m_post_thumb-wrapper">
+                <img
+                  width="1200"
+                  height="630"
+                  src="https://zero-plus.io/media/wp-content/uploads/2020/08/HC05.png"
+                  alt="HTML"
+                />
+              </div>
+              <div class="m_post_content">
+                <div class="m_post_meta">
+                  <time class="m_post_time">2022.01.02</time>
+                  <span class="m_post_cat">HTML</span>
+                </div>
+                <h2 class="m_post_title">
+                  よく使うHTMLのタグ一覧と使い方を学ぼう
+                </h2>
+              </div>
+            </a>
+          </article>
+
+          <article class="m_post">
+            <a href="#" class="m_post_link">
+              <div class="m_post_thumb-wrapper">
+                <img
+                  width="1200"
+                  height="630"
+                  src="https://zero-plus.io/media/wp-content/uploads/2022/01/HTMLCSS-%E2%80%93-25-1.png"
+                  alt="CSS"
+                />
+              </div>
+
+              <div class="m_post_content">
+                <div class="m_post_meta">
+                  <time class="m_post_time">2022.01.03</time>
+                  <span class="m_post_cat">CSS</span>
+                </div>
+                <h2 class="m_post_title">
+                  【初学者必見】CSSの基礎と書き方を丁寧に解説
+                </h2>
+              </div>
+            </a>
+          </article>
+        </div>
+        <!-- ここまで -->
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step4 | CSS設計 part2</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・既存HTMLコードに対して、「<a
+              class="homework_item-link"
+              href="https://zero-plus.io/media/html-css/css-design/#ZeroPlus%E3%81%A7%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87"
+              >ZeroPlusの命名規則</a
+            >」に則ったクラスを命名し、スタイルも整え完成イメージのように作成してください
+            <br />
+          </li>
+          <li class="homework_item homework_item__black">
+            ※index.html内にコメントで「ここのコードから」~「ここまで」と書いてあります
+          </li>
+          <li class="homework_item homework_item__black">
+            ※ピクセルパーフェクトはしなくて良い
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント1: 基本的な命名規則はBEMに従う（ .block_element__modifier
+              ）</b
+            >
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント2: 2単語以上をつなげる場合にのみハイフンを使用する（
+              .class-name ）</b
+            >
+          </li>
+          <li class="homework_item">
+            <b
+              >ポイント3: 必要に応じて、接頭辞をつける（ l_: レイアウト, m_:
+              モジュール など ）</b
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="css-design2_wrapper">
+        <div class="css-design2_image">
+          <p>完成イメージ</p>
+          <img src="img/css-design-image.png" alt="" />
+        </div>
+
+        <div class="css-design2_container">
+          <!-- ここのコードから -->
+          <header class="l_header">
+            <p class="l_header-logo">
+              <a href="index.html" class="l_header-logo_link">ZeroPlus</a>
+            </p>
+            <nav class="l_header-nav">
+              <ul class="l_header-nav_list">
+                <li class="l_header-nav_item">
+                  <a href="" class="l_header-nav_link">ナビアイテム1</a>
+                </li>
+                <li class="l_header-nav_item">
+                  <a href="" class="l_header-nav_link">ナビアイテム2</a>
+                </li>
+                <li class="l_header-nav_item">
+                  <a href="" class="l_header-nav_link">ナビアイテム3</a>
+                </li>
+                <li class="l_header-nav_item">
+                  <a href="" class="l_header-nav_link">ナビアイテム4</a>
+                </li>
+                <li class="l_header-nav_item">
+                  <a href="" class="l_header-nav_link">ナビアイテム5</a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <!-- ここまで -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
