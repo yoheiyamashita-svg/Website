@@ -1,0 +1,54 @@
+/* レスポンシブ基礎 | スマートフォン時のスタイル */
+.responsive-basic_container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media screen and (min-width: 1080px) {
+  .responsive-basic_container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* レスポンシブ実践 | スマートフォン時のスタイル */
+
+.header-nav {
+  display: none;
+}
+
+@media screen and (min-width: 1080px) {
+  .header-nav {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .header-hamburger {
+    display: none;
+  }
+}
+
+.kv_copy {
+  font-size: 40px;
+}
+
+@media screen and (min-width: 1080px) {
+  .kv_copy {
+    font-size: 70px;
+  }
+}
+
+.kv_sub-copy {
+  font-size: 16px;
+  text-align: center;
+}
+
+@media screen and (min-width: 1080px) {
+  .kv_sub-copy {
+    font-size: 20px;
+    text-align: left;
+  }
+}

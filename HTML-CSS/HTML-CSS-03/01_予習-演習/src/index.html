@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HTML-CSS-03-予習-演習</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step1 | レスポンシブ基礎</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・ブレイクポイント1080px以上の時に「アイテム1」と「アイテム2」を横並びにしてください
+          </li>
+          <li class="homework_item homework_item__black">
+            *
+            課題において検証ツールを用いたスマホサイズ表示にする必要はありません。
+          </li>
+        </ul>
+      </div>
+
+      <div class="responsive-basic_wrapper">
+        <!-- 完成イメージ -->
+        <div class="responsive-basic_image">
+          <p>完成イメージ</p>
+          <img src="img/responsive-basic.png" alt="" />
+        </div>
+
+        <div class="responsive-basic_container">
+          <div class="responsive-basic_item">アイテム1</div>
+          <div class="responsive-basic_item">アイテム2</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step2 | レスポンシブ実践</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・画面幅が1080px以上の時に「.header-hamburger」を非表示にし、「.header-nav」を表示させてください
+          </li>
+          <li class="homework_item">
+            ・画面幅が1080px以上の時に「.kv_copy」のフォントサイズを70pxにしてください
+          </li>
+          <li class="homework_item">
+            ・画面幅が1080px以上の時に「.kv_sub-copy」のフォントサイズを20px、テキスト左寄せにしてください
+          </li>
+          <li class="homework_item homework_item__black">
+            *
+            課題において検証ツールを用いたスマホサイズ表示にする必要はありません。
+          </li>
+        </ul>
+      </div>
+
+      <div class="responsive-practice_wrapper">
+        <header class="header">
+          <h1 class="header-ttl">
+            <a href="">ZeroPlus GYM</a>
+          </h1>
+
+          <nav class="header-nav">
+            <ul class="header-nav_list">
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">メニュー</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">トレーナー紹介</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">お客様の声</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">解決できるお悩み</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">よくあるご質問</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">ブログ</a>
+              </li>
+              <li class="header-nav_item">
+                <a class="header-nav_link" href="">アクセス</a>
+              </li>
+              <li class="header-nav_item header-nav_item__cta">
+                <a class="header-nav_link" href="">
+                  <span class="u_break">無料体験</span
+                  ><span class="u_break">お申し込み</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <button class="header-hamburger">
+            <span class="header-hamburger-bar"></span>
+            <span class="header-hamburger-bar"></span>
+            <span class="header-hamburger-bar"></span>
+          </button>
+        </header>
+
+        <div class="kv">
+          <div class="kv_contents">
+            <p class="kv_copy">
+              <span>LISTENS</span>
+              <span>TO</span>
+              <span>YOUR BODY</span>
+            </p>
+            <p class="kv_sub-copy">完全個室通い放題パーソナルジム</p>
+            <div class="m_btn-wrapper kv_btn-wrapper">
+              <a href="contact.html" class="m_btn m_btn__md m_btn__cta">
+                今すぐ無料体験お申し込み
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step3 | ファビコン、Webクリップアイコン</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・予習のindex.htmlにファビコン、Webクリップアイコンのタグを正しい位置に追加してください
+          </li>
+          <li class="homework_item">
+            ・ファビコンの読み込むファイルは、「favicon.ico」「favicon.png」「favicon.svg」と仮定する
+          </li>
+          <li class="homework_item">
+            ・Webクリップアイコンの読み込むファイルは、「webclip.png」と仮定する
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step4 | OGP</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・予習のindex.htmlにOGP関連のmetaタグを正しい位置に追加してください（設定内容は以下）
+          </li>
+          <li class="homework_item">・タイトル: ZeroPlus</li>
+          <li class="homework_item">・サイトのURL: https://zero-plus.io</li>
+          <li class="homework_item">
+            ・画像のURL: https://zero-plus.io/lesson/ogp/hp_ogp.jpg
+          </li>
+          <li class="homework_item">・Webページの種類: website</li>
+          <li class="homework_item">
+            ・ページの説明: ZeroPlus
+            Lesson2の予習課題です。次回の授業では、サイトの設定やレスポンシブWebデザインを行なっていきます。
+          </li>
+          <li class="homework_item">
+            ・X(twitter)等の設定は不要。模範回答には解答例がありますのでご確認ください
+          </li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>
