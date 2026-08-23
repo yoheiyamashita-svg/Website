@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+:root {
+  /* 色管理用の変数 */
+  --black-color: #333;
+  --white-color: #fff;
+  --gray-color: #aaa;
+  --gray-color02: #fafafa;
+  --primary-color: #1863af;
+  --accent-color: #fc7f24;
+}
+
+:root {
+  /* コンテンツ幅管理用の変数 */
+  --content-width-sm: 800px;
+  --content-width: 960px;
+  --content-width-lg: 1088px;
+}
+
+:root {
+  /* z-index管理用の変数 */
+  --z-index-back: -1;
+  --z-index-default: 1;
+  --z-index-header: 100;
+  --z-index-menu: 150;
+  --z-index-modal: 200;
+}
+
+/* ---------- base ---------- */
+body {
+  color: var(--black-color);
+  font-size: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- utility ---------- */
+
+/* ---------- layout ---------- */
+
+/* ---------- module ---------- */
+
+/* ---------- top ---------- */
+
+/* ---------- service ---------- */
+
+/* ---------- case ---------- */
+
+/* ---------- company ---------- */
+
+/* ---------- contact ---------- */

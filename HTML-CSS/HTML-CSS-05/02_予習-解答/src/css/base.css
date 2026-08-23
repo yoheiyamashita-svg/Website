@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrapper {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrapper {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+/* text-shadow */
+.txt-shadow_container {
+  display: flex;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.txt-shadow_item {
+  font-size: 60px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+/* balloon */
+.balloon_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* centered */
+.centered_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.centered_container {
+  height: 500px;
+  width: 100%;
+  border: 5px solid #ccc;
+}
+
+.centered_item {
+  font-size: 40px;
+  font-weight: bold;
+  background-color: #43cfe8;
+  color: #fff;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+/* hamburger */
+.hamburger_wrapper {
+  padding: 48px 0;
+}
+
+.hamburger_image {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.hamburger_container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* linear-gradient */
+.gradient_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.gradient_image {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.gradient_container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.gradient_item {
+  border: 1px solid #000;
+  width: 200px;
+  height: 200px;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+/* ＝＝＝＝＝＝＝＝＝＝追加部分＝＝＝＝＝＝＝＝＝＝＝ */
+
+/* フィルター */
+.filter_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.filter_image {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  width: 280px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.filter_container {
+  width: 280px;
+  height: auto;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.filter_item {
+  border: 1px solid #000;
+  width: 280px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+/* ＝＝＝＝＝＝＝＝＝＝追加部分＝＝＝＝＝＝＝＝＝＝＝ */

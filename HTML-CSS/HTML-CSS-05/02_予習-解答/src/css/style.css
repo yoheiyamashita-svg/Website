@@ -1,0 +1,87 @@
+/* Step1 */
+.txt-shadow_item {
+  text-shadow: 8px 8px 3px #ccc;
+}
+
+/* Step2 */
+.balloon_container {
+  position: relative;
+  display: inline-block;
+  background: #ff9158;
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.balloon_container::before {
+  content: '';
+  border-width: 10px;
+  border-style: solid;
+  border-color: #ff9158 transparent transparent transparent;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Step3 */
+.centered_container {
+  position: relative;
+}
+
+.centered_item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Step4 */
+.hamburger {
+  width: 40px;
+  height: 32px;
+  position: relative;
+}
+
+.hamburger_bar {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  background: #000;
+}
+
+.hamburger_bar:nth-child(1) {
+  top: 0;
+}
+
+.hamburger_bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger_bar:nth-child(3) {
+  top: 100%;
+  transform: translateY(-100%);
+}
+
+/* Step5 */
+.gradient_item {
+  background: linear-gradient(to right, #ffbb1e, #ff9158);
+}
+
+/* Step6 */
+.filter_item {
+  background:
+    linear-gradient(#ff9b0f33, #ff9b0f33),
+    url(../img/filter-image.png) center/cover;
+
+  /* こちらの書き方について、「background ショートハンド」などでぜひ調べてみましょう！ */
+}
+
+/* Step6 別解 */
+/* .filter_item {
+  background: linear-gradient(rgba(255, 155, 15, 0.2), rgba(255, 155, 15, 0.2)),
+    url(../img/filter-image.png) center/cover;
+} */
