@@ -1,0 +1,13 @@
+# 改行コードをリポジトリ内で LF に統一する
+* text=auto eol=lf
+
+# バイナリファイルは変換対象外にする
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.xd binary
