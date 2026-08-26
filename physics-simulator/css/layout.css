@@ -1,0 +1,115 @@
+/* requirements.md §13 UI要件のレイアウト：
+   上部ヘッダー / 左パラメータ列＋右シミュレーション列 / 下部 数式・物理量・説明 */
+
+.app-header {
+  padding: 12px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* タブ切り替え（縦波 / 気柱振動）。指示書§49「情報を詰め込みすぎない」ため、
+   1画面に1シミュレーションだけを表示する。 */
+.tab-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: #eee;
+  font-size: 0.95em;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #ffffff;
+  border-color: #2c6bd9;
+  color: #2c6bd9;
+  font-weight: bold;
+}
+
+/* 非表示中のタブはdisplay:noneにする。CanvasのclientWidth/Heightが0になるため、
+   各App(js/app/App.js, js/app/AirColumnApp.js)側のresizeToDisplaySizeは
+   0幅・0高さのときは何もしないようガードしてある（js/main.jsのタブ切替時に
+   handleResizeを呼び直すことで、表示された瞬間に正しいサイズへ復帰する）。 */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  padding: 16px 20px;
+  min-height: 60vh;
+}
+
+.parameter-panel {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.simulation-panel {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#simulation-canvas {
+  width: 100%;
+  height: 420px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+/* 気柱振動は指示書§14の通り縦長に表示する。幅は縦波より狭く、高さは大きく取る
+   （js/renderer/acoustic/AirColumnRenderer.jsが、この高さいっぱいに管を描く）。 */
+.air-column-simulation-panel {
+  align-items: center;
+}
+
+#air-column-canvas {
+  width: 260px;
+  max-width: 100%;
+  height: 640px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.learning-panel {
+  margin: 0 20px 20px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.explanation-panel {
+  margin: 0 20px 20px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+@media (max-width: 720px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}

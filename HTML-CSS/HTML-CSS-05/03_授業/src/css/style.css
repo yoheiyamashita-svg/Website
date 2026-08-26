@@ -40,9 +40,78 @@ body {
 /* ---------- layout ---------- */
 
 /* ---------- module ---------- */
+.l_header {
+  height: 72px;                         /* ヘッダーの高さを72pxにする */
+  width: 100%;                          /* ヘッダーの幅を画面いっぱいにする */
+  padding: 0 16px;                      /* 上下の余白は0、左右の余白は16px */
+  display: flex;                        /* 子要素をFlexboxで配置する */
+  justify-content: space-between;       /* 子要素を左右の端に配置する */
+  align-items: center;                  /* 子要素を上下中央に揃える */
+  position: absolute;                   /* 絶対位置で配置する */
+  top: 0;                               /* 画面の上端から0px */
+  left: 0;                              /* 画面の左端から0px */
+  z-index: var(--z-index-header);       /* ヘッダーを他の要素より前面に表示する */
+}
 
+.l_header-logo {
+  height: 100%;                        /* 親要素の高さ100%にする */
+  font-size: 20px;                    /* 文字サイズを20pxにする */
+  font-weight: bold;                  /* 文字を太字にする */
+
+  /* 以下のコメントアウトはKV完成後外してください */
+  /* color: var(--white-color); */
+}
+
+.l_header-logo_link {
+  height: 100%;                        /* 親要素の高さ100%にする */
+  display: flex;                       /* Flexboxを使用する */
+  align-items: center;                 /* 子要素を上下中央に揃える */
+}
+
+.m_hamburger {
+  width: 32px;                         /* 幅を32pxにする */
+  height: 24px;                        /* 高さを24pxにする */
+  position: relative;                  /* 子要素を配置するときの基準にする */
+  z-index: var(--z-index-menu);        /* メニューを他の要素より前面に表示する */
+}
+
+.m_hamburger-bar {
+  width: 100%;                         /* 親要素の幅いっぱいにする */
+  height: 2px;                         /* 線の太さを2pxにする */
+  position: absolute;                  /* 親要素を基準に自由に配置する */
+  background: var(--black-color);      /* 線の色を黒にする */
+  left: 50%;                           /* 左端を親要素の中央に配置する */
+}
+
+.m_hamburger-bar:nth-child(1) {
+  top: 0;                              /* 1本目を一番上に配置する */
+  transform: translate(-50%, 0);       /* X方向に50%左へ移動して中央揃え */
+}
+
+.m_hamburger-bar:nth-child(2) {
+  top: 50%;                            /* 2本目を親要素の高さ50%に配置する */
+  transform: translate(-50%, -50%);    /* X・Y方向に50%ずつ移動して中央揃え */
+}
+
+.m_hamburger-bar:nth-child(3) {
+  top: 100%;                           /* 3本目を親要素の一番下に配置する */
+  transform: translate(-50%, -100%);   /* X方向に50%、Y方向に100%移動して位置調整 */
+}
 /* ---------- top ---------- */
+.top_kv {
+  height: 100vh;
+  background: linear-gradient(rgba(51, 51, 51, 0.2), rgba(51, 51, 51, 0.2)),
+    url(../img/bg_kv.jpg) center top / cover;
+}
 
+.top_kv-inner {
+  position: relative;
+  height: 100%;
+}
+
+
+/* rgba(51, 51, 51, 0.2)tuika
+ */
 /* ---------- service ---------- */
 
 /* ---------- case ---------- */

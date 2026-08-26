@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高校物理 波動シミュレータ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <!--
+    KaTeX: LaTeX形式の数式を描画する外部ライブラリ（requirements.md §9 数式表示）。
+    CSS(見た目)とJS(描画ロジック)の2つを読み込む。js/ui/FormulaDisplay.js /
+    js/ui/acoustic/AirColumnFormulaDisplay.js が、グローバルの window.katex を
+    参照して数式を描画する。
+  -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+  />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>波動シミュレーション</h1>
+    <!--
+      タブ切り替え：縦波(進行波)と気柱振動(定常波)は別々の物理モデル・別々のCanvasを
+      持つ独立したシミュレーションであり、1画面に同時表示すると情報過多になるため
+      （指示書§49）、タブで1つずつ表示する。js/main.jsがdata-tab属性を見て
+      表示するsectionを切り替える。裏側の時刻進行はタブに関係なく続く。
+    -->
+    <nav class="tab-bar">
+      <button type="button" class="tab-button active" data-tab="wave">縦波（進行波）</button>
+      <button type="button" class="tab-button" data-tab="air-column">気柱振動（定常波）</button>
+    </nav>
+  </header>
+
+  <section id="wave-panel" class="tab-panel active">
+    <main class="app-main">
+      <section class="parameter-panel">
+        <h2>パラメータ</h2>
+        <div id="parameter-controls"></div>
+        <div id="playback-controls"></div>
+        <div id="particle-inspector"></div>
+      </section>
+
+      <section class="simulation-panel">
+        <div id="mode-selector"></div>
+        <canvas id="simulation-canvas"></canvas>
+      </section>
+    </main>
+
+    <section class="learning-panel">
+      <h2>学習モード：予想 → 実験 → 確認</h2>
+      <div id="learning-mode"></div>
+    </section>
+
+    <footer class="explanation-panel">
+      <h2>数式・物理量・説明</h2>
+      <div id="formula-panel"></div>
+    </footer>
+  </section>
+
+  <section id="air-column-panel" class="tab-panel">
+    <main class="app-main air-column-app-main">
+      <section class="parameter-panel">
+        <h2>パラメータ<p>振動数が大きいので、再生速度を落として使用してください</h2>
+        <div id="air-column-parameter-controls"></div>
+        <div id="air-column-playback-controls"></div>
+        <div id="air-column-particle-inspector"></div>
+      </section>
+
+      <section class="simulation-panel air-column-simulation-panel">
+        <div id="air-column-mode-selector"></div>
+        <canvas id="air-column-canvas"></canvas>
+      </section>
+    </main>
+
+    <section class="learning-panel">
+      <h2>学習モード：予想 → 実験 → 確認</h2>
+      <div id="air-column-learning-mode"></div>
+    </section>
+
+    <footer class="explanation-panel">
+      <h2>数式・物理量・説明</h2>
+      <div id="air-column-formula-panel"></div>
+    </footer>
+  </section>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
