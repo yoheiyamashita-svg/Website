@@ -104,6 +104,12 @@
   margin-bottom: 8px;
 }
 
+.formula-step-label {
+  font-size: 0.8em;
+  color: #666;
+  margin-bottom: 2px;
+}
+
 .learning-mode-question {
   font-weight: bold;
 }
