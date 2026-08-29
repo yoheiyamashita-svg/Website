@@ -254,6 +254,25 @@ export function createTransverseWaveControls({ appState }) {
     }
   );
 
+  // 半波長ごとの色分け表示のON/OFFトグル（ユーザー要望：「入射波に対応する反射波が
+  // どれかがわかる仕様にしたい」）。ONにすると、入射波・反射波の両方が、右端(x=L)基準の
+  // λ/2区間ごとに交互の濃淡2色で塗り分けられる（js/renderer/TransverseWaveRenderer.js
+  // のdrawSegmentedCurve参照）。物理計算には一切関わらない表示専用の切り替えなので、
+  // updatePointsを呼ぶ必要はない（次のrender()でTransverseWaveRendererがこのフラグを
+  // 読んで描画方法を変えるだけ）。
+  const halfWavelengthColoringLabel = document.createElement("label");
+  halfWavelengthColoringLabel.className = "wave-speed-fixed-toggle";
+  const halfWavelengthColoringCheckbox = document.createElement("input");
+  halfWavelengthColoringCheckbox.type = "checkbox";
+  halfWavelengthColoringCheckbox.checked = transverseWaveState.halfWavelengthColoringEnabled;
+  halfWavelengthColoringLabel.appendChild(halfWavelengthColoringCheckbox);
+  halfWavelengthColoringLabel.appendChild(
+    document.createTextNode(" 半波長ごとに色分け（入射波と反射波の対応区間を同じ色で表示）")
+  );
+  halfWavelengthColoringCheckbox.addEventListener("change", () => {
+    transverseWaveState.halfWavelengthColoringEnabled = halfWavelengthColoringCheckbox.checked;
+  });
+
   refreshDerivedValues();
 
   wrapper.appendChild(sourceEndLabel);
@@ -268,6 +287,7 @@ export function createTransverseWaveControls({ appState }) {
   wrapper.appendChild(incidentOpacitySlider.element);
   wrapper.appendChild(reflectedOpacitySlider.element);
   wrapper.appendChild(combinedOpacitySlider.element);
+  wrapper.appendChild(halfWavelengthColoringLabel);
 
   return {
     element: wrapper,

@@ -81,6 +81,13 @@ export function createTransverseWaveState({
     incidentOpacity,
     reflectedOpacity,
     combinedOpacity,
+    // 半波長ごとの色分け表示（ユーザー要望：「入射波に対応する反射波がどれかがわかる」ように
+    // したい）のON/OFF。ONのとき、右端(x=L、反射が起きる位置)を基準にλ/2ごとの区間に分け、
+    // 入射波・反射波の両方を、同じx区間には同じ濃淡（交互）で塗り分ける
+    // （js/renderer/TransverseWaveRenderer.jsのdrawSegmentedCurve参照）。
+    // 物理量ではなく表示専用のフラグなので、他のパラメータのように定数化はせず
+    // waveSpeedFixedと同様にここで直接falseを既定値とする。
+    halfWavelengthColoringEnabled: false,
     points: createPoints(TRANSVERSE_WAVE_POINT_COUNT, mediumLength),
   };
 }

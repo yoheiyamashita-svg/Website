@@ -21,6 +21,20 @@ const LINE_WIDTH_PX = 2;
 const BOUNDARY_LABEL_COLOR = "#333";
 const BOUNDARY_LABEL_FONT = "12px sans-serif";
 
+// RGB色を白と混ぜて明るくするヘルパー。半波長ごとの色分け表示（drawSegmentedCurve）で
+// 使う「濃い/薄い」の2トーンを、既存の基本色(INCIDENT_COLOR/REFLECTED_COLOR)から
+// 自動的に作る。新しい色を別途決め打ちすると、基本色と紐付いた色だという意図が
+// コードから読み取りにくくなるため、この関数経由で導出する。
+// whiteRatio=0なら元の色のまま、1なら真っ白になる（線形補間）。
+function lightenColor(rgb, whiteRatio) {
+  return rgb.map((channel) => Math.round(channel + (255 - channel) * whiteRatio));
+}
+
+// 半波長ごとの色分け表示（ユーザー要望：「入射波に対応する反射波がどれかがわかる」ように
+// したい）専用の、薄いトーンのバリエーション。
+const INCIDENT_COLOR_LIGHT = lightenColor(INCIDENT_COLOR, 0.55);
+const REFLECTED_COLOR_LIGHT = lightenColor(REFLECTED_COLOR, 0.55);
+
 export class TransverseWaveRenderer {
   constructor(canvasElement) {
     this.canvas = canvasElement;
@@ -65,12 +79,49 @@ export class TransverseWaveRenderer {
     this.clear();
     this.updateTransform(transverseWaveState.mediumLength);
 
-    const { points, endType, incidentOpacity, reflectedOpacity, combinedOpacity } = transverseWaveState;
+    const {
+      points,
+      endType,
+      incidentOpacity,
+      reflectedOpacity,
+      combinedOpacity,
+      halfWavelengthColoringEnabled,
+      mediumLength,
+      wavelength,
+    } = transverseWaveState;
     const centerYPx = this.transform.originYPx;
 
     this.drawZeroLine(points, centerYPx);
-    this.drawCurve(points, "incidentDisplacement", INCIDENT_COLOR, incidentOpacity, centerYPx);
-    this.drawCurve(points, "reflectedDisplacement", REFLECTED_COLOR, reflectedOpacity, centerYPx);
+
+    if (halfWavelengthColoringEnabled) {
+      // 入射波・反射波を、右端(x=L、反射が起きる位置)基準のλ/2区間ごとに交互の濃淡で塗り分ける。
+      // 同じx区間なら入射波・反射波とも同じ濃淡になるため、「この区間の入射波が、
+      // 反射後にこの区間の反射波として見えている」という対応関係が一目でわかる。
+      // 合成波は対応関係を示す対象ではないため、常に単色のまま描く。
+      this.drawSegmentedCurve(
+        points,
+        "incidentDisplacement",
+        INCIDENT_COLOR,
+        INCIDENT_COLOR_LIGHT,
+        incidentOpacity,
+        centerYPx,
+        mediumLength,
+        wavelength
+      );
+      this.drawSegmentedCurve(
+        points,
+        "reflectedDisplacement",
+        REFLECTED_COLOR,
+        REFLECTED_COLOR_LIGHT,
+        reflectedOpacity,
+        centerYPx,
+        mediumLength,
+        wavelength
+      );
+    } else {
+      this.drawCurve(points, "incidentDisplacement", INCIDENT_COLOR, incidentOpacity, centerYPx);
+      this.drawCurve(points, "reflectedDisplacement", REFLECTED_COLOR, reflectedOpacity, centerYPx);
+    }
     this.drawCurve(points, "combinedDisplacement", COMBINED_COLOR, combinedOpacity, centerYPx);
 
     this.drawBoundaryLabels(points, endType, centerYPx);
@@ -115,6 +166,59 @@ export class TransverseWaveRenderer {
     context.stroke();
 
     // 他の描画（次のcurveや境界ラベル等）に影響しないよう、不透明度を元に戻しておく。
+    context.globalAlpha = 1;
+  }
+
+  // 半波長ごとに交互の濃淡2色で塗り分けながら、1本の変位曲線を描く。
+  // drawCurveとの違いは、strokeStyleを区間ごとに切り替えながら複数のパスに分けて
+  // 描画する点だけで、変位の計算はしない（Rendererは値を読むだけ、REQ-105の精神）。
+  //
+  // 区間の基準は右端(x=mediumLength、反射が起きる位置)。そこからλ/2ずつ左へ数えた
+  // 区間番号（0, 1, 2, ...）の偶奇で、darkColorRgb/lightColorRgbを交互に選ぶ。
+  // 入射波・反射波の両方でこの同じ基準・同じ配色ルールを使うことで、
+  // 「同じx区間＝同じ濃淡」が「入射波のこの部分と反射波のこの部分が対応する」という
+  // 意味を持つようにしている。
+  drawSegmentedCurve(points, displacementKey, darkColorRgb, lightColorRgb, opacityPercent, centerYPx, mediumLength, wavelength) {
+    if (opacityPercent <= 0) {
+      return;
+    }
+    const context = this.context;
+    context.globalAlpha = opacityPercent / 100;
+    context.lineWidth = LINE_WIDTH_PX;
+
+    const halfWavelength = wavelength / 2;
+    function colorForPosition(xMeters) {
+      // (mediumLength - xMeters)は理論上[0, mediumLength]の範囲だが、xMetersが
+      // 浮動小数点誤差でmediumLengthよりわずかに大きくなる点（右端ちょうどの点）では
+      // 差がわずかに負の値になり、Math.floorで-1になってしまう（本来は区間0であるべき）。
+      // Math.maxで0未満にならないようにし、右端の点が必ず区間0（濃い色）になるようにする。
+      const segmentIndex = Math.max(0, Math.floor((mediumLength - xMeters) / halfWavelength));
+      return segmentIndex % 2 === 0 ? darkColorRgb : lightColorRgb;
+    }
+
+    let currentColorRgb = null;
+    points.forEach((point) => {
+      const segmentColorRgb = colorForPosition(point.initialPosition);
+      const x = this.transform.physicsXToPixel(point.initialPosition);
+      const y = this.transform.pixelYForOffset(centerYPx, point[displacementKey]);
+
+      if (segmentColorRgb !== currentColorRgb) {
+        if (currentColorRgb !== null) {
+          // 色が変わる境目の点まで前の色のパスを延ばしてから区切ることで、
+          // 曲線が途中で途切れて見えないようにする。
+          context.lineTo(x, y);
+          context.stroke();
+        }
+        currentColorRgb = segmentColorRgb;
+        context.strokeStyle = `rgb(${segmentColorRgb[0]}, ${segmentColorRgb[1]}, ${segmentColorRgb[2]})`;
+        context.beginPath();
+        context.moveTo(x, y);
+      } else {
+        context.lineTo(x, y);
+      }
+    });
+    context.stroke();
+
     context.globalAlpha = 1;
   }
 
