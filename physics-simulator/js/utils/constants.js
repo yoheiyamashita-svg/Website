@@ -156,3 +156,35 @@ export const AIR_COLUMN_COLUMN_COUNT_STEP = 1;
 // 「複数の粒子が束になって動く」行列として視覚的に表現するための値
 // （気柱振動だけでなく、縦波の媒質も同じ考え方で行列表示するため共通定数にした）。
 export const PARTICLE_ROW_COUNT = 5;
+
+// ==== 横波（定常波）専用の定数 ====
+
+// 反対側（右端）の境界の種類。文字列比較で判定する（気柱振動のBOUNDARY_TYPE_*と同じ考え方）。
+// 左端は「振動源（音源に相当する駆動端）」であり、固定端/自由端の選択肢は持たない
+// （気柱振動の音源側が常に開口固定なのと同じ設計。指示書では「両端」選択可能と
+// 依頼されたが、駆動端である左端の境界条件は反射波の式に影響しないため、
+// 物理的な効果を持たない選択肢を置かないことをユーザーに確認済み）。
+export const END_TYPE_FIXED = "fixed"; // 固定端：変位が常に0（節）
+export const END_TYPE_FREE = "free"; // 自由端：傾きが常に0（腹）
+export const DEFAULT_END_TYPE = END_TYPE_FIXED;
+
+// 媒質（弦）の長さ L の初期値・可動範囲 [m]。
+// 縦波の媒質(MEDIUM_LENGTH=6m)と同じスケール感にしつつ、右端での反射が
+// 画面内でちょうど収まるよう、縦波よりわずかに短い範囲にした。
+export const DEFAULT_TRANSVERSE_MEDIUM_LENGTH = 4.0;
+export const TRANSVERSE_MEDIUM_LENGTH_MIN = 1.0;
+export const TRANSVERSE_MEDIUM_LENGTH_MAX = 6.0;
+export const TRANSVERSE_MEDIUM_LENGTH_STEP = 0.1;
+
+// 波形を滑らかに描くためのサンプル点数。粒子を表示しないモードなので、
+// 縦波の「粒子数」のようにユーザーが調整できる値ではなく、表示解像度として固定する。
+export const TRANSVERSE_WAVE_POINT_COUNT = 200;
+
+// 右向き波・左向き波・合成波、それぞれの透明度の初期値 [%]（0〜100）。
+// 3つとも見える状態を初期値にしつつ、主役である合成波を最も目立たせる。
+export const DEFAULT_INCIDENT_OPACITY = 60;
+export const DEFAULT_REFLECTED_OPACITY = 60;
+export const DEFAULT_COMBINED_OPACITY = 100;
+export const OPACITY_MIN = 0;
+export const OPACITY_MAX = 100;
+export const OPACITY_STEP = 5;

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <clipPath id="clip-img-service-icon_analytics">
+      <rect width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g id="img-service-icon_analytics" clip-path="url(#clip-img-service-icon_analytics)">
+    <rect id="長方形_484" data-name="長方形 484" width="40" height="247.994" transform="translate(328.812 135.049)" fill="#333"/>
+    <rect id="長方形_483" data-name="長方形 483" width="40" height="144.84" transform="translate(254.017 238.203)" fill="#333"/>
+    <rect id="長方形_461" data-name="長方形 461" width="40" height="86.666" transform="translate(30.821 296.377)" fill="#333"/>
+    <rect id="長方形_462" data-name="長方形 462" width="40" height="192.328" transform="translate(104.429 190.714)" fill="#333"/>
+    <rect id="長方形_463" data-name="長方形 463" width="40" height="160.274" transform="translate(179.223 222.769)" fill="#333"/>
+    <g id="グループ_418" data-name="グループ 418" transform="translate(-21.75 20)">
+      <path id="合体_4" data-name="合体 4" d="M152.056,37.127l-2.817-2.186,2.817,2.186,2.29-3.078-2.29,3.078,118.259,91.757L358.448,0,270.314,128.884l3.293,2.555-3.293-2.555-1.747,2.555,1.747-2.555L152.056,37.127,43.5,183.069Z" transform="translate(0 63.431)" fill="none" stroke="#333" stroke-width="14"/>
+      <path id="多角形_7" data-name="多角形 7" d="M31.558,0,63.117,44.8H0Z" transform="matrix(0.799, 0.602, -0.602, 0.799, 349.593, 23.55)" fill="#333"/>
+    </g>
+  </g>
+</svg>

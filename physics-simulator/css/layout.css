@@ -77,6 +77,15 @@
   background: #fafafa;
 }
 
+/* 横波（定常波）は縦波と同じく横長に表示する（js/renderer/TransverseWaveRenderer.js）。 */
+#transverse-wave-canvas {
+  width: 100%;
+  height: 420px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
 /* 気柱振動は指示書§14の通り縦長に表示する。幅は縦波より狭く、高さは大きく取る
    （js/renderer/acoustic/AirColumnRenderer.jsが、この高さいっぱいに管を描く）。 */
 .air-column-simulation-panel {

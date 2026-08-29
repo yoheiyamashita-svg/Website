@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrap {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrap {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+/* underline */
+.underline_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.underline_image p {
+  text-align: center;
+}
+
+.underline_image {
+  width: 500px;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+}
+
+.underline_container {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.underline_item {
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* circle */
+.circle_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.circle_image {
+  width: 500px;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+}
+
+.circle_image p {
+  text-align: center;
+}
+
+.circle_container {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* triangle */
+.triangle_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.triangle_image {
+  width: 500px;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+}
+
+.triangle_image p {
+  text-align: center;
+}
+
+.triangle_container {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}

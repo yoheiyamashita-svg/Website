@@ -4,6 +4,7 @@
 // （architecture.md §10-11: 時間管理とループの起点）。
 import { createWaveApp } from "./app/App.js";
 import { createAirColumnApp } from "./app/AirColumnApp.js";
+import { createTransverseWaveApp } from "./app/TransverseWaveApp.js";
 import { MAX_DELTA_TIME } from "./utils/constants.js";
 
 // document.getElementById(id)は、指定したid属性を持つDOM要素を1つ取得するWeb APIの
@@ -29,14 +30,22 @@ const airColumnApp = createAirColumnApp({
   learningModeContainer: document.getElementById("air-column-learning-mode"),
 });
 
-// タブ切り替え：どちらのsectionを表示するかだけを切り替える。
-// 縦波・気柱振動どちらのシミュレーションも裏側では時刻が進み続け（下のtick呼び出しを参照）、
+const transverseWaveApp = createTransverseWaveApp({
+  canvasElement: document.getElementById("transverse-wave-canvas"),
+  parameterContainer: document.getElementById("transverse-wave-parameter-controls"),
+  playbackContainer: document.getElementById("transverse-wave-playback-controls"),
+  formulaContainer: document.getElementById("transverse-wave-formula-panel"),
+});
+
+// タブ切り替え：どのsectionを表示するかだけを切り替える。
+// 縦波・気柱振動・横波のどのシミュレーションも裏側では時刻が進み続け（下のtick呼び出しを参照）、
 // タブを切り替えても「戻ってきたら時間が止まっていた」ということが起きないようにする
 // （REQ-104のモード切替と同じ考え方：表示の切り替えと物理状態の進行は独立させる）。
 const tabButtons = document.querySelectorAll(".tab-button");
 const tabPanels = {
   wave: document.getElementById("wave-panel"),
   "air-column": document.getElementById("air-column-panel"),
+  "transverse-wave": document.getElementById("transverse-wave-panel"),
 };
 
 tabButtons.forEach((button) => {
@@ -56,6 +65,8 @@ tabButtons.forEach((button) => {
       waveApp.handleResize();
     } else if (targetTab === "air-column") {
       airColumnApp.handleResize();
+    } else if (targetTab === "transverse-wave") {
+      transverseWaveApp.handleResize();
     }
   });
 });
@@ -68,6 +79,7 @@ tabButtons.forEach((button) => {
 window.addEventListener("resize", () => {
   waveApp.handleResize();
   airColumnApp.handleResize();
+  transverseWaveApp.handleResize();
 });
 
 let previousTimestampMs = null;
@@ -99,11 +111,12 @@ function animationFrame(currentTimestampMs) {
   // 1フレームで進める時間の上限をMAX_DELTA_TIMEに制限する（NFR-001）。
   const deltaTimeSeconds = Math.min(rawDeltaTimeSeconds, MAX_DELTA_TIME);
 
-  // 表示中でない方のシミュレーションも含め、両方のtickを毎フレーム呼ぶ。
+  // 表示中でない方のシミュレーションも含め、3つとものtickを毎フレーム呼ぶ。
   // 描画自体はCanvasRenderer/AirColumnRendererが行うが、非表示中のCanvasは
   // clientWidth/Heightが0になるため実際の描画コストはほぼ発生しない。
   waveApp.tick(deltaTimeSeconds);
   airColumnApp.tick(deltaTimeSeconds);
+  transverseWaveApp.tick(deltaTimeSeconds);
 
   // 次のフレームでもこの関数が呼ばれるよう、ループの最後で自分自身を再登録する。
   requestAnimationFrame(animationFrame);
