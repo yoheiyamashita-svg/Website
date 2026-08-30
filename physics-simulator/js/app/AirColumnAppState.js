@@ -1,7 +1,7 @@
 // 気柱振動のApplication Layerの状態（js/app/AppState.jsの気柱振動版）。
 // AirColumnStateが物理的な状態を持つのに対し、こちらはアプリの操作状態
 // （再生中か・どの表示モードか・どの列を選択中か）を持つ。
-import { DEFAULT_PLAYBACK_SPEED, MODE_PARTICLES_AND_WAVE } from "../utils/constants.js";
+import { DEFAULT_AIR_COLUMN_PLAYBACK_SPEED, MODE_PARTICLES_AND_WAVE } from "../utils/constants.js";
 
 /**
  * AirColumnAppStateを作る。
@@ -21,7 +21,7 @@ export function createAirColumnAppState(airColumnState) {
     airColumnState,
     mode: MODE_PARTICLES_AND_WAVE,
     isPlaying: true,
-    playbackSpeed: DEFAULT_PLAYBACK_SPEED,
+    playbackSpeed: DEFAULT_AIR_COLUMN_PLAYBACK_SPEED,
     selectedColumnIndex: null,
     tubeVisible: true,
   };

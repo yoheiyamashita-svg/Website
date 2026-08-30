@@ -57,6 +57,9 @@ export const DEFAULT_PLAYBACK_SPEED = 1;
 // 追える周期（およそ1〜3秒程度）まで見せるには、1/100〜1/1000程度の
 // 大幅な減速が必要になるため、この専用の選択肢を用意する。
 export const AIR_COLUMN_PLAYBACK_SPEEDS = [0.001, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1];
+// 気柱振動タブを開いた直後から振動が目に見える速さになるよう、DEFAULT_PLAYBACK_SPEED(1倍)
+// ではなくAIR_COLUMN_PLAYBACK_SPEEDSの中の十分遅い値をデフォルトにする（ユーザー要望）。
+export const DEFAULT_AIR_COLUMN_PLAYBACK_SPEED = 0.005;
 
 // コマ送り1回あたりに進める物理時間 [s]。
 // 60FPSを目標フレームレートとしているため、1フレーム分(1/60秒)を1コマとする。
