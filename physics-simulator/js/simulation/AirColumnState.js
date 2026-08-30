@@ -19,11 +19,12 @@ import {
   AIR_COLUMN_AMPLITUDE_DEFAULT,
   AIR_COLUMN_COLUMN_COUNT_DEFAULT,
   AIR_COLUMN_END_EXTENSION_POINT_COUNT,
-  BOUNDARY_TYPE_OPEN_OPEN,
-  DEFAULT_BOUNDARY_TYPE,
+  AIR_COLUMN_END_OPEN,
   DEFAULT_END_CORRECTION,
+  DEFAULT_FAR_END_TYPE,
   DEFAULT_MODE_NUMBER,
   DEFAULT_SOUND_SPEED,
+  DEFAULT_SOURCE_END_TYPE,
   DEFAULT_TUBE_LENGTH,
   PARTICLE_ROW_COUNT,
 } from "../utils/constants.js";
@@ -36,8 +37,10 @@ import {
  * @param {number} [options.amplitude] - 振幅 A [m]
  * @param {number} [options.tubeLength] - 気柱の長さ L [m]
  * @param {number} [options.soundSpeed] - 音速 v [m/s]
- * @param {string} [options.boundaryType] - 'open-open' | 'open-closed'（x=Lの境界条件。
- *   x=0は指示書§15の絶対条件により常にこのモジュール内でも「開口」として扱い、選択肢にしない）
+ * @param {string} [options.sourceEndType] - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED
+ *   （x=0側＝上端の境界条件。以前は常に開口固定だったが、ユーザー要望により選択可能にした）
+ * @param {string} [options.farEndType] - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED
+ *   （x=L側＝下端の境界条件）
  * @param {number} [options.modeNumber] - 振動モード番号 n
  * @param {number} [options.rowCount] - 断面方向の表示用ドット数（物理量ではない）
  * @param {number} [options.endCorrection] - 開口端補正 Δx [m]（0のとき補正なし＝従来通り）
@@ -46,13 +49,15 @@ import {
  *   amplitude:          振幅 A [m]（気柱の枠を超えて描画されてよい。ここでclampしない）
  *   tubeLength:         気柱の長さ L [m]
  *   soundSpeed:         音速 v [m/s]
- *   boundaryType:       x=L側の境界条件
+ *   sourceEndType:      x=0側（上端）の境界条件
+ *   farEndType:         x=L側（下端）の境界条件
  *   modeNumber:         振動モード番号 n
  *   rowCount:           断面方向の表示用ドット数
  *   endCorrection:      開口端補正 Δx [m]
  *   columns:            Particleオブジェクトの配列（initialPositionが気柱内のx座標 [m]）
- *   sourceEndExtension: 音源側の開口端補正の延長区間（x∈[-Δx, 0]）のParticle配列
- *   farEndExtension:    反対側の開口端補正の延長区間（両端開管かつx∈[L, L+Δx]のときのみ、
+ *   sourceEndExtension: 上端の開口端補正の延長区間（x∈[-Δx, 0]、上端が開口のときのみ、
+ *                        それ以外は空配列）のParticle配列
+ *   farEndExtension:    下端の開口端補正の延長区間（x∈[L, L+Δx]、下端が開口のときのみ、
  *                        それ以外は空配列）のParticle配列
  */
 export function createAirColumnState({
@@ -60,7 +65,8 @@ export function createAirColumnState({
   amplitude = AIR_COLUMN_AMPLITUDE_DEFAULT,
   tubeLength = DEFAULT_TUBE_LENGTH,
   soundSpeed = DEFAULT_SOUND_SPEED,
-  boundaryType = DEFAULT_BOUNDARY_TYPE,
+  sourceEndType = DEFAULT_SOURCE_END_TYPE,
+  farEndType = DEFAULT_FAR_END_TYPE,
   modeNumber = DEFAULT_MODE_NUMBER,
   rowCount = PARTICLE_ROW_COUNT,
   endCorrection = DEFAULT_END_CORRECTION,
@@ -70,7 +76,8 @@ export function createAirColumnState({
     amplitude,
     tubeLength,
     soundSpeed,
-    boundaryType,
+    sourceEndType,
+    farEndType,
     modeNumber,
     rowCount,
     endCorrection,
@@ -109,29 +116,31 @@ function createExtensionColumns(startX, endX, count) {
 
 /**
  * 開口端補正Δxによる延長区間（sourceEndExtension / farEndExtension）を、
- * 現在のtubeLength・endCorrection・boundaryTypeに基づいて作り直す。
+ * 現在のtubeLength・endCorrection・sourceEndType・farEndTypeに基づいて作り直す。
  * これらのパラメータのいずれかが変わったとき（気柱長・開口端補正・境界条件の変更時）に
  * 呼び出す必要がある。
  *
  * @param {Object} airColumnState - 対象のAirColumnState
  */
 export function rebuildEndExtensions(airColumnState) {
-  const { tubeLength, endCorrection, boundaryType } = airColumnState;
-  airColumnState.sourceEndExtension = createExtensionColumns(
-    -endCorrection,
-    0,
-    AIR_COLUMN_END_EXTENSION_POINT_COUNT
-  );
-  // 閉口端は硬い壁なので補正されない。反対側が開口（両端開管）のときだけ延長区間を作る。
+  const { tubeLength, endCorrection, sourceEndType, farEndType } = airColumnState;
+  // 閉口端は硬い壁なので補正されない。上端が開口のときだけ延長区間を作る
+  // （以前は音源側=常に開口だったため無条件に作っていたが、閉口も選べるようになったため
+  // 下端の延長区間と同じ条件分岐にした）。
+  airColumnState.sourceEndExtension =
+    sourceEndType === AIR_COLUMN_END_OPEN
+      ? createExtensionColumns(-endCorrection, 0, AIR_COLUMN_END_EXTENSION_POINT_COUNT)
+      : [];
+  // 下端が開口のときだけ延長区間を作る。
   airColumnState.farEndExtension =
-    boundaryType === BOUNDARY_TYPE_OPEN_OPEN
+    farEndType === AIR_COLUMN_END_OPEN
       ? createExtensionColumns(tubeLength, tubeLength + endCorrection, AIR_COLUMN_END_EXTENSION_POINT_COUNT)
       : [];
 }
 
 /**
  * 気柱振動をリセットする（時刻を0に戻し、列を初期配置に作り直す）。
- * amplitude・tubeLength・boundaryType・modeNumber等のパラメータは変更しない。
+ * amplitude・tubeLength・sourceEndType・farEndType・modeNumber等のパラメータは変更しない。
  *
  * @param {Object} airColumnState - リセット対象のAirColumnState
  */

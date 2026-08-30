@@ -1,4 +1,7 @@
-// 一端閉管の境界条件の単体テスト（physics.md §19-20、指示書§17-2・§45-46 TEST-010/011/012）。
+// 「両端の種類が不一致」の場合の固有値条件の単体テスト（physics.md §19-20、
+// 指示書§17-2・§45-46 TEST-010/011/012）。一端閉管(開口-閉口)はこの条件の
+// 具体例の1つとして検証する（js/physics/acoustic/OpenClosedTube.jsのヘッダーコメント参照：
+// このモジュールの数式自体は「両端が異なる種類」全般に成り立つ）。
 import { describe, expect, it } from "vitest";
 import {
   calculateEigenfrequency,
@@ -6,7 +9,7 @@ import {
 } from "../../js/physics/acoustic/OpenClosedTube.js";
 import { calculateStandingWaveDisplacement } from "../../js/physics/wave/StandingWave.js";
 
-describe("OpenClosedTube", () => {
+describe("OpenClosedTube（両端の種類が不一致の場合の固有値条件）", () => {
   // TEST-010: 開口端(x=0)は常に変位の腹になる（cos(k・0)=1なので振幅そのまま）。
   it("開口端(x=0)が変位の腹になる（TEST-010）", () => {
     const tubeLength = 1.0;
@@ -58,25 +61,25 @@ describe("OpenClosedTube", () => {
     expect(ratios).toEqual([1, 3, 5, 7, 9]);
   });
 
-  // 開口端補正Δx：ユーザー要望「Δx=0のときは今のままでOK」の裏返しの確認。
-  it("開口端補正Δxを省略した場合と明示的に0を渡した場合が一致する", () => {
-    expect(calculateEigenfrequency(1, 340, 1.0)).toBe(calculateEigenfrequency(1, 340, 1.0, 0));
-    expect(calculateWaveNumberForMode(1, 1.0)).toBe(calculateWaveNumberForMode(1, 1.0, 0));
+  // 実効長L_eff（開口端補正Δx込みの長さ、または単なるtubeLengthそのもの）を渡すだけの
+  // モジュールになったため、L_effの計算自体はjs/physics/acoustic/AirColumn.js側の責務。
+  it("実効長がtubeLengthそのものと一致するとき、補正なしの式と一致する", () => {
+    expect(calculateEigenfrequency(1, 340, 1.0)).toBeCloseTo((1 * 340) / (4 * 1.0), 10);
+    expect(calculateWaveNumberForMode(1, 1.0)).toBeCloseTo(Math.PI / (2 * 1.0), 10);
   });
 
-  // 一端閉管では開口端(x=0)側だけがΔxの影響を受け、閉口端(x=L)は硬い壁なので
-  // 補正を受けない。そのため実効長はL_eff = L + Δx（両端開管の+2Δxとは異なる）。
-  it("開口端補正Δx>0のとき、固有振動数はf_n=(2n-1)v/(4(L+Δx))になる", () => {
+  // 両端が不一致の場合、開口端は1本だけなので実効長はL_eff = L + Δx
+  // （js/physics/acoustic/AirColumn.jsのcountOpenEnds参照。両端一致(開口-開口)の
+  // +2Δxとは異なる）。
+  it("実効長L_eff=L+Δxを渡すと、固有振動数はf_n=(2n-1)v/(4L_eff)になる", () => {
     const soundSpeed = 340;
     const tubeLength = 1.0;
     const endCorrection = 0.02;
     const modeNumber = 1;
-    const expected = ((2 * modeNumber - 1) * soundSpeed) / (4 * (tubeLength + endCorrection));
-    expect(calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection)).toBeCloseTo(
-      expected,
-      10
-    );
-    expect(calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection)).toBeLessThan(
+    const effectiveLength = tubeLength + endCorrection;
+    const expected = ((2 * modeNumber - 1) * soundSpeed) / (4 * effectiveLength);
+    expect(calculateEigenfrequency(modeNumber, soundSpeed, effectiveLength)).toBeCloseTo(expected, 10);
+    expect(calculateEigenfrequency(modeNumber, soundSpeed, effectiveLength)).toBeLessThan(
       calculateEigenfrequency(modeNumber, soundSpeed, tubeLength)
     );
   });

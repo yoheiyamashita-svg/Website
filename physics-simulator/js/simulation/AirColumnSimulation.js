@@ -32,7 +32,8 @@ export function updateColumns(airColumnState) {
     amplitude,
     tubeLength,
     soundSpeed,
-    boundaryType,
+    sourceEndType,
+    farEndType,
     modeNumber,
     endCorrection,
     time,
@@ -40,7 +41,7 @@ export function updateColumns(airColumnState) {
     sourceEndExtension,
     farEndExtension,
   } = airColumnState;
-  const parameters = { amplitude, tubeLength, soundSpeed, boundaryType, modeNumber, endCorrection };
+  const parameters = { amplitude, tubeLength, soundSpeed, sourceEndType, farEndType, modeNumber, endCorrection };
 
   // 気柱本体・音源側延長区間・反対側延長区間はすべて同じ変位関数から導出する（REQ-105の精神）。
   updateParticleList(columns, time, parameters);

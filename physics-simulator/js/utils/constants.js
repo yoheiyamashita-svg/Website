@@ -42,6 +42,9 @@ export const MEDIUM_LENGTH = 6.0;
 export const MODE_PARTICLES = "MODE_PARTICLES"; // Mode A: 粒子のみ
 export const MODE_PARTICLES_AND_WAVE = "MODE_PARTICLES_AND_WAVE"; // Mode B: 粒子+波形
 export const MODE_FULL_EXPLANATION = "MODE_FULL_EXPLANATION"; // Mode C: 粒子+波形+対応矢印
+// Mode D: 波形のみ（粒子を表示しない）。気柱振動タブだけで使う表示モード
+// （js/ui/ModeSelector.jsのmodeLabels引数経由で、気柱振動タブのモード選択にだけ追加する）。
+export const MODE_WAVE_ONLY = "MODE_WAVE_ONLY";
 
 // 再生速度の選択肢（等倍に対する倍率、単位なし）。
 export const PLAYBACK_SPEEDS = [0.25, 0.5, 1, 2];
@@ -89,14 +92,19 @@ export const PARTICLE_COUNT_STEP = 1;
 
 // ==== 気柱振動（acoustic）専用の定数 ====
 
-// 境界条件の種類。文字列比較でどちらのモデルかを判定できるようにする
-// （js/physics/acoustic/AirColumn.js のBOUNDARY_TYPE_*と同じ値を、
-// UI側で気柱長・音速などと並べて定数importしたいときのために、utils側にも定義する）。
-export const BOUNDARY_TYPE_OPEN_OPEN = "open-open";
-export const BOUNDARY_TYPE_OPEN_CLOSED = "open-closed";
-// 初期状態は両端開管とする。両端が対称（両方とも腹）で、進行波の縦波モデルから
-// 気柱振動へ話を広げるときに直感的に理解しやすいと考え、こちらを初期値にした。
-export const DEFAULT_BOUNDARY_TYPE = BOUNDARY_TYPE_OPEN_OPEN;
+// 気柱の両端それぞれの種類。文字列比較で判定する。
+// 以前は「音源側(x=0)は常に開口」という絶対条件があり、反対側だけを表す
+// BOUNDARY_TYPE_OPEN_OPEN/OPEN_CLOSEDという1つの値で境界条件を表していたが、
+// 音源側も選べるようにしたため、両端それぞれの種類（開口/閉口）を独立に持つ形に変更した。
+// js/physics/acoustic/AirColumn.jsが、この2つの値の組み合わせから
+// 固有値条件（kLの決まり方）と空間分布（cos/sin）を導出する。
+export const AIR_COLUMN_END_OPEN = "open";
+export const AIR_COLUMN_END_CLOSED = "closed";
+// 初期状態は両端開口とする。両端が対称（両方とも腹）で、進行波の縦波モデルから
+// 気柱振動へ話を広げるときに直感的に理解しやすいと考え、こちらを初期値にした
+// （以前のDEFAULT_BOUNDARY_TYPE=両端開管と同じ初期挙動）。
+export const DEFAULT_SOURCE_END_TYPE = AIR_COLUMN_END_OPEN;
+export const DEFAULT_FAR_END_TYPE = AIR_COLUMN_END_OPEN;
 
 // 気柱の長さ L の初期値 [m]。指示書§16の例（1.00 m）に合わせる。
 export const DEFAULT_TUBE_LENGTH = 1.0;
@@ -159,9 +167,9 @@ export const PARTICLE_ROW_COUNT = 5;
 
 // ==== 横波（定常波）専用の定数 ====
 
-// 反対側（右端）の境界の種類。文字列比較で判定する（気柱振動のBOUNDARY_TYPE_*と同じ考え方）。
+// 反対側（右端）の境界の種類。文字列比較で判定する（気柱振動のAIR_COLUMN_END_*と同じ考え方）。
 // 左端は「振動源（音源に相当する駆動端）」であり、固定端/自由端の選択肢は持たない
-// （気柱振動の音源側が常に開口固定なのと同じ設計。指示書では「両端」選択可能と
+// （指示書では「両端」選択可能と
 // 依頼されたが、駆動端である左端の境界条件は反射波の式に影響しないため、
 // 物理的な効果を持たない選択肢を置かないことをユーザーに確認済み）。
 export const END_TYPE_FIXED = "fixed"; // 固定端：変位が常に0（節）

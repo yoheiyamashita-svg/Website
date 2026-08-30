@@ -1,45 +1,47 @@
-// 両端開管（open-open tube）の境界条件（physics.md §18, §20、指示書§17-1, §18-1）。
+// 「両端の種類が一致する」場合の固有値条件（physics.md §18, §20、指示書§17-1, §18-1）。
 //
-// 座標系：x=0が音源側（常に開口）、x=Lが管のもう一方の端（この境界条件では開口）。
+// 元々は「両端開管（x=0が開口・x=Lも開口）」専用のモジュールだったが、音源側(x=0)も
+// 開口/閉口を選べるようになったことで、この式が実際に成り立つのは「両端の種類が
+// 一致する」場合（開口-開口 または 閉口-閉口）全般であることがわかった
+// （js/physics/acoustic/AirColumn.jsのヘッダーコメントにある導出参照）。
+// ファイル名は歴史的経緯でOpenOpenTube.jsのままだが、意味するところは
+// 「両端一致（same-end-type）の固有値条件」であり、どちらが開口/閉口かはこの
+// モジュールの外（AirColumn.js）が決める。
 //
-// 境界条件（両端とも「変位の腹」）：
-//   x=0: u(0,t) = A cos(0) cos(ωt) = A cos(ωt) … cos(0)=1なので常に腹（自動的に満たされる）
-//   x=L: 腹になる条件は cos(kL) の振幅が最大、すなわち |cos(kL)|=1 になること。
-//        これは kL = nπ （n=1,2,3,...）のときに成り立つ
-//        （sin(kL)=0 になるという条件と同値：cos(kx)の空間微分 -k sin(kx) が
-//          x=Lで0になる＝その点で変位が極値＝腹、という意味）。
+// 境界条件（両端とも「同じ種類」＝両方とも腹、または両方とも節）：
+//   両方とも腹（開口-開口）: x=0は自動的に腹（cos(0)=1）。x=Lも腹になる条件は
+//     |cos(kL)|=1、すなわちkL=nπ（n=1,2,3,...）。
+//   両方とも節（閉口-閉口）: x=0は自動的に節（sin(0)=0）。x=Lも節になる条件は
+//     sin(kL)=0、すなわちkL=nπ（n=1,2,3,...）。
+//   → どちらの場合も同じkL=nπという条件になる（cos/sinどちらでも、腹どうし・
+//     節どうしを両端に置くための波長の条件は同じため）。
 //
 // 【開口端補正（end correction）Δx について】
-// 実際の気柱では、開口端の少し外側の空気も管内の空気と一緒になって振動するため、
-// 「変位の腹」は管の開口部ちょうどではなく、そこから距離Δxだけ外側にできる
-// （教科書的にはΔx ≈ 0.6×管の半径 程度とされるが、このアプリでは半径を扱わないため、
-// Δxをユーザーが直接指定できるパラメータとして扱う）。
-// 両端開管では両方の開口端がこの補正を受けるため、実効的な気柱の長さは
-//   L_eff = L + 2Δx
-// となり、この実効長を使って波数・固有振動数を計算する
-// （Δx=0のときは L_eff = L となり、補正なしの元の式と完全に一致する）。
+// このモジュールはL_eff（開口端補正込みの実効長）を受け取るだけで、Δxそのものや
+// 開口端の本数（0/1/2）は一切知らない。L_effの計算はAirColumn.js側に集約している
+// （開口端の本数は両端の種類の組み合わせで変わり、「両端一致」の中でも
+// 開口-開口なら2本、閉口-閉口なら0本と異なるため、このモジュール単体では
+// 決められない）。
 
 /**
- * 両端開管のn次モードにおける波数kを求める（開口端補正Δxを考慮）。
+ * 両端の種類が一致する場合のn次モードにおける波数kを求める。
  *
  * 物理式:
- *   k L_eff = nπ,  L_eff = L + 2Δx  →  k = nπ / (L + 2Δx)
+ *   k L_eff = nπ  →  k = nπ / L_eff
  *
  * @param {number} modeNumber - モード番号 n（1, 2, 3, ...）
- * @param {number} tubeLength - 気柱の長さ L [m]
- * @param {number} [endCorrection=0] - 開口端補正 Δx [m]（両端に適用されるため2倍で効く）
+ * @param {number} effectiveLength - 開口端補正込みの実効長 L_eff [m]
  * @returns {number} 波数 k [rad/m]
  */
-export function calculateWaveNumberForMode(modeNumber, tubeLength, endCorrection = 0) {
-  const effectiveLength = tubeLength + 2 * endCorrection;
+export function calculateWaveNumberForMode(modeNumber, effectiveLength) {
   return (modeNumber * Math.PI) / effectiveLength;
 }
 
 /**
- * 両端開管のn次モードの固有振動数を求める（開口端補正Δxを考慮）。
+ * 両端の種類が一致する場合のn次モードの固有振動数を求める。
  *
  * 物理式:
- *   f_n = n v / (2 L_eff),  L_eff = L + 2Δx
+ *   f_n = n v / (2 L_eff)
  *
  * 導出：波の基本式 v = fλ と k = 2π/λ より f = v k / (2π)。
  * ここに k = nπ/L_eff を代入すると、
@@ -48,17 +50,13 @@ export function calculateWaveNumberForMode(modeNumber, tubeLength, endCorrection
  * - f_n: n次固有振動数 [Hz]
  * - n (modeNumber): モード番号（1, 2, 3, ...）
  * - v (soundSpeed): 音速 [m/s]
- * - L (tubeLength): 気柱の長さ [m]
- * - Δx (endCorrection): 開口端補正 [m]。Δxが大きいほどL_effが伸び、f_nは下がる
- *   （管が実質的に長くなったのと同じ効果）。
+ * - L_eff (effectiveLength): 開口端補正込みの実効長 [m]
  *
  * @param {number} modeNumber - モード番号 n
  * @param {number} soundSpeed - 音速 v [m/s]
- * @param {number} tubeLength - 気柱の長さ L [m]
- * @param {number} [endCorrection=0] - 開口端補正 Δx [m]
+ * @param {number} effectiveLength - 開口端補正込みの実効長 L_eff [m]
  * @returns {number} 固有振動数 f_n [Hz]
  */
-export function calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection = 0) {
-  const effectiveLength = tubeLength + 2 * endCorrection;
+export function calculateEigenfrequency(modeNumber, soundSpeed, effectiveLength) {
   return (modeNumber * soundSpeed) / (2 * effectiveLength);
 }

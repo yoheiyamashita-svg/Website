@@ -9,11 +9,13 @@
 // ここで変位を再計算することはしない（REQ-105の精神を気柱にも適用）。
 //
 // 【開口端補正Δxによる、管からはみ出す部分の表示について】
-// sourceEndExtension（音源側、常に存在）とfarEndExtension（反対側、両端開管のときだけ
-// 存在）は、管の物理的な範囲(x∈[0,tubeLength])の外側で計算された変位点列
+// sourceEndExtension（上端、上端が開口のときだけ存在）とfarEndExtension（下端、下端が
+// 開口のときだけ存在）は、管の物理的な範囲(x∈[0,tubeLength])の外側で計算された変位点列
 // （js/simulation/AirColumnState.jsのrebuildEndExtensions参照）。管の内部(columns)は
 // 実線、管の外側にはみ出す延長区間は破線で描き分けることで、「ここから先は実際の
 // 管の外（腹の理論位置まで）」であることを視覚的に区別する。
+
+import { AIR_COLUMN_END_CLOSED } from "../../utils/constants.js";
 
 const WAVE_LINE_COLOR = "#2c7a4b";
 const WAVE_LINE_WIDTH_PX = 2;
@@ -32,7 +34,8 @@ const BOUNDARY_LABEL_FONT = "12px sans-serif";
  * @param {Array<Object>} sourceEndExtension - 音源側の延長区間（管の外側、破線で描く）
  * @param {Array<Object>} farEndExtension - 反対側の延長区間（両端開管のときだけ存在。破線）
  * @param {number} tubeCenterXPx - 管の中心線のCanvas X座標 [px]（変位0の基準線）
- * @param {string} boundaryType - 'open-open' | 'open-closed'（x=L側の境界条件）
+ * @param {string} sourceEndType - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED（x=0側＝上端）
+ * @param {string} farEndType - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED（x=L側＝下端）
  */
 export function renderAirColumnWaveform(
   context,
@@ -41,7 +44,8 @@ export function renderAirColumnWaveform(
   sourceEndExtension,
   farEndExtension,
   tubeCenterXPx,
-  boundaryType
+  sourceEndType,
+  farEndType
 ) {
   // ラベル・基準線の両端は、延長区間があればその先端（腹の理論位置）、
   // なければ管の物理的な端(columns[0]/columns[末尾])を使う。
@@ -69,10 +73,10 @@ export function renderAirColumnWaveform(
     drawWaveSegment(context, transform, farEndExtension, tubeCenterXPx, true);
   }
 
-  // x=0（音源側）は指示書§15の絶対条件により常に開口＝腹。
-  drawBoundaryLabel(context, tubeCenterXPx, topYPx, "開口（腹）", "above");
-  // x=L（反対側）は選択された境界条件に従い、腹（開口）または節（閉口）。
-  const farEndLabel = boundaryType === "open-closed" ? "閉口（節）" : "開口（腹）";
+  // x=0（上端）・x=L（下端）とも、選択された境界条件に従い、腹（開口）または節（閉口）。
+  const sourceEndLabel = sourceEndType === AIR_COLUMN_END_CLOSED ? "閉口（節）" : "開口（腹）";
+  drawBoundaryLabel(context, tubeCenterXPx, topYPx, sourceEndLabel, "above");
+  const farEndLabel = farEndType === AIR_COLUMN_END_CLOSED ? "閉口（節）" : "開口（腹）";
   drawBoundaryLabel(context, tubeCenterXPx, bottomYPx, farEndLabel, "below");
 }
 

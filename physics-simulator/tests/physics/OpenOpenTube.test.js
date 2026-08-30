@@ -1,4 +1,7 @@
-// 両端開管の境界条件の単体テスト（physics.md §18, §20、指示書§17-1・§45-46 TEST-008/009/013/014）。
+// 「両端の種類が一致する」場合の固有値条件の単体テスト（physics.md §18, §20、
+// 指示書§17-1・§45-46 TEST-008/009/013/014）。両端開管(開口-開口)はこの条件の
+// 具体例の1つとして検証する（js/physics/acoustic/OpenOpenTube.jsのヘッダーコメント参照：
+// このモジュールの数式自体は「両端が同じ種類」全般に成り立つ）。
 import { describe, expect, it } from "vitest";
 import {
   calculateEigenfrequency,
@@ -6,7 +9,7 @@ import {
 } from "../../js/physics/acoustic/OpenOpenTube.js";
 import { calculateStandingWaveDisplacement } from "../../js/physics/wave/StandingWave.js";
 
-describe("OpenOpenTube", () => {
+describe("OpenOpenTube（両端の種類が一致する場合の固有値条件）", () => {
   // TEST-008: 基本振動数(n=1) f1 = v/(2L)
   it("基本振動数がf1=v/(2L)になる（TEST-008）", () => {
     const soundSpeed = 340;
@@ -17,7 +20,7 @@ describe("OpenOpenTube", () => {
     );
   });
 
-  // TEST-009: 両端(x=0とx=L)が常に変位の腹になる。
+  // TEST-009: 両端(x=0とx=L)が常に変位の腹になる（開口-開口の具体例、hasNodeAtOrigin=false）。
   // 「腹になる」とは、時刻によって変位が-A〜+Aの最大振幅まで振れることを意味する。
   // これはcos(kx)の大きさが1であること（=0にならないこと、つまり節でないこと）と同値。
   it("両端(x=0, x=L)が変位の腹になる（TEST-009）", () => {
@@ -65,27 +68,25 @@ describe("OpenOpenTube", () => {
     expect(fAt680).toBeCloseTo(fAt340 * 2, 10);
   });
 
-  // 開口端補正Δx：ユーザー要望「Δx=0のときは今のままでOK」の裏返しの確認。
-  // endCorrection引数を省略した場合(=0扱い)と、明示的に0を渡した場合が完全に一致すること。
-  it("開口端補正Δxを省略した場合と明示的に0を渡した場合が一致する", () => {
-    expect(calculateEigenfrequency(1, 340, 1.0)).toBe(calculateEigenfrequency(1, 340, 1.0, 0));
-    expect(calculateWaveNumberForMode(1, 1.0)).toBe(calculateWaveNumberForMode(1, 1.0, 0));
+  // 実効長L_eff（開口端補正Δx込みの長さ、または単なるtubeLengthそのもの）を渡すだけの
+  // モジュールになったため、L_effの計算自体はjs/physics/acoustic/AirColumn.js側の責務。
+  // ここではL_eff=tubeLengthのとき（Δx=0相当）と、L_eff=tubeLength+2Δxを直接渡したとき
+  // （両端開管でΔx>0のとき、js/physics/acoustic/AirColumn.jsが計算する値）の両方を検証する。
+  it("実効長がtubeLengthそのものと一致するとき、補正なしの式と一致する", () => {
+    expect(calculateEigenfrequency(1, 340, 1.0)).toBeCloseTo(340 / (2 * 1.0), 10);
+    expect(calculateWaveNumberForMode(1, 1.0)).toBeCloseTo(Math.PI / 1.0, 10);
   });
 
-  // 両端開管ではΔxが両端に効くため、実効長L_eff = L + 2Δxになる
-  // （js/physics/acoustic/OpenOpenTube.js のコメント参照）。
-  it("開口端補正Δx>0のとき、固有振動数はf_n=nv/(2(L+2Δx))になる", () => {
+  it("実効長L_eff=L+2Δxを渡すと、固有振動数はf_n=nv/(2L_eff)になる", () => {
     const soundSpeed = 340;
     const tubeLength = 1.0;
     const endCorrection = 0.02;
     const modeNumber = 1;
-    const expected = (modeNumber * soundSpeed) / (2 * (tubeLength + 2 * endCorrection));
-    expect(calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection)).toBeCloseTo(
-      expected,
-      10
-    );
+    const effectiveLength = tubeLength + 2 * endCorrection;
+    const expected = (modeNumber * soundSpeed) / (2 * effectiveLength);
+    expect(calculateEigenfrequency(modeNumber, soundSpeed, effectiveLength)).toBeCloseTo(expected, 10);
     // 管が実質的に長くなるため、補正なしのときより固有振動数は必ず下がる。
-    expect(calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection)).toBeLessThan(
+    expect(calculateEigenfrequency(modeNumber, soundSpeed, effectiveLength)).toBeLessThan(
       calculateEigenfrequency(modeNumber, soundSpeed, tubeLength)
     );
   });

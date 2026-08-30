@@ -1,119 +1,192 @@
 // 気柱振動の物理エンジン（Physics Layer）。
 //
-// 役割：境界条件（両端開管 / 一端閉管）に応じて波数k・固有振動数f_nを決定し、
-// その結果をStandingWave.js（physics/wave/）の定常波の式に渡して変位・粒子速度を求める。
-// 気柱固有の近似式をここで新たに作ることはしない（REQ-105の精神：
-// 気柱の粒子表示・波形表示・矢印表示は、すべてこのファイルが返す同じ変位関数の
-// 計算結果だけを使う）。
+// 役割：気柱の両端それぞれの種類（開口/閉口）に応じて波数k・固有振動数f_n・
+// 空間分布（cos(kx)かsin(kx)か）を決定し、その結果をStandingWave.js（physics/wave/）の
+// 定常波の式に渡して変位・粒子速度を求める。気柱固有の近似式をここで新たに作ることは
+// しない（REQ-105の精神：気柱の粒子表示・波形表示・矢印表示は、すべてこのファイルが
+// 返す同じ変位関数の計算結果だけを使う）。
 //
-// 指示書§15の絶対条件：音源側(x=0)は常に開口。boundaryTypeは「反対側(x=L)」だけを表し、
-// x=0側の扱いを選択できるパラメータはこのファイルのどの関数にも存在しない
-// （StandingWave.calculateStandingWaveDisplacementの式の形自体が、x=0で自動的に
-// 腹になることを保証しているため、境界条件モジュール側でx=0を特別扱いする必要もない）。
+// 【両端の種類から固有値条件・空間分布を導く一般化について】
+// 以前は「音源側(x=0)は常に開口」という絶対条件があったが、音源側も開口/閉口を
+// 選べるようにしたことで、開口/閉口の組み合わせは4通り（開口-開口・開口-閉口・
+// 閉口-開口・閉口-閉口）になった。これは実は次の2つの独立した軸に分解できる
+// （u1=(A/2)sin(kx-ωt+φ), u2=(A/2)sin(kx+ωt+φ)の重ね合わせで、
+//   sinP+sinQ=2sin((P+Q)/2)cos((P-Q)/2) を適用すると
+//   u=u1+u2=A sin(kx+φ)cos(ωt) となり、これを境界条件に当てはめて検証済み）：
+//
+//   1. 固有値条件（kLの決まり方）は、両端の種類が「一致するか」だけで決まる：
+//      - 一致（開口-開口 or 閉口-閉口）→ kL=nπ （OpenOpenTube.jsの式）
+//      - 不一致（開口-閉口 or 閉口-開口）→ kL=(2n-1)π/2 （OpenClosedTube.jsの式）
+//   2. 空間分布（cos(kx)かsin(kx)か）は、音源側(x=0)だけで決まる：
+//      - 音源側が開口（x=0が腹）→ cos(kx)（上のφ=π/2に相当）
+//      - 音源側が閉口（x=0が節）→ sin(kx)（上のφ=0に相当）
 //
 // 【開口端補正（end correction）Δx について（endCorrectionパラメータ）】
 // 実際の気柱では、開口端の少し外側の空気も管内の空気と一緒に振動するため、
 // 「変位の腹」は開口部ちょうどではなく、そこから距離Δxだけ外側にできる。
-// この効果は2箇所に現れる：
-//   1. 固有振動数の式：波数kの計算にL_eff(=L+Δx または L+2Δx)を使う
-//      （OpenOpenTube.js / OpenClosedTube.js側で実装）。
-//   2. 変位の空間分布：x=0を管の物理的な開口部としたまま、cos(kx)の引数に
-//      x+Δxを渡すことで、「腹の位置が開口部よりΔxだけ外側にずれている」ことを
-//      表現する。この+Δxのシフトがあることで、一端閉管の閉口端(x=L)では
-//      k(L+Δx)=(2n-1)π/2 が厳密に成り立ち、Δxの値によらずu(L,t)=0が
-//      常に厳密に満たされる（閉口端は硬い壁なので補正の影響を受けない、
-//      という物理的な要請と一致する）。
+// 閉口端は硬い壁なので補正を受けない。したがって実効長L_effは、
+//   L_eff = L + (開口端の本数: 0, 1, 2のいずれか) × Δx
+// となる（開口端の本数は両端の種類の組み合わせで変わるため、この計算は
+// OpenOpenTube.js/OpenClosedTube.js側ではなく、ここAirColumn.js側に集約する）。
+// 変位の空間分布についても、音源側(x=0)が開口のときだけ、cos(kx)やsin(kx)の
+// 引数にx+Δxを渡すことで、「腹の位置が開口部よりΔxだけ外側にずれている」ことを表現する
+// （音源側が閉口のときはシフトしない。閉口端はΔxによらずu=0が厳密に成り立たなければ
+// ならず、シフトしてしまうとその厳密さが崩れてしまうため。詳細はcalculateSpatialShift
+// 関数のコメント参照）。反対側(x=L)が開口のときは、シフトしない状態のまま
+// 「Δx>0だと物理的な端での振幅がAよりわずかに小さくなる」という近似が現れる。
 
 import {
   calculateStandingWaveDisplacement,
   calculateStandingWaveParticleVelocity,
 } from "../wave/StandingWave.js";
-import * as OpenOpenTube from "./OpenOpenTube.js";
-import * as OpenClosedTube from "./OpenClosedTube.js";
-// 境界条件の種類を表す定数は、UI層（js/ui/acoustic/AirColumnControls.js等）も
-// 同じ値を参照するため、utils/constants.js側で一元管理し、ここではimportするだけにする
-// （同じ意味の定数を複数箇所で定義しない）。
-import { BOUNDARY_TYPE_OPEN_CLOSED, BOUNDARY_TYPE_OPEN_OPEN } from "../../utils/constants.js";
+import * as SameEndTube from "./OpenOpenTube.js";
+import * as DifferentEndTube from "./OpenClosedTube.js";
+import { AIR_COLUMN_END_CLOSED, AIR_COLUMN_END_OPEN } from "../../utils/constants.js";
 
-// boundaryTypeの値から、対応する境界条件モジュール（OpenOpenTube.js / OpenClosedTube.js）を選ぶ。
-// JavaScript構文メモ：`import * as OpenOpenTube from "..."` は、そのファイルがexportする
-// 関数をまとめて1つのオブジェクトとして受け取る書き方。OpenOpenTube.calculateWaveNumberForMode
-// のように、ファイル名をnamespaceとして関数を呼び出せる。
-function selectTubeModule(boundaryType) {
-  if (boundaryType === BOUNDARY_TYPE_OPEN_OPEN) {
-    return OpenOpenTube;
-  }
-  if (boundaryType === BOUNDARY_TYPE_OPEN_CLOSED) {
-    return OpenClosedTube;
-  }
-  throw new Error(`未対応の境界条件です: ${boundaryType}`);
+// sourceEndType・farEndTypeの組み合わせから、対応する境界条件モジュールを選ぶ。
+// 両端の種類が一致するかどうかだけで決まる（ファイル上部のコメント参照）。
+function selectTubeModule(sourceEndType, farEndType) {
+  return sourceEndType === farEndType ? SameEndTube : DifferentEndTube;
+}
+
+// 開口端の本数（0・1・2）を数える。
+function countOpenEnds(sourceEndType, farEndType) {
+  const sourceIsOpen = sourceEndType === AIR_COLUMN_END_OPEN ? 1 : 0;
+  const farIsOpen = farEndType === AIR_COLUMN_END_OPEN ? 1 : 0;
+  return sourceIsOpen + farIsOpen;
+}
+
+// 開口端の本数に応じた実効長L_effを求める（開口端補正Δxは開口端1本につき1回分効く）。
+function calculateEffectiveLength(tubeLength, sourceEndType, farEndType, endCorrection) {
+  return tubeLength + countOpenEnds(sourceEndType, farEndType) * endCorrection;
+}
+
+// 変位の空間分布(cos(kx)またはsin(kx))に渡す前に、xへ加える座標シフト量を求める。
+//
+// 【なぜ音源側(x=0)が開口のときだけシフトするのか】
+// 開口端補正は「開口端の少し外側の空気も一緒に振動するため、真の腹の位置は
+// 開口部よりΔxだけ外側にできる」という効果であり、閉口端（硬い壁）には一切効かない。
+// 音源側が開口なら、真の腹はx=-Δxの位置にある。空間分布の原点（x=0でcos=1、
+// またはx=0でsin=0）をこの「真の腹（または真の節）」に合わせて評価するため、
+// 実際に渡すxの値を+Δxだけシフトする（x=-Δxにあった真の腹が、シフト後は
+// 引数0のところに来る）。
+// 音源側が閉口なら、x=0そのものが真の節であり、シフトする理由がない
+// （シフトしてしまうと、閉口端であるx=0でu=0が厳密に成り立たなくなってしまう）。
+// 反対側(x=L)が開口か閉口かは、この音源側のシフト量には影響しない
+// （反対側が開口のとき、そちら側は「シフトなし」のまま近似的な腹になるだけで、
+// これは他の開口端補正と同じ「Δx>0だと物理的な端での振幅がAよりわずかに
+// 小さくなる」という許容される近似の一部である）。
+function calculateSpatialShift(sourceEndType, endCorrection) {
+  return sourceEndType === AIR_COLUMN_END_OPEN ? endCorrection : 0;
 }
 
 /**
- * 境界条件・モード番号・気柱長・開口端補正から波数kを求める。
+ * 気柱の両端の種類・モード番号・気柱長・開口端補正から波数kを求める。
  *
- * @param {string} boundaryType - BOUNDARY_TYPE_OPEN_OPEN | BOUNDARY_TYPE_OPEN_CLOSED
+ * @param {string} sourceEndType - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED（x=0側）
+ * @param {string} farEndType - AIR_COLUMN_END_OPEN | AIR_COLUMN_END_CLOSED（x=L側）
  * @param {number} modeNumber - モード番号 n
  * @param {number} tubeLength - 気柱の長さ L [m]
  * @param {number} [endCorrection=0] - 開口端補正 Δx [m]
  * @returns {number} 波数 k [rad/m]
  */
-export function calculateWaveNumber(boundaryType, modeNumber, tubeLength, endCorrection = 0) {
-  return selectTubeModule(boundaryType).calculateWaveNumberForMode(modeNumber, tubeLength, endCorrection);
+export function calculateWaveNumber(sourceEndType, farEndType, modeNumber, tubeLength, endCorrection = 0) {
+  const effectiveLength = calculateEffectiveLength(tubeLength, sourceEndType, farEndType, endCorrection);
+  return selectTubeModule(sourceEndType, farEndType).calculateWaveNumberForMode(modeNumber, effectiveLength);
 }
 
 /**
- * 境界条件・モード番号・気柱長・音速・開口端補正から固有振動数f_nを求める。
+ * 気柱の両端の種類・モード番号・気柱長・音速・開口端補正から固有振動数f_nを求める。
  *
- * @param {string} boundaryType
+ * @param {string} sourceEndType
+ * @param {string} farEndType
  * @param {number} modeNumber
  * @param {number} soundSpeed - 音速 v [m/s]
  * @param {number} tubeLength - 気柱の長さ L [m]
  * @param {number} [endCorrection=0] - 開口端補正 Δx [m]
  * @returns {number} 固有振動数 f_n [Hz]
  */
-export function calculateEigenfrequency(boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection = 0) {
-  return selectTubeModule(boundaryType).calculateEigenfrequency(modeNumber, soundSpeed, tubeLength, endCorrection);
+export function calculateEigenfrequency(
+  sourceEndType,
+  farEndType,
+  modeNumber,
+  soundSpeed,
+  tubeLength,
+  endCorrection = 0
+) {
+  const effectiveLength = calculateEffectiveLength(tubeLength, sourceEndType, farEndType, endCorrection);
+  return selectTubeModule(sourceEndType, farEndType).calculateEigenfrequency(
+    modeNumber,
+    soundSpeed,
+    effectiveLength
+  );
 }
 
 /**
- * 境界条件・モード番号・気柱長・音速・開口端補正から角周波数ωを求める。
+ * 気柱の両端の種類・モード番号・気柱長・音速・開口端補正から角周波数ωを求める。
  *
  * 物理式: ω = 2π f_n
  *
- * @param {string} boundaryType
+ * @param {string} sourceEndType
+ * @param {string} farEndType
  * @param {number} modeNumber
  * @param {number} soundSpeed
  * @param {number} tubeLength
  * @param {number} [endCorrection=0] - 開口端補正 Δx [m]
  * @returns {number} 角周波数 ω [rad/s]
  */
-export function calculateAngularFrequency(boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection = 0) {
-  return 2 * Math.PI * calculateEigenfrequency(boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection);
+export function calculateAngularFrequency(
+  sourceEndType,
+  farEndType,
+  modeNumber,
+  soundSpeed,
+  tubeLength,
+  endCorrection = 0
+) {
+  return (
+    2 *
+    Math.PI *
+    calculateEigenfrequency(sourceEndType, farEndType, modeNumber, soundSpeed, tubeLength, endCorrection)
+  );
 }
 
 /**
  * 位置x、時刻tにおける気柱内の変位u(x,t)を求める。
  *
- * 波数k・角周波数ωを境界条件から決定したうえで、実際の変位の式自体は
- * StandingWave.calculateStandingWaveDisplacement（定常波の一般式）に委譲する。
- * ただし、開口端補正Δxがある場合は、位置xをそのまま渡すのではなく x+Δx を渡す
- * （上部のコメント「開口端補正Δxについて」参照。管の物理的な開口部(x=0)から見て、
- * 実際の腹はΔxだけ外側にあるという物理的な意味を、この+Δxのシフトで表現している）。
+ * 波数k・角周波数ω・空間分布（cos/sin）を両端の種類から決定したうえで、
+ * 実際の変位の式自体はStandingWave.calculateStandingWaveDisplacement
+ * （定常波の一般式）に委譲する。ただし、音源側(x=0)が開口のときだけ、位置xを
+ * そのまま渡すのではなく x+Δx を渡す（calculateSpatialShiftのコメント参照。
+ * 音源側が閉口のときにシフトしてしまうと、x=0で厳密にu=0となるべき節条件が
+ * 崩れてしまうため、シフトは音源側が開口のときだけ行う）。
  *
- * @param {number} x - 気柱内の位置 [m]（x=0が音源側の開口端）
+ * @param {number} x - 気柱内の位置 [m]（x=0が上端）
  * @param {number} t - 時刻 [s]
- * @param {{amplitude:number, boundaryType:string, modeNumber:number, soundSpeed:number, tubeLength:number, endCorrection?:number}} parameters
+ * @param {{amplitude:number, sourceEndType:string, farEndType:string, modeNumber:number, soundSpeed:number, tubeLength:number, endCorrection?:number}} parameters
  * @returns {number} 変位 u [m]
  */
 export function calculateDisplacement(
   x,
   t,
-  { amplitude, boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection = 0 }
+  { amplitude, sourceEndType, farEndType, modeNumber, soundSpeed, tubeLength, endCorrection = 0 }
 ) {
-  const waveNumber = calculateWaveNumber(boundaryType, modeNumber, tubeLength, endCorrection);
-  const angularFrequency = calculateAngularFrequency(boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection);
-  return calculateStandingWaveDisplacement(x + endCorrection, t, { amplitude, waveNumber, angularFrequency });
+  const waveNumber = calculateWaveNumber(sourceEndType, farEndType, modeNumber, tubeLength, endCorrection);
+  const angularFrequency = calculateAngularFrequency(
+    sourceEndType,
+    farEndType,
+    modeNumber,
+    soundSpeed,
+    tubeLength,
+    endCorrection
+  );
+  const hasNodeAtOrigin = sourceEndType === AIR_COLUMN_END_CLOSED;
+  const spatialShift = calculateSpatialShift(sourceEndType, endCorrection);
+  return calculateStandingWaveDisplacement(x + spatialShift, t, {
+    amplitude,
+    waveNumber,
+    angularFrequency,
+    hasNodeAtOrigin,
+  });
 }
 
 /**
@@ -121,15 +194,29 @@ export function calculateDisplacement(
  *
  * @param {number} x
  * @param {number} t
- * @param {{amplitude:number, boundaryType:string, modeNumber:number, soundSpeed:number, tubeLength:number, endCorrection?:number}} parameters
+ * @param {{amplitude:number, sourceEndType:string, farEndType:string, modeNumber:number, soundSpeed:number, tubeLength:number, endCorrection?:number}} parameters
  * @returns {number} 粒子速度 v_p [m/s]
  */
 export function calculateParticleVelocity(
   x,
   t,
-  { amplitude, boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection = 0 }
+  { amplitude, sourceEndType, farEndType, modeNumber, soundSpeed, tubeLength, endCorrection = 0 }
 ) {
-  const waveNumber = calculateWaveNumber(boundaryType, modeNumber, tubeLength, endCorrection);
-  const angularFrequency = calculateAngularFrequency(boundaryType, modeNumber, soundSpeed, tubeLength, endCorrection);
-  return calculateStandingWaveParticleVelocity(x + endCorrection, t, { amplitude, waveNumber, angularFrequency });
+  const waveNumber = calculateWaveNumber(sourceEndType, farEndType, modeNumber, tubeLength, endCorrection);
+  const angularFrequency = calculateAngularFrequency(
+    sourceEndType,
+    farEndType,
+    modeNumber,
+    soundSpeed,
+    tubeLength,
+    endCorrection
+  );
+  const hasNodeAtOrigin = sourceEndType === AIR_COLUMN_END_CLOSED;
+  const spatialShift = calculateSpatialShift(sourceEndType, endCorrection);
+  return calculateStandingWaveParticleVelocity(x + spatialShift, t, {
+    amplitude,
+    waveNumber,
+    angularFrequency,
+    hasNodeAtOrigin,
+  });
 }

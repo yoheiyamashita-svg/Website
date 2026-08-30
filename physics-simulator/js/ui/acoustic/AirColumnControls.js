@@ -19,9 +19,9 @@ import {
   AIR_COLUMN_COLUMN_COUNT_MAX,
   AIR_COLUMN_COLUMN_COUNT_MIN,
   AIR_COLUMN_COLUMN_COUNT_STEP,
+  AIR_COLUMN_END_CLOSED,
+  AIR_COLUMN_END_OPEN,
   AIR_COLUMN_PLAYBACK_SPEEDS,
-  BOUNDARY_TYPE_OPEN_CLOSED,
-  BOUNDARY_TYPE_OPEN_OPEN,
   END_CORRECTION_MAX,
   END_CORRECTION_MIN,
   END_CORRECTION_STEP,
@@ -51,18 +51,20 @@ export function createAirColumnControls({ appState }) {
   const eigenfrequencyDisplay = document.createElement("div");
   eigenfrequencyDisplay.className = "wave-speed-display";
 
-  // 現在のboundaryType・modeNumber・soundSpeed・tubeLengthから固有振動数f_nを計算して表示する。
-  // 計算そのものはPhysics Layer（AirColumn.calculateEigenfrequency）に委譲する。
+  // 現在のsourceEndType・farEndType・modeNumber・soundSpeed・tubeLengthから
+  // 固有振動数f_nを計算して表示する。計算そのものはPhysics Layer
+  // （AirColumn.calculateEigenfrequency）に委譲する。
   function refreshEigenfrequencyDisplay() {
     const eigenfrequency = calculateEigenfrequency(
-      airColumnState.boundaryType,
+      airColumnState.sourceEndType,
+      airColumnState.farEndType,
       airColumnState.modeNumber,
       airColumnState.soundSpeed,
       airColumnState.tubeLength,
       airColumnState.endCorrection
     );
-    const boundaryLabel =
-      airColumnState.boundaryType === BOUNDARY_TYPE_OPEN_CLOSED ? "開口－閉口（一端閉管）" : "開口－開口（両端開管）";
+    const endTypeLabel = (endType) => (endType === AIR_COLUMN_END_CLOSED ? "閉口" : "開口");
+    const boundaryLabel = `上端：${endTypeLabel(airColumnState.sourceEndType)} / 下端：${endTypeLabel(airColumnState.farEndType)}`;
     eigenfrequencyDisplay.textContent =
       `境界条件：${boundaryLabel} / モード n = ${airColumnState.modeNumber} / ` +
       `固有振動数 f = ${eigenfrequency.toFixed(1)} Hz`;
@@ -165,48 +167,93 @@ export function createAirColumnControls({ appState }) {
     },
   });
 
-  // 音源側は指示書§15の絶対条件により常に開口。選択肢を作らず、説明文だけを表示する。
-  const sourceEndLabel = document.createElement("div");
-  sourceEndLabel.className = "air-column-source-label";
-  sourceEndLabel.textContent = "音源側（上端）：開口";
+  // 上端(x=0)・下端(x=L)とも、開口/閉口をラジオボタンで選べる
+  // （以前は上端＝音源側が常に開口の絶対条件だったが、ユーザー要望により両端とも
+  // 選択可能にした）。同じ構造を2箇所で使うため、共通のヘルパー関数にまとめる。
+  //
+  // @param {string} legendText - fieldsetの見出し（「上端」または「下端」）
+  // @param {string} currentValue - 現在の値（airColumnState.sourceEndType/farEndType）
+  // @param {string} radioGroupName - ラジオボタンのname属性（上端・下端で別グループにする）
+  // @param {(value:string)=>void} onChange - 選択が変わったときに呼ばれる
+  function createEndTypeFieldset(legendText, currentValue, radioGroupName, onChange) {
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "air-column-boundary-fieldset";
+    const legend = document.createElement("legend");
+    legend.textContent = legendText;
+    fieldset.appendChild(legend);
 
-  // 反対側（下端）だけ、開口/閉口をラジオボタンで選べる。
-  const farEndFieldset = document.createElement("fieldset");
-  farEndFieldset.className = "air-column-boundary-fieldset";
-  const farEndLegend = document.createElement("legend");
-  farEndLegend.textContent = "反対側（下端）";
-  farEndFieldset.appendChild(farEndLegend);
-
-  [
-    { value: BOUNDARY_TYPE_OPEN_OPEN, label: "開口（両端開管）" },
-    { value: BOUNDARY_TYPE_OPEN_CLOSED, label: "閉口（一端閉管）" },
-  ].forEach(({ value, label }) => {
-    const optionLabel = document.createElement("label");
-    optionLabel.className = "air-column-boundary-option";
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = "air-column-boundary-type";
-    radio.value = value;
-    radio.checked = airColumnState.boundaryType === value;
-    radio.addEventListener("change", () => {
-      if (!radio.checked) {
-        return;
-      }
-      airColumnState.boundaryType = value;
-      // 反対側の延長区間(farEndExtension)は境界条件が開口のときだけ存在するため作り直す。
-      rebuildEndExtensions(airColumnState);
-      updateColumns(airColumnState);
-      refreshEigenfrequencyDisplay();
+    [
+      { value: AIR_COLUMN_END_OPEN, label: "開口" },
+      { value: AIR_COLUMN_END_CLOSED, label: "閉口" },
+    ].forEach(({ value, label }) => {
+      const optionLabel = document.createElement("label");
+      optionLabel.className = "air-column-boundary-option";
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = radioGroupName;
+      radio.value = value;
+      radio.checked = currentValue === value;
+      radio.addEventListener("change", () => {
+        if (!radio.checked) {
+          return;
+        }
+        onChange(value);
+      });
+      optionLabel.appendChild(radio);
+      optionLabel.appendChild(document.createTextNode(label));
+      fieldset.appendChild(optionLabel);
     });
-    optionLabel.appendChild(radio);
-    optionLabel.appendChild(document.createTextNode(label));
-    farEndFieldset.appendChild(optionLabel);
+
+    return fieldset;
+  }
+
+  // 境界条件（開口/閉口）が変わったときに共通で必要な再計算
+  // （延長区間は開口のときだけ存在するため作り直す→変位を再計算→固有振動数の表示を更新）。
+  function handleEndTypeChange() {
+    rebuildEndExtensions(airColumnState);
+    updateColumns(airColumnState);
+    refreshEigenfrequencyDisplay();
+  }
+
+  const sourceEndFieldset = createEndTypeFieldset(
+    "上端（x = 0）",
+    airColumnState.sourceEndType,
+    "air-column-source-end-type",
+    (value) => {
+      airColumnState.sourceEndType = value;
+      handleEndTypeChange();
+    }
+  );
+
+  const farEndFieldset = createEndTypeFieldset(
+    "下端（x = L）",
+    airColumnState.farEndType,
+    "air-column-far-end-type",
+    (value) => {
+      airColumnState.farEndType = value;
+      handleEndTypeChange();
+    }
+  );
+
+  // 管の外枠を表示するかどうかのトグル（appState側の表示専用フラグ）。
+  // 物理計算には一切関わらないため、変更してもupdateColumnsを呼ぶ必要はない
+  // （次のrender()でAirColumnRendererがこのフラグを読んで描画方法を変えるだけ）。
+  const tubeVisibleLabel = document.createElement("label");
+  tubeVisibleLabel.className = "wave-speed-fixed-toggle";
+  const tubeVisibleCheckbox = document.createElement("input");
+  tubeVisibleCheckbox.type = "checkbox";
+  tubeVisibleCheckbox.checked = appState.tubeVisible;
+  tubeVisibleLabel.appendChild(tubeVisibleCheckbox);
+  tubeVisibleLabel.appendChild(document.createTextNode(" 管の外枠を表示する"));
+  tubeVisibleCheckbox.addEventListener("change", () => {
+    appState.tubeVisible = tubeVisibleCheckbox.checked;
   });
 
   refreshEigenfrequencyDisplay();
 
-  wrapper.appendChild(sourceEndLabel);
+  wrapper.appendChild(sourceEndFieldset);
   wrapper.appendChild(farEndFieldset);
+  wrapper.appendChild(tubeVisibleLabel);
   wrapper.appendChild(tubeLengthSlider.element);
   wrapper.appendChild(endCorrectionSlider.element);
   wrapper.appendChild(soundSpeedSlider.element);

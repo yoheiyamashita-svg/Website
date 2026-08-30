@@ -15,7 +15,13 @@
 // tubeLengthだけでなく、上下の延長区間の長さも含めた「総表示長」から計算する。
 
 import { createCoordinateTransform } from "../../utils/math.js";
-import { BOUNDARY_TYPE_OPEN_OPEN, MODE_PARTICLES, MODE_PARTICLES_AND_WAVE } from "../../utils/constants.js";
+import {
+  AIR_COLUMN_END_CLOSED,
+  AIR_COLUMN_END_OPEN,
+  MODE_PARTICLES,
+  MODE_PARTICLES_AND_WAVE,
+  MODE_WAVE_ONLY,
+} from "../../utils/constants.js";
 import { renderAirColumnParticles } from "./AirColumnParticleRenderer.js";
 import { renderAirColumnWaveform } from "./AirColumnWaveRenderer.js";
 import { renderAirColumnCorrespondenceArrows } from "./AirColumnArrowRenderer.js";
@@ -60,7 +66,7 @@ export class AirColumnRenderer {
     const pixelsPerMeter = (displayHeight - MARGIN_PX * 2) / totalVisualLength;
     this.transform = createCoordinateTransform({
       pixelsPerMeter,
-      // x=0（音源側・開口）を、上の延長区間の分だけ余白から下げた位置に置く。
+      // x=0（上端）を、上の延長区間の分だけ余白から下げた位置に置く。
       // topExtensionLength=0のときはMARGIN_PXのまま（これまでと同じ）。
       originXPx: MARGIN_PX + topExtensionLength * pixelsPerMeter,
       originYPx: 0, // このtransformでは横方向オフセットは呼び出し側が明示的に指定するため未使用
@@ -73,24 +79,43 @@ export class AirColumnRenderer {
    * 現在のAirColumnStateを、指定した表示モードで描画する。
    *
    * @param {Object} airColumnState - 描画対象のAirColumnState
-   * @param {string} mode - MODE_PARTICLES / MODE_PARTICLES_AND_WAVE / MODE_FULL_EXPLANATION
+   * @param {string} mode - MODE_PARTICLES / MODE_PARTICLES_AND_WAVE / MODE_FULL_EXPLANATION / MODE_WAVE_ONLY
    * @param {Object} [options]
    * @param {number|null} [options.highlightedColumnIndex] - 選択中の列番号
+   * @param {boolean} [options.tubeVisible=true] - 管の外枠を描くかどうか（表示専用の切り替え）
    */
-  render(airColumnState, mode, { highlightedColumnIndex = null } = {}) {
+  render(airColumnState, mode, { highlightedColumnIndex = null, tubeVisible = true } = {}) {
     this.clear();
 
-    const { columns, boundaryType, sourceEndExtension, farEndExtension, endCorrection } = airColumnState;
-    // 音源側は指示書§15により常に開口なので、常に上側の延長区間を確保する。
-    // 反対側は開口（両端開管）のときだけ下側の延長区間を確保する
-    // （一端閉管の閉口端は硬い壁で補正を受けないため、延長区間の長さは0＝はみ出さない）。
-    const topExtensionLength = endCorrection;
-    const bottomExtensionLength = boundaryType === BOUNDARY_TYPE_OPEN_OPEN ? endCorrection : 0;
+    const { columns, sourceEndType, farEndType, sourceEndExtension, farEndExtension, endCorrection } =
+      airColumnState;
+    // 上端(x=0)が開口のときだけ上側の延長区間を確保する。
+    // 下端(x=L)が開口のときだけ下側の延長区間を確保する
+    // （閉口端は硬い壁で補正を受けないため、延長区間の長さは0＝はみ出さない）。
+    const topExtensionLength = sourceEndType === AIR_COLUMN_END_OPEN ? endCorrection : 0;
+    const bottomExtensionLength = farEndType === AIR_COLUMN_END_OPEN ? endCorrection : 0;
     this.updateTransform(airColumnState.tubeLength, topExtensionLength, bottomExtensionLength);
 
     const tubeCenterXPx = this.canvas.width / 2;
 
-    this.drawTubeOutline(tubeCenterXPx, boundaryType);
+    if (tubeVisible) {
+      this.drawTubeOutline(tubeCenterXPx, sourceEndType, farEndType);
+    }
+
+    if (mode === MODE_WAVE_ONLY) {
+      // 粒子・矢印は描かず、波形だけを描く（ユーザー要望：粒子を表示しないモード）。
+      renderAirColumnWaveform(
+        this.context,
+        this.transform,
+        columns,
+        sourceEndExtension,
+        farEndExtension,
+        tubeCenterXPx,
+        sourceEndType,
+        farEndType
+      );
+      return;
+    }
 
     if (mode === MODE_PARTICLES) {
       renderAirColumnParticles(
@@ -123,7 +148,8 @@ export class AirColumnRenderer {
       sourceEndExtension,
       farEndExtension,
       tubeCenterXPx,
-      boundaryType
+      sourceEndType,
+      farEndType
     );
 
     if (mode === MODE_PARTICLES_AND_WAVE) {
@@ -140,7 +166,7 @@ export class AirColumnRenderer {
   // AirColumnWaveRenderer側のテキストラベルとも一致させている）。
   // 管の壁そのものは、開口端補正の延長区間の影響を受けず、常に物理的なtubeLengthの
   // 範囲(x=0〜x=tubeLength)だけを描く（延長区間は「管の外にはみ出た波形」として描かれる）。
-  drawTubeOutline(tubeCenterXPx, boundaryType) {
+  drawTubeOutline(tubeCenterXPx, sourceEndType, farEndType) {
     const leftXPx = tubeCenterXPx - TUBE_WIDTH_PX / 2;
     const rightXPx = tubeCenterXPx + TUBE_WIDTH_PX / 2;
     const topYPx = this.transform.physicsXToPixel(0);
@@ -157,10 +183,18 @@ export class AirColumnRenderer {
     this.context.lineTo(rightXPx, bottomYPx);
     this.context.stroke();
 
-    // x=0（音源側）は指示書§15により常に開口なので、上端には壁を閉じる線を描かない。
+    // 上端(x=0)。開口なら描かず（＝開いたまま）、閉口なら太い横線で塞ぐ
+    // （以前は上端＝音源側が常に開口だったため、この分岐は存在しなかった）。
+    if (sourceEndType === AIR_COLUMN_END_CLOSED) {
+      this.context.lineWidth = TUBE_WALL_WIDTH_PX * 2;
+      this.context.beginPath();
+      this.context.moveTo(leftXPx, topYPx);
+      this.context.lineTo(rightXPx, topYPx);
+      this.context.stroke();
+    }
 
-    // x=Lの端。開口なら描かず（＝開いたまま）、閉口なら太い横線で塞ぐ。
-    if (boundaryType === "open-closed") {
+    // 下端(x=L)。開口なら描かず（＝開いたまま）、閉口なら太い横線で塞ぐ。
+    if (farEndType === AIR_COLUMN_END_CLOSED) {
       this.context.lineWidth = TUBE_WALL_WIDTH_PX * 2;
       this.context.beginPath();
       this.context.moveTo(leftXPx, bottomYPx);

@@ -20,16 +20,21 @@ const MODE_LABELS = [
  * @param {Object} params
  * @param {Object} params.appState - mode を持つAppState
  * @param {(mode: string) => void} params.onModeChange - モードが切り替わった後に呼ばれる
+ * @param {Array<{mode:string,label:string}>} [params.modeLabels=MODE_LABELS] - 表示する
+ *   モードボタンの一覧。省略時は縦波・気柱振動で共通の3モード。気柱振動タブは、
+ *   ここに独自の4つ目のモード（Mode D: 波形のみ）を加えた配列を渡す
+ *   （js/app/AirColumnApp.js参照）。この引数化により、縦波タブのモード数を
+ *   変えずに気柱振動タブだけモードを追加できる。
  * @returns {{element: HTMLElement}}
  */
-export function createModeSelector({ appState, onModeChange }) {
+export function createModeSelector({ appState, onModeChange, modeLabels = MODE_LABELS }) {
   const wrapper = document.createElement("div");
   wrapper.className = "mode-selector";
 
   // Array.prototype.mapは、配列の各要素をコールバック関数の戻り値に置き換えて
   // 新しい配列を作る高階関数。ここでは「{mode, label}の設定情報」を
   // 「実際に画面に置くbutton要素」に変換している。
-  const buttons = MODE_LABELS.map(({ mode, label }) => {
+  const buttons = modeLabels.map(({ mode, label }) => {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = label;
