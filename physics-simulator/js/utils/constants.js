@@ -199,3 +199,36 @@ export const DEFAULT_COMBINED_OPACITY = 100;
 export const OPACITY_MIN = 0;
 export const OPACITY_MAX = 100;
 export const OPACITY_STEP = 5;
+
+// ==== 横波の反射（パルス）専用の定数 ====
+//
+// 「横波（定常波）」タブは無限に続く正弦波の重ね合わせで定常波を作るが、
+// このタブは局所的なパルス（山1つ、またはS字型）が右端に向かって進み、
+// 反射して戻ってくる様子そのものを見せることを目的とする独立タブ
+// （ユーザー確認済み：既存タブのモード追加ではなく新規タブとする）。
+
+// パルスの形状。文字列比較で判定する（他のEND_TYPE_*等と同じ考え方）。
+export const PULSE_SHAPE_BUMP = "bump"; // 単一の山（滑らかな1つのこぶ）
+export const PULSE_SHAPE_S = "s"; // S字型（山と谷が対になった、通常サイン波1周期分の形）
+export const DEFAULT_PULSE_SHAPE = PULSE_SHAPE_BUMP;
+
+// パルスの半値幅に相当する量 w [m]（js/physics/wave/PulseWave.jsのbumpProfile/sProfile参照）。
+// 媒質の長さ(1〜6m)に対して、狭すぎず広すぎない見た目になるよう初期値0.3mとした。
+export const DEFAULT_PULSE_WIDTH = 0.3;
+export const PULSE_WIDTH_MIN = 0.1;
+export const PULSE_WIDTH_MAX = 1.0;
+export const PULSE_WIDTH_STEP = 0.05;
+
+// 振動源から右端までの距離（媒質の長さ）L [m]の初期値。
+// TRANSVERSE_MEDIUM_LENGTH_MIN〜MAXの可動範囲はそのまま使うが、初期値は
+// 「横波（定常波）」タブのDEFAULT_TRANSVERSE_MEDIUM_LENGTH(4.0m)より短くする
+// （ユーザー要望：往復距離を短くして、反射の様子を画面内でよりコンパクトに見せる）。
+export const DEFAULT_PULSE_MEDIUM_LENGTH = 2.0;
+
+// パルスの伝わる速さ v [m/s]。音速などの現実の値である必要はなく、
+// 反射の様子がゆっくり目で追えることを優先した速さにした
+// （デフォルト1.0m/s・媒質長2mなら、1往復に数秒かかる程度）。
+export const DEFAULT_PULSE_WAVE_SPEED = 1.0;
+export const PULSE_WAVE_SPEED_MIN = 0.2;
+export const PULSE_WAVE_SPEED_MAX = 3.0;
+export const PULSE_WAVE_SPEED_STEP = 0.1;

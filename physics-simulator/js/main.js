@@ -5,6 +5,7 @@
 import { createWaveApp } from "./app/App.js";
 import { createAirColumnApp } from "./app/AirColumnApp.js";
 import { createTransverseWaveApp } from "./app/TransverseWaveApp.js";
+import { createPulseReflectionApp } from "./app/PulseReflectionApp.js";
 import { MAX_DELTA_TIME } from "./utils/constants.js";
 
 // document.getElementById(id)は、指定したid属性を持つDOM要素を1つ取得するWeb APIの
@@ -37,6 +38,13 @@ const transverseWaveApp = createTransverseWaveApp({
   formulaContainer: document.getElementById("transverse-wave-formula-panel"),
 });
 
+const pulseReflectionApp = createPulseReflectionApp({
+  canvasElement: document.getElementById("pulse-reflection-canvas"),
+  parameterContainer: document.getElementById("pulse-reflection-parameter-controls"),
+  playbackContainer: document.getElementById("pulse-reflection-playback-controls"),
+  formulaContainer: document.getElementById("pulse-reflection-formula-panel"),
+});
+
 // タブ切り替え：どのsectionを表示するかだけを切り替える。
 // 縦波・気柱振動・横波のどのシミュレーションも裏側では時刻が進み続け（下のtick呼び出しを参照）、
 // タブを切り替えても「戻ってきたら時間が止まっていた」ということが起きないようにする
@@ -46,6 +54,7 @@ const tabPanels = {
   wave: document.getElementById("wave-panel"),
   "air-column": document.getElementById("air-column-panel"),
   "transverse-wave": document.getElementById("transverse-wave-panel"),
+  "pulse-reflection": document.getElementById("pulse-reflection-panel"),
 };
 
 tabButtons.forEach((button) => {
@@ -67,6 +76,8 @@ tabButtons.forEach((button) => {
       airColumnApp.handleResize();
     } else if (targetTab === "transverse-wave") {
       transverseWaveApp.handleResize();
+    } else if (targetTab === "pulse-reflection") {
+      pulseReflectionApp.handleResize();
     }
   });
 });
@@ -80,6 +91,7 @@ window.addEventListener("resize", () => {
   waveApp.handleResize();
   airColumnApp.handleResize();
   transverseWaveApp.handleResize();
+  pulseReflectionApp.handleResize();
 });
 
 let previousTimestampMs = null;
@@ -111,12 +123,13 @@ function animationFrame(currentTimestampMs) {
   // 1フレームで進める時間の上限をMAX_DELTA_TIMEに制限する（NFR-001）。
   const deltaTimeSeconds = Math.min(rawDeltaTimeSeconds, MAX_DELTA_TIME);
 
-  // 表示中でない方のシミュレーションも含め、3つとものtickを毎フレーム呼ぶ。
+  // 表示中でない方のシミュレーションも含め、4つとものtickを毎フレーム呼ぶ。
   // 描画自体はCanvasRenderer/AirColumnRendererが行うが、非表示中のCanvasは
   // clientWidth/Heightが0になるため実際の描画コストはほぼ発生しない。
   waveApp.tick(deltaTimeSeconds);
   airColumnApp.tick(deltaTimeSeconds);
   transverseWaveApp.tick(deltaTimeSeconds);
+  pulseReflectionApp.tick(deltaTimeSeconds);
 
   // 次のフレームでもこの関数が呼ばれるよう、ループの最後で自分自身を再登録する。
   requestAnimationFrame(animationFrame);

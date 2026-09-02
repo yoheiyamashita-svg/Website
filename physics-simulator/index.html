@@ -32,6 +32,7 @@
       <button type="button" class="tab-button active" data-tab="wave">縦波（進行波）</button>
       <button type="button" class="tab-button" data-tab="air-column">気柱振動（定常波）</button>
       <button type="button" class="tab-button" data-tab="transverse-wave">横波（定常波）</button>
+      <button type="button" class="tab-button" data-tab="pulse-reflection">横波の反射</button>
     </nav>
   </header>
 
@@ -103,6 +104,25 @@
     <footer class="explanation-panel">
       <h2>数式・物理量・説明</h2>
       <div id="transverse-wave-formula-panel"></div>
+    </footer>
+  </section>
+
+  <section id="pulse-reflection-panel" class="tab-panel">
+    <main class="app-main">
+      <section class="parameter-panel">
+        <h2>パラメータ</h2>
+        <div id="pulse-reflection-parameter-controls"></div>
+        <div id="pulse-reflection-playback-controls"></div>
+      </section>
+
+      <section class="simulation-panel">
+        <canvas id="pulse-reflection-canvas"></canvas>
+      </section>
+    </main>
+
+    <footer class="explanation-panel">
+      <h2>数式・物理量・説明</h2>
+      <div id="pulse-reflection-formula-panel"></div>
     </footer>
   </section>
 
