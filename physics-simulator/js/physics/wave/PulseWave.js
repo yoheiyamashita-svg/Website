@@ -1,6 +1,6 @@
 // 横波の反射（パルス）モードの物理エンジン（Physics Layer）。
 //
-// 「横波（定常波）」タブ（js/physics/wave/TravelingWave.js・ReflectedWave.js）は
+// 「横波（定常波）」タブ（js/physics/wave/TravelingWave.js・TransverseStandingWave.js）は
 // 無限に続く正弦波の入射波・反射波を重ね合わせて定常波を作るが、このタブは
 // 局所的なパルス（山1つ、またはS字型）が右端(x=L)に向かって進み、反射して
 // 戻ってくる様子そのものを見せることを目的とする。物理モデルは以下の2つの部分からなる。
@@ -25,7 +25,8 @@
 //
 // 反射波 u2(x,t) = ε・A・profile(2L - x - v t - x0, w) は、x=Lを軸として
 // u1を鏡映（x→2L-x）した形。εは境界の種類で決まる符号（+1:自由端 / -1:固定端）。
-// この形にする理由は、js/physics/wave/ReflectedWave.jsの正弦波版と全く同じ発想
+// この形にする理由は、以前のjs/physics/wave/ReflectedWave.js（現在はTransverseStandingWave.js
+// に置き換わっている）の正弦波版と全く同じ発想
 // （x=Lでの境界条件を、u1・u2の重ね合わせだけで自動的に満たす鏡像法）だが、
 // ここではx=Lでの代入によって次の関係が常に成り立つことを使う：
 //   u1(L,t) = A・profile(L - vt - x0, w)

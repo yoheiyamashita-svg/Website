@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HTML-CSS-07-予習-演習</title>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step1 | テーブル</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・完成イメージのようにテーブルを完成させてください（ピクセルパーフェクトでなくてよい）
+          </li>
+          <li class="homework_item">
+            ・「.table_container」内に作成してください
+          </li>
+        </ul>
+      </div>
+
+      <div class="table_wrapper">
+        <div class="table_image">
+          <p>完成イメージ</p>
+          <img src="img/table-image.png" alt="" />
+        </div>
+
+        <div class="table_container">
+          <!-- ここにマークアップ -->
+          <table class="table">
+            <tr class="table_row">
+              <th class="table_head">会社名</th>
+              <td class="table_data">ZeroPlus合同会社</td>
+            </tr>
+            <tr class="table_row">
+              <th class="table_head">所在地</th>
+              <td class="table_data">東京都豊島区池袋〇-〇-〇</td>
+            </tr>
+            <tr class="table_row">
+              <th class="table_head">設立</th>
+              <td class="table_data">2018年9月1日</td>
+            </tr>
+            <tr class="table_row">
+              <th class="table_head">資本金</th>
+              <td class="table_data">1000万円</td>
+            </tr>
+            <tr class="table_row">
+              <th class="table_head">従業員数</th>
+              <td class="table_data">52名</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrapper">
+        <h2 class="homework_title">Step2 | お問い合わせフォーム</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・完成イメージのようにお問い合わせフォームを完成させてください（ピクセルパーフェクトでなくてよい）
+          </li>
+          <li class="homework_item">
+            ・「.contact_container」内に作成してください
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact_wrapper">
+        <div class="contact_image">
+          <p>完成イメージ</p>
+          <img src="img/contact-image.png" alt="" />
+        </div>
+
+        <div class="contact_container">
+          <form action="" class="contact_form">
+            <dl class="contact_list">
+              <dt class="contact_heading">
+                お名前<span class="contact_required">必須</span>
+              </dt>
+              <dd class="contact_detail">
+                <input type="text" class="contact_input" required />
+              </dd>
+              <dt class="contact_heading">
+                電話番号<span class="contact_required">必須</span>
+              </dt>
+              <dd class="contact_detail">
+                <input type="tel" class="contact_input" required />
+              </dd>
+              <dt class="contact_heading">
+                メールアドレス<span class="contact_required">必須</span>
+              </dt>
+              <dd class="contact_detail">
+                <input type="email" class="contact_input" required />
+              </dd>
+              <dt class="contact_heading">
+                お問い合わせ項目<span class="contact_required">必須</span>
+              </dt>
+              <dd class="contact_detail">
+                <ul class="contact_check-list">
+                  <li class="contact_check-item">
+                    <label class="contact_request-item-inner" for="request-01">
+                      <input
+                        type="radio"
+                        name="request"
+                        id="request-01"
+                        class="contact_radio"
+                        value="web-production"
+                        required
+                      />
+                      <span class="contact_request-txt">Web制作</span>
+                    </label>
+                  </li>
+                  <li class="contact_check-item">
+                    <label class="contact_request-item-inner" for="request-02">
+                      <input
+                        type="radio"
+                        name="request"
+                        id="request-02"
+                        class="contact_radio"
+                        value="school"
+                        required
+                      />
+                      <span class="contact_request-txt"
+                        >プログラミングスクール</span
+                      >
+                    </label>
+                  </li>
+                  <li class="contact_check-item">
+                    <label class="contact_request-item-inner" for="request-03">
+                      <input
+                        type="radio"
+                        name="request"
+                        id="request-03"
+                        class="contact_radio"
+                        value="other"
+                        required
+                      />
+                      <span class="contact_request-txt">その他</span>
+                    </label>
+                  </li>
+                </ul>
+              </dd>
+              <dt class="contact_heading">お問い合わせ内容</dt>
+              <dd class="contact_detail">
+                <textarea class="contact_textarea"></textarea>
+              </dd>
+            </dl>
+
+            <div class="contact_btn-wrapper">
+              <input type="submit" class="contact_btn" value="送信する" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="長方形_490" data-name="長方形 490" width="277" height="400" transform="translate(0 24)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-img-serviceiron_growup">
+      <rect width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g id="img-serviceiron_growup" clip-path="url(#clip-img-serviceiron_growup)">
+    <g id="マスクグループ_1" data-name="マスクグループ 1" transform="translate(62 -24)" clip-path="url(#clip-path)">
+      <g id="長方形_489" data-name="長方形 489" transform="translate(0 47.082)" fill="#fff" stroke="#333" stroke-width="5">
+        <rect width="277.124" height="376.471" stroke="none"/>
+        <rect x="2.5" y="2.5" width="272.124" height="371.471" fill="none"/>
+      </g>
+      <g id="長方形_488" data-name="長方形 488" transform="translate(0 37.932)" fill="#fff" stroke="#333" stroke-width="5">
+        <rect width="277.124" height="376.471" stroke="none"/>
+        <rect x="2.5" y="2.5" width="272.124" height="371.471" fill="none"/>
+      </g>
+      <g id="長方形_487" data-name="長方形 487" transform="translate(0 28.781)" fill="#fff" stroke="#333" stroke-width="5">
+        <rect width="277.124" height="376.471" stroke="none"/>
+        <rect x="2.5" y="2.5" width="272.124" height="371.471" fill="none"/>
+      </g>
+      <g id="長方形_486" data-name="長方形 486" transform="translate(0 23.553)" fill="#fff" stroke="#333" stroke-width="5">
+        <rect width="277.124" height="371.242" stroke="none"/>
+        <rect x="2.5" y="2.5" width="272.124" height="366.242" fill="none"/>
+      </g>
+      <g id="グループ_417" data-name="グループ 417" transform="translate(28.758 62.837)">
+        <path id="合体_3" data-name="合体 3" d="M77.187,86.217l-1.542-1.061,1.542,1.061,1.046-1.535-1.046,1.535,39.687,27.3L194.272,0l-77.4,113.515,1.534,1.055-1.534-1.055-.881,1.293.881-1.293-39.687-27.3L0,199.444Z" transform="translate(0 24.889)" fill="none" stroke="#333" stroke-width="8"/>
+        <path id="多角形_7" data-name="多角形 7" d="M18.954,0,37.908,35.294H0Z" transform="translate(187.114) rotate(31)" fill="#333"/>
+      </g>
+      <g id="パス_7" data-name="パス 7" transform="translate(247.032 -6.448) rotate(45)" fill="#fff">
+        <path d="M 81.44609069824219 41.13725280761719 L 4.828431606292725 41.13725280761719 L 43.13725662231445 2.828428030014038 L 81.44609069824219 41.13725280761719 Z" stroke="none"/>
+        <path d="M 43.13725662231445 5.656856536865234 L 9.6568603515625 39.13725662231445 L 76.61766052246094 39.13725662231445 L 43.13725662231445 5.656856536865234 M 43.13725662231445 0 L 86.27451324462891 43.13725662231445 L 0 43.13725662231445 L 43.13725662231445 0 Z" stroke="none" fill="#333"/>
+      </g>
+      <text id="GROW_UP" data-name="GROW UP" transform="translate(36.601 342.518)" fill="#333" font-size="41" font-family="YuGo-Bold, YuGothic" font-weight="700"><tspan x="0" y="0">GROW UP</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <clipPath id="clip-img-service-icon_sns">
+      <rect width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g id="img-service-icon_sns" clip-path="url(#clip-img-service-icon_sns)">
+    <g id="グループ_415" data-name="グループ 415" transform="translate(-11.5 -20)">
+      <g id="長方形_465" data-name="長方形 465" transform="translate(91.5 420) rotate(-90)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="10">
+        <rect width="400" height="241" rx="8" stroke="none"/>
+        <rect x="5" y="5" width="390" height="231" rx="3" fill="none"/>
+      </g>
+      <g id="グループ_412" data-name="グループ 412" transform="translate(96.5 28.889)">
+        <g id="長方形_475" data-name="長方形 475" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="228.889" height="325.556" stroke="none"/>
+          <rect x="0.5" y="0.5" width="227.889" height="324.556" fill="none"/>
+        </g>
+        <rect id="長方形_467" data-name="長方形 467" width="226.667" height="63.333" transform="translate(2.222 320)" fill="#333"/>
+        <g id="楕円形_1" data-name="楕円形 1" transform="translate(96.667 335)" fill="none" stroke="#fff" stroke-width="4">
+          <circle cx="17.778" cy="17.778" r="17.778" stroke="none"/>
+          <circle cx="17.778" cy="17.778" r="15.778" fill="none"/>
+        </g>
+        <rect id="長方形_466" data-name="長方形 466" width="231.111" height="11.111" transform="translate(0 313.889)" fill="#333"/>
+        <g id="グループ_402" data-name="グループ 402" transform="translate(8.764 35.104)">
+          <line id="線_3" data-name="線 3" x1="49.028" y1="56.527" transform="translate(33.804 163.91) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+          <g id="グループ_401" data-name="グループ 401" transform="translate(76.937 194.264)">
+            <g id="楕円形_2" data-name="楕円形 2" transform="translate(0 5.136) rotate(-11)" fill="#fff" stroke="#333" stroke-width="4">
+              <circle cx="13.459" cy="13.459" r="13.459" stroke="none"/>
+              <circle cx="13.459" cy="13.459" r="11.459" fill="none"/>
+            </g>
+            <g id="楕円形_3" data-name="楕円形 3" transform="translate(9.017 11.218) rotate(-11)" fill="none" stroke="#333" stroke-width="4">
+              <circle cx="5.768" cy="5.768" r="5.768" stroke="none"/>
+              <circle cx="5.768" cy="5.768" r="3.768" fill="none"/>
+            </g>
+          </g>
+          <g id="グループ_399" data-name="グループ 399" transform="translate(17.438 150.247) rotate(-11)">
+            <g id="楕円形_2-2" data-name="楕円形 2" fill="#fff" stroke="#333" stroke-width="4">
+              <circle cx="13.459" cy="13.459" r="13.459" stroke="none"/>
+              <circle cx="13.459" cy="13.459" r="11.459" fill="none"/>
+            </g>
+            <g id="楕円形_3-2" data-name="楕円形 3" transform="translate(7.691 7.691)" fill="none" stroke="#333" stroke-width="4">
+              <circle cx="5.768" cy="5.768" r="5.768" stroke="none"/>
+              <circle cx="5.768" cy="5.768" r="3.768" fill="none"/>
+            </g>
+          </g>
+          <line id="線_4" data-name="線 4" y1="89.212" x2="33.839" transform="translate(75.695 122.47) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+          <line id="線_1" data-name="線 1" y1="89.212" x2="33.839" transform="translate(0 167.347) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+          <line id="線_3-2" data-name="線 3" x1="49.028" y1="56.527" transform="translate(121.452 50.034) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+          <g id="グループ_399-2" data-name="グループ 399" transform="translate(105.086 36.371) rotate(-11)">
+            <g id="楕円形_2-3" data-name="楕円形 2" fill="#fff" stroke="#333" stroke-width="4">
+              <circle cx="13.459" cy="13.459" r="13.459" stroke="none"/>
+              <circle cx="13.459" cy="13.459" r="11.459" fill="none"/>
+            </g>
+            <g id="楕円形_3-3" data-name="楕円形 3" transform="translate(7.691 7.691)" fill="none" stroke="#333" stroke-width="4">
+              <circle cx="5.768" cy="5.768" r="5.768" stroke="none"/>
+              <circle cx="5.768" cy="5.768" r="3.768" fill="none"/>
+            </g>
+          </g>
+          <g id="グループ_400" data-name="グループ 400" transform="translate(164.585 78.25)">
+            <g id="楕円形_2-4" data-name="楕円形 2" transform="translate(0 5.136) rotate(-11)" fill="#fff" stroke="#333" stroke-width="4">
+              <circle cx="13.459" cy="13.459" r="13.459" stroke="none"/>
+              <circle cx="13.459" cy="13.459" r="11.459" fill="none"/>
+            </g>
+            <g id="楕円形_3-4" data-name="楕円形 3" transform="translate(9.017 11.218) rotate(-11)" fill="none" stroke="#333" stroke-width="4">
+              <circle cx="5.768" cy="5.768" r="5.768" stroke="none"/>
+              <circle cx="5.768" cy="5.768" r="3.768" fill="none"/>
+            </g>
+          </g>
+          <line id="線_4-2" data-name="線 4" y1="89.212" x2="33.839" transform="translate(163.343 6.457) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+          <line id="線_1-2" data-name="線 1" y1="89.212" x2="33.839" transform="translate(87.648 53.471) rotate(-11)" fill="none" stroke="#333" stroke-linecap="round" stroke-width="6"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

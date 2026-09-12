@@ -14,8 +14,21 @@
   width: 100%;
 }
 
-.slider-value {
+.slider-value-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slider-value-input {
+  width: 5.5em;
   font-variant-numeric: tabular-nums;
+  color: #444;
+  font-size: 0.9em;
+  padding: 2px 4px;
+}
+
+.slider-unit {
   color: #444;
   font-size: 0.9em;
 }

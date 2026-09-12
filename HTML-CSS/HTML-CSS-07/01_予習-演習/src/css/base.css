@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrapper {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrapper {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+/* table */
+.table_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.table_image {
+  border-bottom: 1px solid #eee;
+}
+
+.table_image p {
+  text-align: center;
+}
+
+.table_container {
+  padding: 40px 0;
+}
+
+/* contact */
+.contact_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.contact_image {
+  border-bottom: 1px solid #eee;
+}
+
+.contact_image p {
+  text-align: center;
+}
+
+.contact_container {
+  padding: 40px 0;
+}

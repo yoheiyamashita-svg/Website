@@ -50,8 +50,12 @@ function createPoints(pointCount, mediumLength) {
  * @param {number} [options.wavelength] - 波長 λ [m]
  * @param {number} [options.frequency] - 周波数 f [Hz]
  * @param {number} [options.mediumLength] - 媒質（弦）の長さ L [m]
- * @param {string} [options.endType] - 右端(x=L)の境界の種類。'fixed' | 'free'
- *   （左端(x=0)は振動源であり境界条件を持たないため、パラメータとして存在しない）
+ * @param {string} [options.leftEndType] - 左端(x=0)の境界の種類。'fixed' | 'free'
+ * @param {string} [options.rightEndType] - 右端(x=L)の境界の種類。'fixed' | 'free'
+ *   （以前は左端を「振動源」として境界条件を持たない特別な点にしていたが、
+ *   ユーザー要望により両端とも対等に選べるようにした。js/physics/wave/
+ *   TransverseStandingWave.jsのコメント参照：両端に境界条件を置くと、
+ *   λ・f・Lの組み合わせ次第では定常波が発生しない（共鳴しない）ことがある）
  * @param {number} [options.incidentOpacity] - 右向き波（入射波）の透明度 [%, 0-100]
  * @param {number} [options.reflectedOpacity] - 左向き波（反射波）の透明度 [%, 0-100]
  * @param {number} [options.combinedOpacity] - 合成波の透明度 [%, 0-100]
@@ -62,7 +66,8 @@ export function createTransverseWaveState({
   wavelength = DEFAULT_WAVELENGTH,
   frequency = DEFAULT_FREQUENCY,
   mediumLength = DEFAULT_TRANSVERSE_MEDIUM_LENGTH,
-  endType = DEFAULT_END_TYPE,
+  leftEndType = DEFAULT_END_TYPE,
+  rightEndType = DEFAULT_END_TYPE,
   incidentOpacity = DEFAULT_INCIDENT_OPACITY,
   reflectedOpacity = DEFAULT_REFLECTED_OPACITY,
   combinedOpacity = DEFAULT_COMBINED_OPACITY,
@@ -73,7 +78,8 @@ export function createTransverseWaveState({
     wavelength,
     frequency,
     mediumLength,
-    endType,
+    leftEndType,
+    rightEndType,
     // v固定機能：js/simulation/SimulationState.jsと同じ設計（指示書「v,f,λの設定方法は
     // 縦波と同様」に従い、同じ考え方を流用する）。
     waveSpeedFixed: false,
@@ -81,6 +87,11 @@ export function createTransverseWaveState({
     incidentOpacity,
     reflectedOpacity,
     combinedOpacity,
+    // 共鳴応答係数（0〜1）。js/simulation/TransverseWaveSimulation.jsのupdatePointsが
+    // 毎フレーム計算してここに書き込む（RendererとFormulaDisplayはこれを読むだけで
+    // 再計算しない、REQ-105の精神）。生成直後はまだ計算していないので暫定的に1とする
+    // （すぐにupdatePointsが呼ばれて正しい値に上書きされる）。
+    resonanceResponse: 1,
     points: createPoints(TRANSVERSE_WAVE_POINT_COUNT, mediumLength),
   };
 }

@@ -20,6 +20,14 @@ const COMBINED_COLOR = [44, 122, 75]; // 合成波の色 #2c7a4b
 const LINE_WIDTH_PX = 2;
 const BOUNDARY_LABEL_COLOR = "#333";
 const BOUNDARY_LABEL_FONT = "12px sans-serif";
+// 共鳴中は落ち着いた緑、共鳴から外れているときは注意を引く色にする
+// （js/simulation/TransverseWaveSimulation.jsのresonanceResponseに応じて切り替える）。
+const RESONANCE_ON_COLOR = "#0f6e56";
+const RESONANCE_OFF_COLOR = "#993c1d";
+const RESONANCE_LABEL_FONT = "13px sans-serif";
+// resonanceResponseがこの値以上のとき「共鳴中」とみなす
+// （js/ui/TransverseWaveFormulaDisplay.jsの90%しきい値と揃える）。
+const RESONANCE_THRESHOLD = 0.9;
 
 export class TransverseWaveRenderer {
   constructor(canvasElement) {
@@ -65,7 +73,15 @@ export class TransverseWaveRenderer {
     this.clear();
     this.updateTransform(transverseWaveState.mediumLength);
 
-    const { points, endType, incidentOpacity, reflectedOpacity, combinedOpacity } = transverseWaveState;
+    const {
+      points,
+      leftEndType,
+      rightEndType,
+      incidentOpacity,
+      reflectedOpacity,
+      combinedOpacity,
+      resonanceResponse,
+    } = transverseWaveState;
     const centerYPx = this.transform.originYPx;
 
     this.drawZeroLine(points, centerYPx);
@@ -73,7 +89,8 @@ export class TransverseWaveRenderer {
     this.drawCurve(points, "reflectedDisplacement", REFLECTED_COLOR, reflectedOpacity, centerYPx);
     this.drawCurve(points, "combinedDisplacement", COMBINED_COLOR, combinedOpacity, centerYPx);
 
-    this.drawBoundaryLabels(points, endType, centerYPx);
+    this.drawBoundaryLabels(points, leftEndType, rightEndType, centerYPx);
+    this.drawResonanceStatus(resonanceResponse);
   }
 
   drawZeroLine(points, centerYPx) {
@@ -118,13 +135,15 @@ export class TransverseWaveRenderer {
     context.globalAlpha = 1;
   }
 
-  // 左端（振動源、境界条件を持たない）と右端（固定端=節 / 自由端=腹）にラベルを描く。
-  drawBoundaryLabels(points, endType, centerYPx) {
+  // 左端・右端とも、固定端(節)/自由端(腹)に応じたラベルを描く
+  // （以前は左端を「振動源」固定表示していたが、両端とも選択可能になったため対称にした）。
+  drawBoundaryLabels(points, leftEndType, rightEndType, centerYPx) {
     const leftXPx = this.transform.physicsXToPixel(points[0].initialPosition);
     const rightXPx = this.transform.physicsXToPixel(points[points.length - 1].initialPosition);
 
-    this.drawLabel(leftXPx, centerYPx, "振動源");
-    const rightLabel = endType === END_TYPE_FIXED ? "固定端（節）" : "自由端（腹）";
+    const leftLabel = leftEndType === END_TYPE_FIXED ? "固定端（節）" : "自由端（腹）";
+    this.drawLabel(leftXPx, centerYPx, leftLabel);
+    const rightLabel = rightEndType === END_TYPE_FIXED ? "固定端（節）" : "自由端（腹）";
     this.drawLabel(rightXPx, centerYPx, rightLabel);
   }
 
@@ -134,5 +153,20 @@ export class TransverseWaveRenderer {
     this.context.textAlign = "center";
     this.context.textBaseline = "bottom";
     this.context.fillText(text, xPx, centerYPx - 60);
+  }
+
+  // 共鳴の度合い（resonanceResponse、0〜1）をCanvas上部にテキストで表示する
+  // （js/physics/wave/TransverseStandingWave.jsのcalculateResonanceResponse参照。
+  // ユーザー要望：共鳴していないことを明示的に画面上で知らせる）。
+  drawResonanceStatus(resonanceResponse) {
+    const isNearResonance = resonanceResponse >= RESONANCE_THRESHOLD;
+    const percentText = (resonanceResponse * 100).toFixed(0);
+    const text = isNearResonance ? `共鳴中（${percentText}%）` : `共鳴から外れています（${percentText}%）`;
+
+    this.context.fillStyle = isNearResonance ? RESONANCE_ON_COLOR : RESONANCE_OFF_COLOR;
+    this.context.font = RESONANCE_LABEL_FONT;
+    this.context.textAlign = "center";
+    this.context.textBaseline = "top";
+    this.context.fillText(text, this.canvas.width / 2, 8);
   }
 }

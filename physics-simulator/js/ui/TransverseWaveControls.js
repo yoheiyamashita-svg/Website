@@ -1,7 +1,7 @@
 // 横波（定常波）モードのパラメータ操作UI（js/ui/Controls.jsの横波版）。
 //
 // 縦波のControls.jsと全く同じ設計方針：スライダー/ラジオボタンはTransverseWaveStateの
-// フィールドを書き換えるだけで、Physics Layer（TravelingWave.js・ReflectedWave.js）の
+// フィールドを書き換えるだけで、Physics Layer（TravelingWave.js・TransverseStandingWave.js）の
 // 計算関数を直接呼ぶことはしない。パラメータを書き換えた後にupdatePointsを呼んで
 // 再計算させる、という間接的な流れ（原則2「UIから物理モデルを直接操作しない」）を徹底する。
 //
@@ -178,41 +178,67 @@ export function createTransverseWaveControls({ appState }) {
     },
   });
 
-  // 左端(x=0)は振動源であり境界条件を持たないため選択肢を作らず、説明文だけを表示する
-  // （js/utils/constants.jsのEND_TYPE定数群のコメント参照）。
-  const sourceEndLabel = document.createElement("div");
-  sourceEndLabel.className = "air-column-source-label";
-  sourceEndLabel.textContent = "左端（振動源）：境界条件なし";
+  // 両端(x=0・x=L)とも、固定端/自由端をラジオボタンで選べる
+  // （以前は左端を「振動源」として境界条件を持たない特別な点にしていたが、
+  // ユーザー要望により両端とも対等に選択可能にした）。同じ構造を2箇所で使うため、
+  // 共通のヘルパー関数にまとめる（js/ui/acoustic/AirColumnControls.jsの
+  // createEndTypeFieldsetと同じパターン）。
+  //
+  // @param {string} legendText - fieldsetの見出し（「左端」または「右端」）
+  // @param {string} currentValue - 現在の値（transverseWaveState.leftEndType/rightEndType）
+  // @param {string} radioGroupName - ラジオボタンのname属性（左端・右端で別グループにする）
+  // @param {(value:string)=>void} onChange - 選択が変わったときに呼ばれる
+  function createEndTypeFieldset(legendText, currentValue, radioGroupName, onChange) {
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "air-column-boundary-fieldset";
+    const legend = document.createElement("legend");
+    legend.textContent = legendText;
+    fieldset.appendChild(legend);
 
-  // 右端（x=L）だけ、固定端/自由端をラジオボタンで選べる。
-  const farEndFieldset = document.createElement("fieldset");
-  farEndFieldset.className = "air-column-boundary-fieldset";
-  const farEndLegend = document.createElement("legend");
-  farEndLegend.textContent = "右端（x = L）";
-  farEndFieldset.appendChild(farEndLegend);
-
-  [
-    { value: END_TYPE_FIXED, label: "固定端" },
-    { value: END_TYPE_FREE, label: "自由端" },
-  ].forEach(({ value, label }) => {
-    const optionLabel = document.createElement("label");
-    optionLabel.className = "air-column-boundary-option";
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = "transverse-wave-end-type";
-    radio.value = value;
-    radio.checked = transverseWaveState.endType === value;
-    radio.addEventListener("change", () => {
-      if (!radio.checked) {
-        return;
-      }
-      transverseWaveState.endType = value;
-      updatePoints(transverseWaveState);
+    [
+      { value: END_TYPE_FIXED, label: "固定端" },
+      { value: END_TYPE_FREE, label: "自由端" },
+    ].forEach(({ value, label }) => {
+      const optionLabel = document.createElement("label");
+      optionLabel.className = "air-column-boundary-option";
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = radioGroupName;
+      radio.value = value;
+      radio.checked = currentValue === value;
+      radio.addEventListener("change", () => {
+        if (!radio.checked) {
+          return;
+        }
+        onChange(value);
+      });
+      optionLabel.appendChild(radio);
+      optionLabel.appendChild(document.createTextNode(label));
+      fieldset.appendChild(optionLabel);
     });
-    optionLabel.appendChild(radio);
-    optionLabel.appendChild(document.createTextNode(label));
-    farEndFieldset.appendChild(optionLabel);
-  });
+
+    return fieldset;
+  }
+
+  const leftEndFieldset = createEndTypeFieldset(
+    "左端（x = 0）",
+    transverseWaveState.leftEndType,
+    "transverse-wave-left-end-type",
+    (value) => {
+      transverseWaveState.leftEndType = value;
+      updatePoints(transverseWaveState);
+    }
+  );
+
+  const farEndFieldset = createEndTypeFieldset(
+    "右端（x = L）",
+    transverseWaveState.rightEndType,
+    "transverse-wave-right-end-type",
+    (value) => {
+      transverseWaveState.rightEndType = value;
+      updatePoints(transverseWaveState);
+    }
+  );
 
   // 右向き波(入射波)・左向き波(反射波)・合成波の3本を、それぞれ独立した不透明度[%]で
   // 表示できるようにするスライダー。Rendererにはstate.incidentOpacity等をそのまま渡すだけで、
@@ -256,7 +282,7 @@ export function createTransverseWaveControls({ appState }) {
 
   refreshDerivedValues();
 
-  wrapper.appendChild(sourceEndLabel);
+  wrapper.appendChild(leftEndFieldset);
   wrapper.appendChild(farEndFieldset);
   wrapper.appendChild(amplitudeSlider.element);
   wrapper.appendChild(wavelengthSlider.element);
