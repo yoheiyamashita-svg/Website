@@ -1,0 +1,11 @@
+/* Step10 */
+.class-method_item {
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.class-method_item.is-active {
+  color: #43cfe8;
+}

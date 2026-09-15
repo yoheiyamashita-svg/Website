@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrap {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_sub-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_arrow {
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.homework_arrow::before,
+.homework_arrow::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  content: '';
+  vertical-align: middle;
+}
+
+.sample1-4::before {
+  left: 86px;
+  width: 10px;
+  height: 51px;
+  top: -7px;
+  background: #ff9f48;
+}
+.sample1-4::after {
+  left: 71px;
+  width: 40px;
+  height: 40px;
+  border-top: 8px solid #ff9f48;
+  border-right: 8px solid #ff9f48;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(135deg);
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrap {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+.homework_point {
+  margin: 80px auto;
+  max-width: 850px;
+}
+
+.homework_point_txt:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.homework_point_txt-link {
+  color: #3547e9;
+  text-decoration: underline;
+}
+
+.homework_point_txt-bold {
+  font-weight: bold;
+}
+
+.homework_point_img {
+  margin-bottom: 20px;
+  max-width: 80%;
+}
+
+.homework_point_head-wrapper {
+  width: 100%;
+  text-align: left;
+}
+
+.homework_fx {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.homework_point_head {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 16px;
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  position: relative;
+}
+
+.homework_point__hint .homework_point_head {
+  background: linear-gradient(45deg, #4caac0 0, #6acae2 100%);
+}
+
+.homework_point_head::before,
+.homework_point_head::after {
+  position: absolute;
+  content: '';
+  background: #fff;
+  height: 4px;
+  width: 24px;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+}
+
+.homework_point_head::before {
+  transform: translateY(-50%) rotate(90deg);
+  transition: all 0.3s;
+}
+
+.homework_point_head-wrapper.is_open .homework_point_head::before {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.homework_point_contents {
+  border: 1px solid #ffb924;
+  padding: 40px 20px 60px;
+}
+
+.homework_point__hint .homework_point_contents {
+  border-color: #6acae2;
+}
+
+.dom_disc {
+  background-color: #e6e6e6;
+  padding: 16px;
+}
+
+/* class-get */
+.class-get_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.class-get_item {
+  font-size: 20px;
+}
+
+/* class-method */
+.class-method_wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.class-method_container {
+  text-align: center;
+}
+
+/* ----- js ----- */
+
+.js_accordion_contents {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.js_accordion_contents.is_open {
+  grid-template-rows: 1fr;
+}
+
+.js_accordion_contents-inner {
+  overflow: hidden;
+}

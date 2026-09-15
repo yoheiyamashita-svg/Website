@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* utility */
+.u_ptb {
+  padding: 60px 0;
+}
+
+/* box style */
+.m_box {
+  width: 200px;
+  height: 200px;
+  border: 3px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffbb1e;
+  font-weight: bold;
+}
+
+.js_box,
+.js_box02 {
+  cursor: pointer;
+  margin: 0 auto;
+  transition: 0.5s;
+}
+
+/* Step4 */
+.js_box.is-active {
+  transform: scale(1.5);
+}
+
+/* Step5 */
+
+.js_box02.is-active {
+  transform: translateY(300px) rotate(360deg);
+}

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>JavaScript-01-予習-解答</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- js -->
+    <script src="js/base.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step1 | JavaScriptファイルの読み込み</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・jsフォルダの中にある「main.js」を使用できるように読み込んでください。
+          </li>
+          <li class="homework_item">
+            ※JavaScriptファイルにはdefer属性を付与してください。
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step2 | 変数</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・変数名「greet」を定義し、初期値に「こんにちは」を設定してください。
+          </li>
+          <li class="homework_item">
+            ・コンソール画面に「こんにちは」が表示されるよう、記述を加えましょう。
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step3 | if文</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・変数名「age」を定義し、適当な数値を代入してください。
+          </li>
+          <li class="homework_item">
+            ・変数「age」を用いて、条件に基づいて成人か未成年かを判別するif文を作成してください。
+          </li>
+          <li class="homework_item">
+            ・未成年の場合は、「{age}歳は未成年です」と出力し、成人の場合は、「{age}歳は成人です」と出力してください。
+          </li>
+          <li class="homework_item">
+            例:「age」に19を代入した場合は、「19歳は未成年です」が出力される。
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step4 | 関数</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・関数名「greeting」をfunction関数で定義し、引数名「name」を設定してください。
+          </li>
+          <li class="homework_item">
+            ・関数の処理として、「〇〇さん、こんにちは」（〇〇に引数nameに渡した値が入ります）と出力される処理を記述してください。
+          </li>
+          <li class="homework_item">
+            ・関数「greeting」を、引数nameに文字列を渡して、呼び出してください。
+          </li>
+        </ul>
+      </div>
+      <div class="homework_point homework_point__hint">
+        <button class="homework_point_head-wrapper js_accordion">
+          <h4 class="homework_point_head">演習の手順</h4>
+        </button>
+        <div class="js_accordion_contents">
+          <div class="js_accordion_contents-inner">
+            <div class="homework_point_contents">
+              <p class="homework_point_txt">1. 関数の雛形を用意する。</p>
+              <img src="img/step4-01.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                2. ここに今回の問題の条件に合わせて、関数名と引数を記入。
+              </p>
+              <img src="img/step4-02.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                3.
+                関数の{}内に、コンソール画面に「ooさん、こんにちは」と表示されるよう、処理を記述する。
+              </p>
+              <p class="homework_point_txt">
+                4.
+                関数の外で関数の呼び出しをする。この時、まだ何も入れていないカッコの中に適当な値を入れる。
+              </p>
+              <p class="homework_point_txt">
+                5.
+                コンソール画面に、4で入れた値が「ooさん、こんにちは」のooに入っていれば、成功です。
+              </p>
+              <img src="img/step4-04.png" alt="" class="homework_point_img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step5 | JavaScript DOMの取得</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・単一の「.class-get_item」がついているDOMを取得してください。
+          </li>
+          <li class="homework_item">
+            ・取得したDOMをコンソールに出力してください。
+          </li>
+        </ul>
+      </div>
+      <div class="class-get_wrapper">
+        <div class="class-get_container">
+          <div class="class-get_item">
+            <p>.class-get_itemのついたdivタグごと</p>
+            <p>コンソールに表示されれば</p>
+            <p>成功です</p>
+          </div>
+        </div>
+        <div class="homework_point homework_point__hint">
+          <button class="homework_point_head-wrapper js_accordion">
+            <h4 class="homework_point_head">演習の手順</h4>
+          </button>
+          <div class="js_accordion_contents">
+            <div class="js_accordion_contents-inner">
+              <div class="homework_point_contents">
+                <p class="homework_point_txt">
+                  1.
+                  “querySelector”というメソッドを使用して、該当のクラスがついている要素をdocumentから取得する。
+                </p>
+                <p class="homework_point_txt">
+                  2. 1の操作を任意の変数に定義する。
+                </p>
+                <img
+                  src="img/step5,6-01.png"
+                  alt=""
+                  class="homework_point_img"
+                />
+                <p class="homework_point_txt">
+                  3.
+                  コンソールで変数を出力し、該当のクラスの情報がコンソールに表示されていれば成功です。
+                </p>
+                <img src="img/step4-03.png" alt="" class="homework_point_img" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step6 | JavaScript クラス操作</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・「.class-method_item」をクリックしたときに、is-activeクラスを追加するようにしてください。
+          </li>
+        </ul>
+      </div>
+      <div class="class-method_wrapper">
+        <div class="class-method_container">
+          <p class="class-method_item">
+            この文字をクリックすると、文字が青色になります
+          </p>
+        </div>
+        <div class="homework_point homework_point__hint">
+          <button class="homework_point_head-wrapper js_accordion">
+            <h4 class="homework_point_head">演習の手順</h4>
+          </button>
+          <div class="js_accordion_contents">
+            <div class="js_accordion_contents-inner">
+              <div class="homework_point_contents">
+                <p class="homework_point_txt">
+                  1.
+                  “querySelector”というメソッドを使用して、該当のクラスをdocumentから取得する。
+                </p>
+                <p class="homework_point_txt">
+                  2. 1の操作を変数に定義する。（変数名は任意）
+                </p>
+                <img
+                  src="img/step5,6-01.png"
+                  alt=""
+                  class="homework_point_img"
+                />
+                <p class="homework_point_txt">
+                  3. 2で定義した変数に対して、クリックイベントを発火させる。<br />
+                  （クリックイベントは"addeventListener"を使用しましょう！）
+                </p>
+                <p class="homework_point_txt">
+                  4.
+                  変数がクリックされたときの処理を、3で作成した関数の{}内に記述する。
+                </p>
+                <p class="homework_point_txt dom_disc">
+                  今回クリック前とクリック後のスタイルは全てstyle.css内に記載がある。<br />
+                  クリック前とクリック後のスタイルは、<br />
+                  ”class-method_item”クラスに”is-active”クラスを追加し、切り替えを行っている。<br />
+                  したがって、{}の中に書く処理は、<br />
+                  <span class="homework_point_txt-bold">
+                    「”classList”メソッドを使用し、任意のセレクタに”is-active”クラスを追加する」<br />
+                  </span>
+                  という旨の記述をすれば良い。
+                </p>
+                <p class="homework_point_txt">
+                  5.
+                  HTMLの"class-method_item"クラスに"is-active"クラスがついている＋クリック箇所が青色になっていれば成功です。
+                </p>
+                <img src="img/step5-02.png" alt="" class="homework_point_img" />
+                <div class="homework_arrow sample1-4"></div>
+                <img src="img/step5-03.png" alt="" class="homework_point_img" />
+                <img src="img/step6-05.png" alt="" class="homework_point_img" />
+                <div class="homework_arrow sample1-4"></div>
+                <img src="img/step6-04.png" alt="" class="homework_point_img" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <div class="homework_fx">
+          <h2 class="homework_title">Step7 | for文</h2>
+          <span class="homework_sub-title"
+            >（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）</span
+          >
+        </div>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・for文を用いて1~5の数字を出力してください。
+          </li>
+        </ul>
+      </div>
+      <div class="homework_point homework_point__hint">
+        <button class="homework_point_head-wrapper js_accordion">
+          <h4 class="homework_point_head">演習の手順</h4>
+        </button>
+        <div class="js_accordion_contents">
+          <div class="js_accordion_contents-inner">
+            <div class="homework_point_contents">
+              <p class="homework_point_txt">1. for文の雛形を用意します。</p>
+              <img src="img/step7-01.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                2. 「初期値」には”let i =
+                1;”のように、ループがスタートする時の値を指定する。
+              </p>
+              <p class="homework_point_txt">
+                3. 「繰り返す条件」には”i
+                &lt;=5;”のように、何回まで処理を繰り返すかを指定する。
+              </p>
+              <p class="homework_point_txt">
+                4.
+                「増価値」には”i++”のように記述する。すると、以下のようになる。<br />
+                【🔗参考】
+                <a
+                  href="https://zero-plus.io/media/l_javascript/operator/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="homework_point_txt-link"
+                  >”++”ってどういう意味？
+                </a>
+              </p>
+              <img src="img/step7-02.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                5.
+                for文内の処理に、コンソールで変数を表示するように記述を加える。
+              </p>
+              <p class="homework_point_txt">
+                6. コンソールに1~5までの数値が表示されていれば成功です。
+              </p>
+              <img src="img/step7-03.png" alt="" class="homework_point_img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <div class="homework_fx">
+          <h2 class="homework_title">Step8 | while文</h2>
+          <span class="homework_sub-title"
+            >（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）</span
+          >
+        </div>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・while文を用いて1~5の数字を出力してください。
+          </li>
+        </ul>
+      </div>
+      <div class="homework_point homework_point__hint">
+        <button class="homework_point_head-wrapper js_accordion">
+          <h4 class="homework_point_head">演習の手順</h4>
+        </button>
+        <div class="js_accordion_contents">
+          <div class="js_accordion_contents-inner">
+            <div class="homework_point_contents">
+              <p class="homework_point_txt">
+                1. 任意の変数に初期値を代入します。
+              </p>
+              <img src="img/step8-01.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">2. while文の雛形を用意します。</p>
+              <img src="img/step8-02.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                3.
+                「条件式」には、for文の「繰り返す条件」と同様、何回まで繰り返すかを指定する。
+              </p>
+              <img src="img/step8-03.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                4.
+                処理内容には、まず1から表示するために、コンソールで変数を表示する記述をしましょう。
+              </p>
+              <p class="homework_point_txt">
+                5. 次に、この変数に数を一つずつ増やすための記述をするため、<br />
+                コンソールの下に”変数名++”のように記述しましょう。
+              </p>
+              <img src="img/step8-04.png" alt="" class="homework_point_img" />
+              <p class="homework_point_txt">
+                6. コンソールに1~5までの数値が表示されていれば成功です。
+              </p>
+              <img src="img/step8-05.png" alt="" class="homework_point_img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <div class="homework_fx">
+          <h2 class="homework_title">Step9 | forEach文</h2>
+          <span class="homework_sub-title"
+            >（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）</span
+          >
+        </div>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・「fruits」という名前で、配列として「りんご・みかん・ぶどう・メロン」を定義してください。
+          </li>
+          <li class="homework_item">
+            ・forEach文を用いて、果物をそれぞれ出力してください。
+          </li>
+        </ul>
+      </div>
+      <div class="homework_point homework_point__hint">
+        <button class="homework_point_head-wrapper js_accordion">
+          <h4 class="homework_point_head">演習の手順</h4>
+        </button>
+        <div class="js_accordion_contents">
+          <div class="js_accordion_contents-inner">
+            <div class="homework_point_contents">
+              <p class="homework_point_txt">
+                1. “fruits”という名前で、配列を定義する。
+              </p>
+              <p class="homework_point_txt">
+                2. forEach文を作って、引数のカッコには任意の引数を入れる。<br />
+                ちなみに、今回扱う引数は複数個ある配列のうちの一つの要素を順番に抜き取る役割を持つ。
+              </p>
+              <p class="homework_point_txt">
+                3.
+                forEach文内の処理に、コンソールで”fruit”を出力するよう記述する。
+              </p>
+              <img src="img/step9.png" alt="" class="homework_point_img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
