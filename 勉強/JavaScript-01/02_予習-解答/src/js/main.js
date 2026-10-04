@@ -29,6 +29,15 @@ console.log('-- Step3 End --');
  * ・関数の処理として、「〇〇さん、こんにちは」（〇〇に引数nameに渡した値が入ります）と出力される処理を記述してください。
  * ・関数「greeting」を、引数nameに文字列を渡して、呼び出してください。
  */
+
+/**
+ * 指定した名前に対して挨拶メッセージをコンソールに出力する。
+  Args:
+    name: 挨拶する相手の名前。
+
+  Returns:
+    なし。
+ */
 function greeting(name) {
   console.log(`${name}さん、こんにちは`);
 }
@@ -48,11 +57,29 @@ console.log('-- Step5 End --');
  * Step6 | JavaScript クラス操作
  *「.class-method_item」をクリックしたときに、is-activeクラスを追加するようにしてください。
  */
+
+/**
+ * classMethodItem がクリックされたときに is-active クラスを追加する。
+ *
+ * Args:
+ *   event: クリックイベントオブジェクト。
+ *
+ * Returns:
+ *   なし。
+ */
 const classMethodItem = document.querySelector('.class-method_item');
 classMethodItem.addEventListener('click', () => {
   classMethodItem.classList.add('is-active');
 });
 console.log('-- Step6 End --');
+
+
+/** 
+classMethodItem.addEventListener('click', function (event) {
+  classMethodItem.classList.add('is-active');
+});
+console.log('-- Step6 End --');
+*/
 
 /**
  * Step7 | for文（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）

@@ -1,0 +1,44 @@
+/* slick */
+.slick_list {
+  position: relative;
+}
+
+.slick_btn {
+  background: #333;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.slick_btn__prev {
+  left: -80px;
+}
+
+.slick_btn__next {
+  right: -80px;
+}
+
+.slick_btn::before {
+  content: '';
+  width: 20%;
+  height: 20%;
+  border-color: #fff;
+  border-width: 2px;
+  border-style: solid solid none none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.slick_btn__prev::before {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.slick_btn__next::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}

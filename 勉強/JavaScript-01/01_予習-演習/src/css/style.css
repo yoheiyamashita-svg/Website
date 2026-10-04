@@ -1,11 +1,21 @@
 /* Step10 */
-.class-method_item {
+.class-method_item1 {
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+.class-method_item2 {
   font-size: 30px;
   font-weight: bold;
   cursor: pointer;
   display: inline-block;
 }
 
-.class-method_item.is-active {
+.class-method_item1.is-active1 {
   color: #43cfe8;
+}
+
+.class-method_item2.is-active2 {
+  color: #e84343;
 }

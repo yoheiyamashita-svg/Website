@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrap {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrap {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+
+
+/* gsap */
+.gsap_wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 240px 0;
+}
+
+.gsap_image {
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
+  width: 800px;
+}
+
+.gsap_image p {
+  text-align: center;
+}
+
+.gsap_container {
+  padding: 40px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.gsap_item {
+  width: 350px;
+  box-shadow: 0 2px 5px #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.gsap_item-title {
+  padding: 16px;
+}
+
+/* step2 */
+
+.foreach_wrap {
+  width: 800px;
+  margin: auto;
+  padding: 80px 80px;
+}
+
+
+.foreach_list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.foreach_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 2px 5px #ccc;
+  border-radius: 5px;
+}

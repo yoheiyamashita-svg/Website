@@ -28,12 +28,24 @@
   font-weight: bold;
 }
 
-.js_box,
-.js_box02 {
+.js_box, .js_box02 {
   cursor: pointer;
   margin: 0 auto;
 }
 
 /* 演習7 */
+.js_box.is-active {
+  transform: scale(1.5);
+  background-color: #00f;
+  transition: 0.5s;
+}
 
 /* 演習8 */
+
+
+.js_box02 {
+  transition: 0.5s;
+}
+.js_box02.is-active {
+  transform: translateX(200px) rotate(360deg);
+}

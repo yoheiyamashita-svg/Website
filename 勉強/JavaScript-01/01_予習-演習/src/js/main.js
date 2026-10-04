@@ -3,6 +3,8 @@
  * ・変数名「greet」を定義し、初期値に「こんにちは」を設定してください。
  * ・コンソール画面に「こんにちは」が表示されるよう、記述を加えましょう。
  */
+const greet = "こんにちは";
+console.log(greet);
 
 console.log('-- Step2 End --'); // このコードは、問題毎の区切り線をコンソールで表示させています。特に変更しないでください。
 
@@ -13,6 +15,12 @@ console.log('-- Step2 End --'); // このコードは、問題毎の区切り線
 ・未成年の場合は、「{age}歳は未成年です」と出力し、成人の場合は、「{age}歳は成人です」と出力してください。
 例:「age」に19を代入した場合は、「19歳は未成年です」が出力される。 */
 
+const age = 20;
+if (age < 20) {
+  console.log(`${age}歳は、未成年です`);
+} else {
+  console.log(`${age}歳は、成人です`);
+}
 console.log('-- Step3 End --');
 
 /**
@@ -21,6 +29,10 @@ console.log('-- Step3 End --');
  * ・関数の処理として、「〇〇さん、こんにちは」（〇〇に引数nameに渡した値が入ります）と出力される処理を記述してください。
  * ・関数「greeting」を、引数nameに文字列を渡して、呼び出してください。
  */
+function greeting(name) {
+  console.log(`${name}さん、こんにちは`);
+}
+greeting('山下');
 
 console.log('-- Step4 End --');
 
@@ -29,20 +41,48 @@ console.log('-- Step4 End --');
  * ・単一の「.class-get_item」がついているDOMを取得してください。
  * ・取得したDOMをコンソールに出力してください。
  */
-
+const dom = document.querySelector('.class-get_item');
+console.log(dom);
 console.log('-- Step5 End --');
 
 /**
  * Step6 | JavaScript クラス操作
  *「.class-method_item」をクリックしたときに、is-activeクラスを追加するようにしてください。
  */
+/**
+ * classMethodItem がクリックされたときに is-active クラスを追加する。
+ *
+ * Args:
+ *   event: クリックイベントオブジェクト。
+ *
+ * Returns:
+ *   なし。
+ */
+const classMethodItem1 = document.querySelector('.class-method_item1');
 
-console.log('-- Step6 End --');
+classMethodItem1.addEventListener('click', function (event) {
+  classMethodItem1.classList.add('is-active1');
+});
+console.log(classMethodItem1);
+
+console.log('-- Step6-1 End --');
+
+
+const classMethodItem2 = document.querySelector('.class-method_item2');
+classMethodItem2.addEventListener('click', () => {
+  classMethodItem2.classList.add('is-active2');
+});
+console.log(classMethodItem2);
+console.log('-- Step6-2 End --');
+
 
 /**
  * Step7 | for文（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）
  * ・for文を用いて1~5の数字を出力してください。
  */
+for (let i = 1; i <= 10; i++){
+  console.log(i);
+} 
 
 console.log('-- Step7 End --');
 
@@ -50,6 +90,11 @@ console.log('-- Step7 End --');
  * Step8 | while文（授業では扱いませんが、重要な知識ではあるので余裕がある方はチャレンジしてみましょう！）
  * ・while文を用いて1~5の数字を出力してください。
  */
+let i = 1;
+while (i <= 10){
+    console.log(i);
+    i++;
+}
 
 console.log('-- Step8 End --');
 
@@ -58,5 +103,11 @@ console.log('-- Step8 End --');
  * ・「fruits」という名前で、配列として「りんご・みかん・ぶどう・メロン」を定義してください。
  * ・forEach文を用いて、果物をそれぞれ出力してください。
  */
+const fruits = ['りんご', 'みかん', 'ぶどう', 'メロン'];
+
+fruits.forEach(function(fruit) {
+  console.log(fruit);
+});
+
 
 console.log('-- Step9 End --');
