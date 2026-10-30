@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>JavaScript-03-予習-解答</title>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+
+    <!-- js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step1 | アコーディオンメニューの穴埋め</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・「faq」という定数を定義し、関数を作成してください
+          </li>
+          <li class="homework_item">
+            ・関数内に定義された「faqA」に対して、クラスをつけ外しするための記述を行なってください
+          </li>
+        </ul>
+      </div>
+
+      <div class="js_accordion-wrap">
+        <button class="js_faq_button js_faq">
+          <div class="js_faq_box">
+            <div class="js_faq_content">
+              <span class="js_faq_icon js_faq_icon__q">Q.</span>
+              <p class="js_faq_txt">
+                質問内容が入ります。質問内容が入ります。質問内容が入ります。質問内容が入ります。
+              </p>
+            </div>
+            <!-- /.js_faq_content -->
+            <div class="js_faq_open js_faq-a">
+              <div class="js_faq_content js_faq_content__a">
+                <span class="js_faq_icon js_faq_icon__a">A.</span>
+                <p class="js_faq_txt">
+                  質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。
+                </p>
+              </div>
+              <!-- /.js_faq_content -->
+            </div>
+            <!-- /.js_faq_open -->
+          </div>
+          <!-- /.js_faq_box -->
+          <div class="js_faq_mark js_faq_mark"></div>
+          <!-- /.js_faq_mark js_faq_mark -->
+        </button>
+        <button class="js_faq_button js_faq">
+          <div class="js_faq_box">
+            <div class="js_faq_content">
+              <span class="js_faq_icon js_faq_icon__q">Q.</span>
+              <p class="js_faq_txt">
+                質問内容が入ります。質問内容が入ります。質問内容が入ります。質問内容が入ります。
+              </p>
+            </div>
+            <!-- /.js_faq_content -->
+            <div class="js_faq_open js_faq-a">
+              <div class="js_faq_content js_faq_content__a">
+                <span class="js_faq_icon js_faq_icon__a">A.</span>
+                <p class="js_faq_txt">
+                  質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。質問の回答が入ります。
+                </p>
+              </div>
+              <!-- /.js_faq_content -->
+            </div>
+            <!-- /.js_faq_open -->
+          </div>
+          <!-- /.js_faq_box -->
+          <div class="js_faq_mark js_faq_mark"></div>
+          <!-- /.js_faq_mark js_faq_mark -->
+        </button>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step2 | Swiper カルーセルパネル</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・swiperの実装に必要な読み込みを行ってください
+          </li>
+          <li class="homework_item">
+            ・「.swiper-slider」に対してSwiperを使ってカルーセルを実装し、次のオプションを加えてください
+          </li>
+          <li class="homework_item">
+            ・オプションとして、自動再生、無限再生、次へボタン、前へボタンを付け加えてください
+          </li>
+        </ul>
+      </div>
+
+      <div class="swiper-content">
+        <div class="swiper swiper-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/avocado-tree.webp" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/coconut.webp" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/coffee.webp" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section>
+
+    <section class="homework_section">
+      <div class="homework_title-wrap">
+        <h2 class="homework_title">Step3 | Swiper スライドショー</h2>
+        <ul class="homework_list">
+          <li class="homework_item">
+            ・Swiperを使ってスライドショーを作成してください
+          </li>
+        </ul>
+      </div>
+
+      <div class="swiper-content">
+        <div class="swiper swiper-slideshow">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/avocado-tree.webp" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/coconut.webp" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/coffee.webp" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

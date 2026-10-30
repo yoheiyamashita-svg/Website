@@ -1,0 +1,200 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.u_break {
+  display: block;
+}
+
+/* homework section */
+.homework_title-wrap {
+  background: linear-gradient(45deg, #ff9158 0, #ffbb1e 100%);
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.homework_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.homework_item {
+  font-size: 14px;
+}
+
+.homework_item__black {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1080px) {
+  .homework_title-wrap {
+    padding: 32px 80px;
+  }
+
+  .homework_title {
+    font-size: 30px;
+  }
+}
+
+/* step2 */
+.js_accordion-wrap {
+  width: 90%;
+  margin: auto;
+  padding: 50px 0;
+}
+
+.js_faq {
+  background: #fafafa;
+}
+
+.js_faq_wrapper {
+  padding-top: 80px;
+}
+
+.js_faq_button {
+  background: #fff;
+  width: 100%;
+  box-shadow: 2px 2px 2px rgba(170, 170, 170, 0.16);
+  padding: 32px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1080px) {
+  .js_faq_button {
+    padding: 32px 24px 32px 64px;
+  }
+}
+
+.js_faq_button:not(:first-child) {
+  margin-top: 16px;
+}
+
+.js_faq_content {
+  display: flex;
+}
+
+.js_faq_content__a {
+  padding-top: 40px;
+}
+
+.js_faq_icon {
+  font-size: 14px;
+  font-weight: bold;
+  padding-right: 16px;
+}
+
+.js_faq_icon__q {
+  color: #1863af;
+}
+
+.js_faq_icon__a {
+  color: #fc7f24;
+}
+
+.js_faq_txt {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  margin-right: 16px;
+}
+
+.js_faq-a {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.js_faq_mark {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.js_faq_mark::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 100%;
+  background: #333;
+}
+
+.js_faq_mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 2px;
+  background: #333;
+}
+
+.js_faq_mark.is-open::before {
+  opacity: 0;
+}
+
+.js_page-top.is-active {
+  right: 24px;
+}
+
+.js_h-slide_trigger {
+  overflow: hidden;
+}
+
+/* swiper */
+.swiper-content {
+  margin: 100px 0;
+  position: relative;
+}
+
+.swiper {
+  max-width: 768px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-next {
+  right: 100px !important;
+}
+
+.swiper-button-prev {
+  left: 100px !important;
+}
